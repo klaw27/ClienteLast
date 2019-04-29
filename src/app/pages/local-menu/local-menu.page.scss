@@ -1,0 +1,61 @@
+.contBanner{
+    position: relative;
+    margin-top: 15px;
+}
+
+.logo{
+    position: absolute;
+    bottom: -30%;
+    left: 0;
+    right: 0;
+    width: 45%;
+    margin: 0 auto;
+}
+
+.principal{
+    margin-top: 23%;
+}
+
+.boton{
+    margin-left: 12px;
+    margin-bottom: 16px;
+    font-size: 1rem;
+}
+
+.titulo{
+    font-size: 1.2rem;
+    margin: 0 0 16px 16px;
+}
+
+.platillo{
+    margin-bottom: 15px;
+}
+
+.thumbnail{
+    width: 80px;
+    height: 80px;
+}
+
+.contenidoPlatillo{
+    width: 100%;
+}
+
+.tituloPlatillo{
+    font-size: 16px;
+}
+
+p{
+    font-size: 13px;
+}
+
+.footerPlatillo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.skellFoot{
+    display: flex;
+    justify-content: space-between;
+}
+

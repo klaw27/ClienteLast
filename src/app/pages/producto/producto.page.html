@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+<ion-content>
+
+  <ion-card>
+
+    <img src="/assets/img/enchiladas.jpg">
+
+    <ion-card-header>
+        <ion-card-title>{{producto.nombre}}</ion-card-title>
+    </ion-card-header>
+    
+      <ion-card-content class="contenido">
+        <ion-label class="parrafo">
+          {{producto.descripcion}}
+        </ion-label>
+        <ion-label class="parrafo">
+          {{producto.cantidad}} Piezas.
+        </ion-label>
+        <ion-label class="parrafo">
+          ${{producto.precio * cantidad}}
+        </ion-label>
+      </ion-card-content>
+
+    </ion-card>
+
+  <div [ngClass]="{'margen': editar == false}" class="sumador">
+      <ion-button class="boton" (click)='add()' size="small" fill='outline'>
+        <ion-icon slot="icon-only" name='add'></ion-icon>
+      </ion-button>
+      <p>{{cantidad}}</p>
+      <ion-button class="boton" id='remove' size="small" fill="outline" (click)='remove()'>
+        <ion-icon slot="icon-only" name='remove'></ion-icon>
+      </ion-button>
+
+  </div>
+
+  <div  *ngIf="editar">
+      <ion-button color="gmail" class="eliminar" fill="clear" (click)='eliminar()'>
+        Eliminar producto del Carrito
+      </ion-button>
+  </div>
+
+  <div class="agregar">
+    <ion-button *ngIf="!editar" color="estore" (click)="agregar()" class="addBoton" expand="full">Agregar {{cantidad}} al carrito</ion-button>
+    <ion-button *ngIf="editar" color="estore" (click)="actualizar()" class="addBoton" expand="full">Actualizar el carrito</ion-button>
+  </div>
+
+
+</ion-content>

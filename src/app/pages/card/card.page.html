@@ -1,0 +1,70 @@
+<ion-content>
+
+  <div class="backTarjeta">
+    <div class="contenTarjeta">
+      <div class="esfera"></div>
+      <div class="esfera2"></div>
+      <img class="chip" src="/assets/img/chip.png" alt="" srcset="">
+      <div class="masterCard">
+        <div class="rojo"></div>
+        <div class="amarillo"></div>
+      </div>
+      <div class="infoTarjeta">
+          <div class="numTarjeta">
+              <span class="cuarteto">1234</span>
+              <span class="cuarteto">****</span>
+              <span class="cuarteto">****</span>
+              <span class="cuarteto">****</span>
+            </div>
+            <div class="nomFecha">
+              <span class=nombre></span>
+              <span class="fecha"></span>
+            </div>    
+  
+      </div>
+  
+    </div>
+
+  </div>
+
+
+    <form  method="POST" id="customer-form">
+      <input type="text" name="token_id" id="token_id"/>
+      <fieldset>
+        <legend>Datos del cliente</legend>
+      <p>
+        <label>Nombre</label>
+        <input type="text" size="20" autocomplete="on" name="client_name"/>
+      </p>
+      <p>
+        <label>Correo Electr&oacute;nico</label>
+        <input type="text" size="20" autocomplete="on" name="cliente_email"/>
+      </p>
+      </fieldset>
+      <fieldset>
+        <legend>Datos de la tarjeta</legend>
+      <p>
+        <label>Nombre</label>
+        <input type="text" size="20" autocomplete="off"
+          data-openpay-card="holder_name" />
+      </p>
+      <p>
+        <label>N&uacute;mero</label>
+        <input type="text" size="20" autocomplete="off"
+          data-openpay-card="card_number" />
+      </p>
+      <p>
+        <label>CVV2</label>
+        <input type="text" size="4" autocomplete="off"
+          data-openpay-card="cvv2" />
+      </p>
+      <p>
+        <label>Fecha de expiraci&oacute;n (MM/YY)</label>
+        <input type="text" size="2" data-openpay-card="expiration_month" /> 
+        <input type="text" size="2" data-openpay-card="expiration_year" />
+      </p>
+      </fieldset>
+      <ion-button (click)="pagar()">Pagar</ion-button>
+</form>
+
+</ion-content>

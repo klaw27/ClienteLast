@@ -1,0 +1,69 @@
+<app-header></app-header>
+
+<ion-content>
+
+  <div class="contBanner">
+    <img class=banner src="/assets/img/banner.jpg" alt="">
+    <div class="contLogo">
+      <img class=logo src="/assets/img/toks.png" alt="">
+    </div>
+  </div>
+
+  <div class="principal">
+    
+    <ion-buttons class="atras"> 
+      <ion-button size='small' (click)='ubicacion()' expand="full" fill="clear" class="boton">Ubicación y Horario</ion-button>
+    </ion-buttons>
+    <h6 class="titulo">Nuestro Menú</h6>
+
+      <div class="data" *ngIf="productos">
+          <ion-item class="platillo" *ngFor="let producto of productos">
+            <ion-thumbnail slot="start" class="thumbnail">
+              <img src="/assets/img/enchiladas.jpg">
+            </ion-thumbnail>
+            <div class="contenidoPlatillo">
+              <ion-label>
+                <h6 class=tituloPlatillo>{{producto.nombre}}</h6>
+                <p>{{producto.descripcion}}</p>
+                <p>{{producto.cantidad}} Piezas.</p>
+              </ion-label>
+              <div class="footerPlatillo">
+                  <p>${{producto.precio}} MXN</p>
+                  <ion-button fill="clear" slot="end" (click)='agregarProducto(producto.id_producto)'>Agregar</ion-button>
+              </div>
+            </div>
+          </ion-item>
+
+      </div>
+
+      <div class="skel" *ngIf="!productos">
+        <ion-item class="animated infinite slow flash" *ngFor="let item of [1,1,1]" lines="none">
+          <ion-thumbnail slot="start" class="thumbnail">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+          <div class="contenidoPlatillo">
+            <ion-skeleton-text animated  style="width: 70%"></ion-skeleton-text>
+            <ion-skeleton-text animated class="skellText" style="width: 95%"></ion-skeleton-text>
+            <ion-skeleton-text animated class="skellText" style="width: 30%"></ion-skeleton-text>
+            <div class="skellFoot">
+              <ion-skeleton-text animated class="skellText" style="width: 40%"></ion-skeleton-text>
+              <ion-skeleton-text animated class="skellText" style="width: 40%"></ion-skeleton-text>
+            </div>
+          </div>
+        </ion-item>
+      </div>
+      
+    </div>
+
+    <ion-buttons class="atras"> 
+        <ion-button size='small' expand="full" fill="clear" class="boton" (click)='salir()'>Atrás</ion-button>
+    </ion-buttons>
+
+    <ion-fab *ngIf="carrito" vertical="bottom" class="animated fadeIn fab" horizontal="end" slot="fixed">
+        <ion-fab-button size="large" (click)="goCarrito()" translucent>
+            <ion-icon name='cart'></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+  
+
+</ion-content>

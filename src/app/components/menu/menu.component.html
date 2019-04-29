@@ -1,0 +1,49 @@
+<ion-menu side="start" 
+          menuId="primerMenu"
+          contentId='principal'
+          type="overlay"
+          (ionWillOpen)='actualizacion()'>
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Mi Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div class="perfil">
+        <img class='fotoPerfil' id='perfil' [src]="fotografia" alt="Foto de perfil">
+        <h6>{{usuario.nombre}} {{usuario.apellidoPat}} {{usuario.apellidoMat}}</h6>
+    </div>
+    <ion-list>
+      <ion-item lines="none" class="menuBoton">
+        <ion-button size="default" fill='clear'  (click)='inicio()'>
+            Inicio
+        </ion-button> 
+      </ion-item>
+      <ion-item lines="none" class="menuBoton"> 
+          <ion-button size="default" fill='clear' (click)='perfil()'>
+              Mi Perfil
+          </ion-button> 
+      </ion-item>
+      <ion-item lines="none" class="menuBoton"> 
+          <ion-button size="default" fill='clear' (click)='cerrarMenu()'>
+              Mis Pedidos
+          </ion-button> 
+      </ion-item>
+      <ion-item lines="none" class="menuBoton"> 
+          <ion-button size="default" fill='clear' (click)='cerrarMenu()'>
+              Contáctanos
+          </ion-button> 
+      </ion-item>
+      <ion-item lines="none" class="menuBoton"> 
+          <ion-button size="default" fill='clear' (click)='cerrarMenu()'>
+              Soporte
+          </ion-button> 
+      </ion-item>
+      <ion-item lines="none" class="menuBoton"> 
+          <ion-button size="default" fill='clear' (click)='logout()'>
+              Cerrar Sesión
+          </ion-button> 
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>

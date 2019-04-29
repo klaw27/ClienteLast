@@ -1,0 +1,83 @@
+<app-header></app-header>
+<ion-content class="contenido" >
+
+  <div class="data principal" *ngIf="carrito.length != 0">
+    <ion-card class="pedido">
+      <ion-card-header>
+        <div class="ubicacion">
+          <div id="mapa3"></div>
+          <div class="dirOpcion">
+            <ion-label class="calle">
+              <h6 class="titCalle">{{calle}}</h6>
+              <p class="calleSec">{{calleSecundario}}</p>
+            </ion-label>
+            <div class="direccion">
+              <ion-button fill="clear" (click)="ubicacion()">
+                <ion-icon slot="start" class="icono" name="pin"></ion-icon>
+                Cambiar ubicación
+              </ion-button>  
+              <ion-button fill="clear" (click)="ubicacionActual()">
+                <ion-icon slot="start" class="icono" name="navigate"></ion-icon>
+                Ubicación actual
+              </ion-button>                    
+            </div>
+          </div>
+        </div>
+            <ion-card-title class="titulo">Tu pedido</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content>
+              <ion-item class="platillo ion-activatable" (click)="editarProducto(producto.id_producto)" lines="none" *ngFor="let producto of carrito">
+                  <ion-ripple-effect></ion-ripple-effect>
+                  <ion-thumbnail slot="start" class="thumbnail">
+                    <img src="/assets/img/enchiladas.jpg">
+                  </ion-thumbnail>
+                  <div class="contenidoPlatillo">
+                    <ion-label>
+                      <h6 class=tituloPlatillo>{{producto.nombre}}</h6>
+                      <p>{{producto.descripcion}}</p>
+                      <p>{{producto.cantidad}} Piezas.</p>
+                    </ion-label>
+                    <div>
+                        <p class="precio">X {{producto.cantidadCarrito}} ${{producto.precioCarrito}} MXN</p>
+                    </div>
+                  </div>
+              </ion-item>
+              <div class="costo">
+                <div>
+                  <span>Subtotal</span>
+                  <span>${{subTotal.toFixed(2)}}</span>
+                </div>
+                <div>
+                  <span>Costo de Envio</span>
+                  <span>$15.00</span>
+                </div>
+                <div class="total">
+                  <span>Total</span>
+                  <span>${{total.toFixed(2)}}</span>
+                </div>
+              </div>
+              <ion-item class="metPago">
+                <ion-label>Metodo de Pago</ion-label>
+                <ion-select value="efectivo">
+                  <ion-select-option value="efectivo">Efectivo</ion-select-option>
+                </ion-select>
+              </ion-item>
+          </ion-card-content>
+        </ion-card>
+        <ion-button expand="full" (click)="pedido()">Confirmar Pedido</ion-button>
+  </div>
+
+  <div class="nada principal" *ngIf="carrito.length == 0">
+      <ion-label class="tituloVacio">
+        Aún no hay productos en el carrito
+      </ion-label>
+
+  </div>
+
+
+  <ion-buttons > 
+      <ion-button size='small' expand="full" fill="clear" class="boton" (click)='salir()'>Atrás</ion-button>
+  </ion-buttons>
+
+</ion-content>

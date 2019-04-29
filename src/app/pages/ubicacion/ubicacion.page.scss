@@ -1,0 +1,46 @@
+
+#mapa{
+    height: 37.5vh;
+}
+
+.informacion div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.informacion div p{
+    width: 85%;
+    font-size: .85rem;
+}
+
+.informacion div .icono{
+    font-size: 1.5rem;
+    color: #cb1300;
+}
+
+.mapa ion-skeleton-text{
+    line-height: 35vh;
+}
+
+.skell .direccion, .tituloSkel{
+    margin: 5px 0;
+    display: flex;
+}
+
+.direccion ion-skeleton-text:first-child{
+    margin-right: 10px;
+    --border-radius: 50%;
+    
+}
+
+
+.direccion ion-skeleton-text, .tituloSkel ion-skeleton-text {
+    line-height: 3vh;
+}
+
+.atras{
+    position: fixed;
+    bottom: 3%;
+}
+

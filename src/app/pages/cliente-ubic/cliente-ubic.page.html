@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>clienteUbic</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-progress-bar *ngIf="!load" type="indeterminate"></ion-progress-bar>
+
+  <div class="buscar">
+    <ion-searchbar mode="ios" placeholder="Agrega tu direccion" id="direccion" search-icon="pin" [(ngModel)]="query" (ionChange)="updateSearchResults()"></ion-searchbar>
+    <ion-list *ngIf="lugares.length!=0">
+      <ion-item *ngFor="let lugar of lugares; let i = index; trackBy: customTB" class="local animated fadeIn" (click)="lugarMapa(lugar.place_id)">
+        <ion-icon name="pin" class="pin" slot="start"></ion-icon>
+          <ion-label>
+              {{lugar.structured_formatting.main_text}}
+              <p>{{lugar.structured_formatting.secondary_text}}</p>
+          </ion-label>
+        </ion-item>
+    </ion-list>
+
+  </div>
+
+<div id="mapa">
+
+  </div>
+
+</ion-content>

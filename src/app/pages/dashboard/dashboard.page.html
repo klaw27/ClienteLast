@@ -1,0 +1,57 @@
+<app-header></app-header>
+<ion-content >
+
+    <ion-searchbar class="busqueda" (click)="goBuscar()" placeholder="Búsqueda por producto o negocio"></ion-searchbar>
+
+    <div class="principal">
+
+      <h6 class='tituloLugar'>Comida Preparada</h6>
+      <ion-slides [options]="slideOpts" class="slide">
+          <ion-slide *ngFor='let comida of negocios.comida' class='lugar' (click)="locales(comida.nombre)">
+            <img src='/assets/img/comida/{{comida.icono}}' alt="" class='icono'>  
+            <p class='titulo'>{{comida.nombre}}</p>
+          </ion-slide>
+      </ion-slides>
+    
+      <h6 class='tituloLugar'>Bebidas</h6>
+      <ion-slides [options]="slideOpts" class="slide">
+          <ion-slide *ngFor='let bebidas of negocios.bebidas' class='lugar' (click)="locales(bebidas.nombre)">
+            <img src='/assets/img/bebidas/{{bebidas.icono}}' alt="" class='icono'>  
+            <p class='titulo'>{{bebidas.nombre}}</p>
+          </ion-slide>
+      </ion-slides>
+  
+        <h6 class='tituloLugar'>Postres</h6>
+        <ion-slides [options]="slideOpts" class="slide">
+            <ion-slide *ngFor='let postres of negocios.postres' class='lugar' (click)="locales(postres.nombre)">
+              <img src='/assets/img/postres/{{postres.icono}}' alt="" class='icono'>  
+              <p class='titulo'>{{postres.nombre}}</p>
+            </ion-slide>
+        </ion-slides>
+  
+          <h6 class='tituloLugar'>Damas</h6>
+          <ion-slides [options]="slideOpts" class="slide">
+              <ion-slide *ngFor='let damas of negocios.damas' class='lugar' (click)="locales(damas.nombre)">
+                <img src='/assets/img/damas/{{damas.icono}}' alt="" class='icono'>  
+                <p class='titulo'>{{damas.nombre}}</p>
+              </ion-slide>
+          </ion-slides>
+ 
+    </div>
+    
+
+    <ion-fab vertical="bottom" class="fab" horizontal="start" slot="fixed">
+        <ion-fab-button size="large" (click)="goCarrito()" translucent>
+            <ion-icon name='cart'></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab  vertical="bottom" class="fab" horizontal="end" slot="fixed">
+        <ion-fab-button size="large" (click)="goUbicacion()" translucent color="success">
+          <ion-icon name='bicycle'></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+
+
+</ion-content>

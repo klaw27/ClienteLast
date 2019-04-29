@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Confirma dirección</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-progress-bar *ngIf="load" type="indeterminate"></ion-progress-bar>
+
+  <h6 class="calle" text-center>{{calle}}</h6>
+
+  <div id="mapa2">
+
+  </div>
+
+  <ion-button (click)="guardar()" color="success" expand="full" class="confirmar">Confirmar</ion-button>
+
+</ion-content>

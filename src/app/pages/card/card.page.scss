@@ -1,0 +1,85 @@
+.backTarjeta{
+    background-color: #f3f3f3;
+    width: 100%;
+    height: 35%;
+    display: inline-block;
+}
+.contenTarjeta{
+    width: 80%;
+    height: 73%;
+    background-color: #d8d8d8;
+    border-radius: 8px;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 30px; 
+}
+
+
+.esfera{
+    border-radius: 50%;
+    background-color: #bfbfbf;
+    position: absolute;
+    width: 115%;
+    height: 172%;
+    top: 5%;
+    left: -22%;
+}
+                                    
+.esfera2{
+    border-radius: 50%;
+    position: absolute;
+    width: 110%;
+    height: 172%;
+    top: -130%;
+    left: 27%;
+    border: dotted white;
+}
+
+.chip{
+    position: absolute;
+    width: 55px;
+    top: 29%;
+    left: 5%;
+    height: 45px;
+}
+
+.masterCard{
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    display: flex;
+}
+
+.rojo, .amarillo{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.rojo{
+    background-color: red;
+    position: absolute;
+    right: 50%;
+}
+
+.amarillo{
+    background-color: yellow;
+    opacity: 0.85;
+}
+
+.infoTarjeta{
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 50%;
+    padding: 0 20px;
+}
+
+.cuarteto{
+    font-family: 'IBM Plex Sans';
+    font-size: 1.5rem;
+    margin-right: 20px;
+    color: white;
+    text-shadow: 0 0 5px black;
+}

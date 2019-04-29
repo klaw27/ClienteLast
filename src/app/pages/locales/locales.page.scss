@@ -1,0 +1,56 @@
+.titulo{
+    margin-left: 25px;
+}
+
+.principal{
+    height: 80%;
+    overflow: scroll;
+}
+
+.local{
+    margin-bottom: 15px;
+}
+
+.thumbnail{
+    width: 80px;
+    height: 80px;
+}
+
+.contenidoLocal{
+    width: 100%;
+}
+
+.tituloLocal{
+    font-size: 16px;
+}
+
+p{
+    font-size: 13px;
+}
+
+.footerLocal{
+    display: flex;
+    align-items: center;
+}
+
+.estrella{
+    color: #FDC300;
+    font-size: 23px;
+}
+
+.skellThum{
+    line-height: 80px;
+}
+
+.skellText{
+    line-height: 15px;
+}
+
+.skellFoot{
+    display: flex;
+    justify-content: space-between;
+}
+
+.atras{
+    margin-left: 25px;
+}

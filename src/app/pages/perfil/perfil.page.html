@@ -1,0 +1,56 @@
+<app-header></app-header>
+
+<ion-content padding>
+
+  <h2 class='titulo'>Mi Perfil</h2>
+
+  <div class="perfil">
+    <img class='fotoPerfil' id='perfil' [src]="fotografia" alt="Foto de perfil">
+    <div class="camara">
+      <ion-button class="botonCamara" (click)='presentActionSheet()'>
+        <ion-icon class="botonIcono" slot="icon-only" name='camera'></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <div class="informacion">
+      <ion-input  class="input" [(ngModel)]='usuario.nombre' placeholder="Nombre (s)" type='text'></ion-input>
+      <ion-input  class="input" [(ngModel)]='usuario.apellidoPat' placeholder="Apellido Paterno" type='text'></ion-input>
+      <ion-input  class="input" [(ngModel)]='usuario.apellidoMat' placeholder="Apellido Materno" type='text'></ion-input>
+      <ion-input  class="input" [(ngModel)]='usuario.email' placeholder="Correo" type='email'></ion-input>
+      <ion-input  class="input" [(ngModel)]='usuario.telefono' placeholder="Número Telefónico" type='phone'></ion-input>
+  </div>
+
+  <div class="Envio">
+      <h4 class='tituloEnvio'>Datos de Envío</h4>
+      <ion-input  class="input" [(ngModel)]='usuario.calle' placeholder="Colonia" type='text'></ion-input>
+      <ion-input  class="input" [(ngModel)]='usuario.colonia' placeholder="Calle" type='text'></ion-input>
+      <ion-input  class="input" [(ngModel)]='usuario.numeroCalle' placeholder="Numero" type='number'></ion-input>
+  </div>
+
+  <div class="Envio">
+    <h4 class='tituloEnvio'>Datos fiscales</h4>
+    <ion-input  class="input" [(ngModel)]='usuario.razonSocial' placeholder="Razón Social" type='text'></ion-input>
+    <ion-input  class="input" [(ngModel)]='usuario.rfc' placeholder="RFC" type='text'></ion-input>
+    <ion-input  class="input" [(ngModel)]='usuario.direccionFiscal' placeholder="Direccion fiscal" type='text'></ion-input>
+    <ion-item class="select">
+        <ion-label>Uso del CFDI</ion-label>
+        <ion-select [(ngModel)]='usuario.CFDI'>
+          <ion-select-option value="gastos en general">Gastos en general</ion-select-option>
+          <ion-select-option value="Adquisición de materias primas o mercancía">Adquisición de materias primas o mercancía</ion-select-option>
+          <ion-select-option value="Por definir">Por definir</ion-select-option>
+        </ion-select>
+      </ion-item>
+    <ion-item class="select">
+        <ion-label>Forma de pago</ion-label>
+        <ion-select [(ngModel)]='usuario.formaPago'>
+          <ion-select-option value="Efectivo">Efectivo</ion-select-option>
+          <ion-select-option value="Tarjeta">Tarjeta</ion-select-option>
+        </ion-select>
+    </ion-item>
+</div>
+
+    <ion-button size='default' expand="full" class="actualizar" (click)='actualizar()'>Guardar Cambios</ion-button>
+
+
+</ion-content>

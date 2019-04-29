@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar class="toolbarBack">
+    <ion-title text-center>
+      Bienvenido
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<div class="logo">
+  <img src="../../assets/img/EstoCuadro.png" alt="logo Estor">
+</div>
+<div class="login">
+
+  <h2 text-center class="titulo">Ingresar con</h2>
+  <ion-button size='small' expand="full" fill="clear" class="boton" routerLink='/sesion'>Mi usuario</ion-button>
+  <ion-button size='small' expand="block" class="boton" (click)='facebooklog()'>Facebook</ion-button>
+  <ion-button color='gmail' size='small' expand="block" class="boton" (click)='googleLogin()'>Gmail</ion-button>
+  <ion-button routerLink='/login' color='gmail' size='small' expand="full" fill="clear" class="boton" routerLink='/registro'>Registrarme</ion-button>
+
+</div>
+<h3 text-center class="empresa">{{data}}</h3>
+<div class="copyright">
+  <h3 text-center class="empresa">Powered by Lex Software</h3>
+</div>
+</ion-content>

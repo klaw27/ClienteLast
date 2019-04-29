@@ -1,0 +1,54 @@
+<app-header></app-header>
+
+<ion-content padding>
+
+  <div *ngIf="local" class="animated fadeIn">
+
+    <div id="mapa">
+  
+    </div>
+
+    <h3 class="direccion">Conócenos</h3>
+  
+    <div class="informacion">
+      <div class="direccion">
+        <ion-icon name="compass" class="icono"></ion-icon>
+        <p>{{local.colonia}} {{local.callenumero}}, {{local.codigopostal}} {{local.ciudad}}, {{local.estado}}.</p>
+      </div>
+      <div class="horario">
+        <ion-icon name="clock" class="icono"></ion-icon>
+        <p>{{textoAbierto}}: {{local.horaapertura}} - {{local.horacierre}}</p>
+      </div>
+    </div>
+
+  </div>
+
+    <div class="skell" *ngIf="!local">
+
+        <div class="mapa">
+            <ion-skeleton-text animated class="skell"  style="width: 100%"></ion-skeleton-text>
+        </div>
+        <div class="tituloSkel">
+          <ion-skeleton-text animated  style="width: 40%"></ion-skeleton-text>
+        </div>
+        <div class="direccion">
+          <ion-skeleton-text animated  style="width: 8%"></ion-skeleton-text>
+          <ion-skeleton-text animated  style="width: 60%"></ion-skeleton-text>
+        </div>
+        <div class="direccion">
+            <ion-skeleton-text animated style="width: 8%"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+        </div>
+        <div class="direccion">
+            <ion-skeleton-text animated style="width: 8%"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </div>
+    
+      </div>
+  
+    <ion-buttons class="atras"> 
+        <ion-button size='small' expand="full" fill="clear" class="boton" (click)='salir()'>Atrás</ion-button>
+    </ion-buttons>
+
+
+</ion-content>

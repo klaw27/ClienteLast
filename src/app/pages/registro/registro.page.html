@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot='start'> 
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="logo">
+        <img src="../../assets/img/EstoCuadro.png" alt="logo Estor">
+      </div>
+      <div class="registro">
+        <h2 text-center class="titulo">Ingresa tu información</h2>
+        <ion-input [(ngModel)]='nombre' class="input" placeholder="Nombre completo" type='text'></ion-input>
+        <ion-input [(ngModel)]='numero' class="input" placeholder="Número Telefónico" type='tel'></ion-input>
+        <ion-input [(ngModel)]='correo' class="input" placeholder="Correo Electronico" type='email'></ion-input>
+        <ion-input [(ngModel)]='password' class="input" placeholder="Contraseña" type='password'></ion-input>
+        <ion-input [(ngModel)]='passVerficada' class="input" placeholder="Repetir contraseña" type='password' (ionBlur)='contrasena()'></ion-input>
+        <ion-button size='small' expand="full" fill="clear" class="boton" (click)='registrarse()'>Registrarme</ion-button>
+        <ion-button routerLink='/login' color='gmail' size='small' expand="full" fill="clear" class="boton" >Cancelar</ion-button>
+      </div>
+</ion-content>

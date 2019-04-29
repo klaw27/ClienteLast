@@ -1,0 +1,35 @@
+.loadingContent{
+    position: relative;
+}
+.loading{
+    border-radius: 50%;
+    border: 5px solid;
+    border-color: #ee5a5a transparent #ee5a5a transparent;
+    width: 170px;
+    height: 170px;
+    margin: 0 auto;
+    animation: loading 1s linear infinite;
+    margin-top: 30px;
+
+}
+
+.contador{
+    position: absolute;
+    bottom: 35%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
+    font-size: 2.7rem;
+}
+
+
+@keyframes loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
