@@ -159,9 +159,11 @@ export class ClienteUbicPage  {
       });
       await modal.present();
       const data = await modal.onDidDismiss();
-      if(data.data){
+      console.log(data);
+      if(data.data['ubicacion']){
         this.modalController.dismiss({
-          ubicacion: true
+          ubicacion: true,
+          body: data.data['body']
         });
       }
     }

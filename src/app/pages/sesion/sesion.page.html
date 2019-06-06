@@ -13,7 +13,12 @@
       <div class="registro">
         <h2 text-center class="titulo">Ingresa tu información</h2>
         <ion-input (keyup)='enter($event)' [(ngModel)]='correo' class="input" placeholder="Correo electronico" type='email'></ion-input>
-        <ion-input (keyup)='enter($event)' [(ngModel)]='password' class="input" placeholder="Contraseña" type='password'></ion-input>
+        <div class="pass">
+          <ion-input (keyup)='enter($event)' [type]="passType" [(ngModel)]='password' class="input" placeholder="Contraseña" type='password'></ion-input>
+          <ion-button class="eye" color="light" (click)="cambiarIcono()">
+              <ion-icon slot="icon-only" name="{{icono}}"></ion-icon>
+          </ion-button>
+        </div>
         <ion-button size='small' expand="full" fill="clear" class="boton" (click)='iniciar()'>Entrar</ion-button>
       </div>
 </ion-content>

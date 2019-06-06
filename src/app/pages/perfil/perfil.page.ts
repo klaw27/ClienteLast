@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EstoreService } from '../../services/estore.service';
-import { ToastController, ActionSheetController } from '@ionic/angular';
+import { ToastController, ActionSheetController, NavController } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -17,9 +17,6 @@ export class PerfilPage implements OnInit {
   usuario:any = {
     nombre : undefined,
     email :undefined, 
-    direccionFiscal : undefined, 
-    rfc : undefined, 
-    CFDI :undefined, 
     razonSocial : undefined,
     formaPago : undefined, 
     telefono : undefined,
@@ -34,6 +31,7 @@ export class PerfilPage implements OnInit {
   fotografia:any;
 
   constructor(public estore : EstoreService,
+    public navCtrl: NavController,
     public toastCtrl: ToastController,
     private camara: Camera,
     public actionSheetController: ActionSheetController,
@@ -41,17 +39,11 @@ export class PerfilPage implements OnInit {
 
   ngOnInit() {
 
-    let body = {
-      userId: localStorage.getItem('userId'),
-      funcion: 'ver'
-    };
-    console.log(body);
-    this.estore.verPerfil(body,'perfil.php').subscribe(data=>{
-      console.log(data);
-      this.usuario = {...data['usuario']};
+    console.log("hola");
+
+      this.usuario = {...JSON.parse(localStorage.getItem('user'))};
       this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.usuario.fotografia}`);
-     
-    });
+  
   }
 
   actualizar(){
@@ -61,6 +53,10 @@ export class PerfilPage implements OnInit {
       console.log(data);
       if(data['success'] == true) {
         this.presentarToast("Muy bien perfil actualizado");
+        localStorage.setItem('user',JSON.stringify(this.usuario));
+        setTimeout(()=>{
+          this.navCtrl.navigateBack('/dashboard');
+        },750);
       }
       else this.presentarToast("Error, algo salio mal");
     });

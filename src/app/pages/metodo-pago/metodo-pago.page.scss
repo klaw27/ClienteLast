@@ -1,0 +1,25 @@
+.pago{
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+.card,.efectivo,.terminal{
+    width: 45px;
+    height: 45px;
+}
+
+.card{
+    color: #332c2cc2;
+}
+
+.efectivo{
+    color: #6cdc0d;
+}
+
+.terminal{
+    color: #7676f9;
+}

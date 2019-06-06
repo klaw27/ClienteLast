@@ -18,6 +18,9 @@ const routes: Routes = [
   { path: 'mapa-ubicacion', loadChildren: './pages/mapa-ubicacion/mapa-ubicacion.module#MapaUbicacionPageModule' },
   { path: 'card', loadChildren: './pages/card/card.module#CardPageModule' },
   { path: 'loading', loadChildren: './pages/loading/loading.module#LoadingPageModule' },
+  { path: 'contacto', loadChildren: './pages/contacto/contacto.module#ContactoPageModule' },
+  { path: 'soporte', loadChildren: './pages/soporte/soporte.module#SoportePageModule' },
+  { path: 'metodo-pago', loadChildren: './pages/metodo-pago/metodo-pago.module#MetodoPagoPageModule' },
 ];
 
 @NgModule({

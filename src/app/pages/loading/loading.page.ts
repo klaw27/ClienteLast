@@ -15,13 +15,13 @@ export class LoadingPage implements OnInit {
 
   ngOnInit() {
 
-    this.intervalo = setInterval(()=>{
-      this.contador = this.contador - 1;
-      if(this.contador <= 0){
-        clearInterval(this.intervalo);
-        this.modalController.dismiss();      
-      }
-    },1000);
+    // this.intervalo = setInterval(()=>{
+    //   this.contador = this.contador - 1;
+    //   if(this.contador <= 0){
+    //     clearInterval(this.intervalo);
+    //     this.modalController.dismiss();      
+    //   }
+    // },1000);
           
   }
 }

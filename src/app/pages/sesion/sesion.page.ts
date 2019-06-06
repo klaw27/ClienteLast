@@ -14,12 +14,20 @@ export class SesionPage implements OnInit {
 
   password:any ='';
   correo:any = '';
+  icono = "eye";
+  passType = 'password';
 
   constructor(public estore: EstoreService, 
     private router : Router,
     public toastController: ToastController) { }
 
   ngOnInit() {
+  }
+
+  cambiarIcono(){
+      this.icono = this.icono == 'eye' ? 'eye-off' : 'eye';
+      this.passType = this.passType == 'password' ? 'text' : 'password';
+    
   }
 
   iniciar(){
@@ -30,7 +38,7 @@ export class SesionPage implements OnInit {
 
     this.estore.iniciarSesion(body, 'ingresar.php').subscribe((data)=>{
       if(data['success'] != false){
-        localStorage.setItem('userId',data['userId']);
+        localStorage.setItem('user',JSON.stringify(data['user']));
         this.router.navigateByUrl(`/dashboard`);
       }
       else{

@@ -100,29 +100,16 @@ export class MapaUbicacionPage  {
         lat: this.ubicacion.lat(),
         lng: this.ubicacion.lng(),
         calle: this.calle,
-        userId: localStorage.getItem('userId'),
       }
 
       this.load = true;
 
-      this.estore.actualizarPerfil(body, 'perfil.php').subscribe(data=>{
-        if(data['success']){
-          let ubicacion = [{
-            lat: body.lat,
-            lng: body.lng
-          }];
-          localStorage.setItem('ubicacion', JSON.stringify(ubicacion));
           this.modalCtrl.dismiss({
-            ubicacion: true
+            ubicacion: true,
+            body: body
           });
 
-          this.load = false;
-
-        }
-      });
-
-      console.log(body);
-
+      this.load = false;
     }
 
 }

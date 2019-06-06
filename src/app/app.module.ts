@@ -20,12 +20,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyDZREXasNOfVA327IhwVQfxr6vg04llfZ0",
-  authDomain: "el-estore-4b7a9.firebaseapp.com",
-  databaseURL: "https://el-estore-4b7a9.firebaseio.com",
-  projectId: "el-estore-4b7a9",
-  storageBucket: "el-estore-4b7a9.appspot.com",
-  messagingSenderId: "412789801335"
+    apiKey: "AIzaSyBBpfZ5-RiG2fGwpWFCSimR2CFtXXnTGJI",
+    authDomain: "el-estor.firebaseapp.com",
+    databaseURL: "https://el-estor.firebaseio.com",
+    projectId: "el-estor",
+    storageBucket: "el-estor.appspot.com",
+    messagingSenderId: "524940257833",
+    appId: "1:524940257833:web:c54ca1c9550dc4c9"
 };
 
 

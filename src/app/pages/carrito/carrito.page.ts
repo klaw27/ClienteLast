@@ -4,8 +4,8 @@ import { CarritoService } from '../../services/carrito.service';
 import { ClienteUbicPage } from '../cliente-ubic/cliente-ubic.page';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingPage } from '../loading/loading.page';
-import { EstoreService } from '../../services/estore.service';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { EstoreService } from '../../services/estore.service';
 
 declare var google;
 
@@ -20,9 +20,11 @@ export class CarritoPage  {
   idNegocio: any;
   subTotal = 0;
   total = 0;
-  coordenadas:any;
+  costEnvio = 0;
+  coordenadas={};
   calle = "";
   calleSecundario = "";
+  metPago="efectivo";
 
   constructor(public menu: MenuController,
     public navCtrl: NavController,
@@ -33,26 +35,13 @@ export class CarritoPage  {
     private AfDb: AngularFireDatabase) { }
 
   ionViewWillEnter() {
-    this.total = 0;
-    this.subTotal = 0;
     this.carrito = this._carrito.items;
-    this.idNegocio = this._carrito.idNegocio;
-    console.log(this.carrito);
-    this.carrito.map(data=>{
-      this.subTotal = this.subTotal + data['precioCarrito'];
-    });
-    this.total = this.subTotal + 15;
-    setTimeout(()=>{
-      this.loadMapa();
-
-    },0);
-    this.coordenadas = JSON.parse(localStorage.getItem("ubicacion"));
-    this.callDistancia();
+    this.ubicacionActual();
 
   }
 
   callDistancia(){
-    let origin = new google.maps.LatLng(this.coordenadas[0]['lat'], this.coordenadas[0]['lng'] );
+    let origin = new google.maps.LatLng(this.coordenadas['lat'], this.coordenadas['lng'] );
     let destination = new google.maps.LatLng(this.carrito[0]['latitud'], this.carrito[0]['longitud']);
     let service = new google.maps.DistanceMatrixService();
     service.getDistanceMatrix(
@@ -64,9 +53,25 @@ export class CarritoPage  {
     }, (response,status)=>{
       if ( status == "OK"){
         console.log(response);
-        let distanica = response.rows[0].elements[0].distance.value / 1000;
-        distanica = Math.round(distanica * 100) / 100;
-        console.log(distanica);
+        let distancia = response.rows[0].elements[0].distance.value / 1000;
+        distancia = Math.floor(distancia);
+
+        this.costEnvio = 25;
+        if(distancia - 2 > 0){
+          let kmextra = distancia - 2;
+          kmextra = kmextra * 3;
+          this.costEnvio = this.costEnvio + kmextra;
+        }
+        this.total = 0;
+        this.subTotal = 0;
+        this.idNegocio = this._carrito.idNegocio;
+        console.log(this.carrito);
+        this.carrito.map(data=>{
+          this.subTotal = this.subTotal + data['precioCarrito'];
+        });
+        this.total = this.subTotal + this.costEnvio;
+
+        
       }
       console.log(response);
     });
@@ -81,8 +86,8 @@ export class CarritoPage  {
      let mapa = new google.maps.Map($mapa,{
       disableDefaultUI: true,
       center: {
-        lat: this.coordenadas[0]['lat'],
-        lng: this.coordenadas[0]['lng']
+        lat: this.coordenadas['lat'],
+        lng: this.coordenadas['lng']
       },
       zoom: 14,
 
@@ -90,14 +95,14 @@ export class CarritoPage  {
 
       let marker = new google.maps.Marker({
         position: {
-          lat: this.coordenadas[0]['lat'],
-          lng: this.coordenadas[0]['lng']
+          lat: this.coordenadas['lat'],
+          lng: this.coordenadas['lng']
         },
         map: mapa,
         animation: google.maps.Animation.DROP
       });
 
-      let ubicacion = new google.maps.LatLng(this.coordenadas[0]['lat'], this.coordenadas[0]['lng'] );
+      let ubicacion = new google.maps.LatLng(this.coordenadas['lat'], this.coordenadas['lng'] );
 
       let geocoder = new google.maps.Geocoder();
       geocoder.geocode({'latLng': ubicacion},(results,status)=>{
@@ -137,9 +142,10 @@ export class CarritoPage  {
 
   ubicacionActual(){
     this.geolocation.getCurrentPosition().then((resp) => {
-      console.log(resp);
-      this.coordenadas[0]['lat'] = resp.coords.latitude;
-      this.coordenadas[0]['lng'] = resp.coords.longitude;
+      console.log(resp.coords.latitude);
+      console.log(this.coordenadas);
+      this.coordenadas['lat'] = resp.coords.latitude;
+      this.coordenadas['lng'] = resp.coords.longitude;
       this.calle = "";
       this.calleSecundario = "";
       this.callDistancia();
@@ -149,19 +155,32 @@ export class CarritoPage  {
   }
 
   async pedido(){
+    console.log(this._carrito);
+    let usuario = {...JSON.parse(localStorage.getItem('user'))};
+    console.log(usuario);
+    let hora = Date.now();
     let body = {
-      idNegocio : this._carrito.idNegocio,
-      productos: this._carrito.items,
-      total: this.total,
-      subtotal: this.subTotal,
-      ubicacionCliente: this.coordenadas,
-      status: 1
-    };
-    this.AfDb.database.ref("pedidos/4").set(body);
+          hora: hora,
+          productos: this._carrito.items,
+          total: this.total,
+          envio: this.costEnvio,
+          subtotal: this.subTotal,
+          ubicacionCliente: this.coordenadas,
+          status: 1,
+          metPago: this.metPago,
+          cliente: {
+            apellidoPat: usuario['apellidoPat'],
+            apellidoMat: usuario['apellidoMat'],
+            nombre: usuario['nombre'],
+            telefono: usuario['telefono'],
+          }
+    }
+    console.log(body);
+    this.AfDb.database.ref("pedidos/"+this._carrito.idNegocio+"/"+hora).set(body);
     const modal = await this.modalController.create({
       component: LoadingPage,
       cssClass: "loading",
-      backdropDismiss: false
+      backdropDismiss: false,
     });
     await modal.present();
   }
@@ -173,7 +192,10 @@ export class CarritoPage  {
     });
     await modal.present();
     const data = await modal.onDidDismiss();
-    if(data.data){
+    console.log(data);
+    if(data.data['ubicacion']){
+      this.coordenadas['lat'] = data.data['body']['lat'];
+      this.coordenadas['lng'] = data.data['body']['lng'];
       this.calle = "";
       this.calleSecundario = "";
       this.callDistancia();

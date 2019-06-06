@@ -34,3 +34,17 @@
     letter-spacing: normal;
 }
 
+.pass{
+    position: relative;
+}
+
+.eye{
+    --padding-start: 0;
+    --padding-end: 0;
+    position: absolute;
+    top: 0;
+    right: 8%;
+    width: 35px;
+    height: 35px;
+}
+

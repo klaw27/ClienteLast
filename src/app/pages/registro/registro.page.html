@@ -15,8 +15,18 @@
         <ion-input [(ngModel)]='nombre' class="input" placeholder="Nombre completo" type='text'></ion-input>
         <ion-input [(ngModel)]='numero' class="input" placeholder="Número Telefónico" type='tel'></ion-input>
         <ion-input [(ngModel)]='correo' class="input" placeholder="Correo Electronico" type='email'></ion-input>
-        <ion-input [(ngModel)]='password' class="input" placeholder="Contraseña" type='password'></ion-input>
-        <ion-input [(ngModel)]='passVerficada' class="input" placeholder="Repetir contraseña" type='password' (ionBlur)='contrasena()'></ion-input>
+        <div class="pass">
+          <ion-input [(ngModel)]='password' [type]="passType" class="input" placeholder="Contraseña" type='password'></ion-input>
+          <ion-button class="eye" color="light" (click)="cambiarIcono(1)">
+              <ion-icon slot="icon-only" name="{{icono}}"></ion-icon>
+          </ion-button>
+        </div>
+        <div class="pass">
+          <ion-input [(ngModel)]='passVerficada' [type]="passType2" class="input" placeholder="Repetir contraseña" type='password' (ionBlur)='contrasena()'></ion-input>
+          <ion-button class="eye" color="light" (click)="cambiarIcono(2)">
+              <ion-icon slot="icon-only" name="{{icono2}}"></ion-icon>
+          </ion-button>
+        </div>
         <ion-button size='small' expand="full" fill="clear" class="boton" (click)='registrarse()'>Registrarme</ion-button>
         <ion-button routerLink='/login' color='gmail' size='small' expand="full" fill="clear" class="boton" >Cancelar</ion-button>
       </div>

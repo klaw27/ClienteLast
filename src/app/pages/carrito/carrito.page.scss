@@ -1,8 +1,3 @@
-.contenido{
-    --background: #f6f6f6;
-}
-
-
 .principal{
     height: 90%;
     overflow: scroll;
@@ -60,6 +55,7 @@
 .pedido{
     --ion-item-background: white;
     margin: 20px 0;
+    box-shadow: none;
 }
 
 .titulo{
@@ -122,5 +118,9 @@ p{
     margin-top: 25px; 
     border-top: 1px solid;
     --border-style: none;
+}
+
+.atras{
+    margin-top: 15px;
 }
 

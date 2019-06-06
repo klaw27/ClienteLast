@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { EstoreService } from '../../services/estore.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -17,11 +17,29 @@ export class RegistroPage implements OnInit {
   password:string = '';
   passVerficada:string = '';
 
+  icono = "eye";
+  passType = 'password';
+  icono2 = "eye";
+  passType2 = 'password';
+
   constructor(public toastController: ToastController,
     public estore: EstoreService,
+    private router : Router,
     public alertController: AlertController) { }
 
   ngOnInit() {
+  }
+
+  cambiarIcono(pass){
+    if(pass == 1){
+      this.icono = this.icono == 'eye' ? 'eye-off' : 'eye';
+      this.passType = this.passType == 'password' ? 'text' : 'password';
+    }
+    else{
+      this.icono2 = this.icono2 == 'eye' ? 'eye-off' : 'eye';
+      this.passType2 = this.passType2 == 'password' ? 'text' : 'password';
+    }
+    
   }
 
   async contrasena(){
@@ -99,6 +117,10 @@ export class RegistroPage implements OnInit {
       this.estore.registrarUsuario(body, 'registrar.php').subscribe((data)=>{
         if(data['success'] == false){
           this.presentAlert();
+        }
+        else {
+          localStorage.setItem('user',data['user']);
+          this.router.navigateByUrl(`/dashboard`);
         }
       });
     }
