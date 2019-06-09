@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EstoreService {
 
-  server:string = 'http://localhost:8888/';
+  server:string = 'http://ec2-13-57-42-231.us-west-1.compute.amazonaws.com/clienteApi/';
 
   constructor( private http: HttpClient) { }
 
