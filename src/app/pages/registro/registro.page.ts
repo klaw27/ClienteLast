@@ -16,6 +16,8 @@ export class RegistroPage implements OnInit {
   correo:string = '';
   password:string = '';
   passVerficada:string = '';
+  apellidoPat:string = "";
+  apellidoMat:string = "";
 
   icono = "eye";
   passType = 'password';
@@ -108,6 +110,8 @@ export class RegistroPage implements OnInit {
       let userId = Date.now();
       let body= {
         nombre: this.nombre,
+        apellidoPat: this.apellidoPat,
+        apellidoMat: this.apellidoMat,
         telefono: this.numero,
         correo: this.correo,
         password: this.password,
@@ -119,7 +123,7 @@ export class RegistroPage implements OnInit {
           this.presentAlert();
         }
         else {
-          localStorage.setItem('user',data['user']);
+          localStorage.setItem('user',JSON.stringify(data['user']));
           this.router.navigateByUrl(`/dashboard`);
         }
       });

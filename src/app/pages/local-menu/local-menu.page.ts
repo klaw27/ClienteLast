@@ -31,6 +31,7 @@ export class LocalMenuPage implements OnInit {
       id: this.id,
       funcion: "all"
     };
+    console.log(body);
     this.estore.productos(body, "productos.php").subscribe(data=>{
       console.log(data);
       if(data['success']){

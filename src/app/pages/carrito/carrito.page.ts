@@ -169,6 +169,7 @@ export class CarritoPage  {
           status: 1,
           metPago: this.metPago,
           cliente: {
+            id_cliente: usuario['id_cliente'],
             apellidoPat: usuario['apellidoPat'],
             apellidoMat: usuario['apellidoMat'],
             nombre: usuario['nombre'],

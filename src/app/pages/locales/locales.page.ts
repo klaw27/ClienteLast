@@ -13,7 +13,7 @@ import { CarritoService } from '../../services/carrito.service';
 export class LocalesPage implements OnInit {
 
   titulo:any;
-  locales:any;
+  locales = [];
   carrito:boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -35,6 +35,7 @@ export class LocalesPage implements OnInit {
     this.estore.locales(body,"negocio.php").subscribe(data=>{
       console.log(data);
       this.locales = data['negocio'];
+      console.log(this.locales);
     });
   }
 

@@ -29,6 +29,7 @@ export class AppComponent {
   }
 
   logeado(){
+    console.log(JSON.parse(localStorage.getItem('user')));
     let idUser = JSON.parse(localStorage.getItem('user'));
     if( idUser ){
       this.router.navigateByUrl(`/dashboard`);

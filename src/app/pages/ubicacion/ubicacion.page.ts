@@ -26,7 +26,7 @@ export class UbicacionPage implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     let body = {
       funcion: 'id',
-      id_negocio: this.id
+      clientid: this.id
     }
     this.estore.locales(body,"negocio.php").subscribe(data=>{
       console.log(this.local);

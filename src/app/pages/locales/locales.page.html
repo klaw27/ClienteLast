@@ -7,8 +7,8 @@
   <h4 class='titulo'>{{titulo}}</h4>
   
 
-  <div *ngIf="locales" class="principal">
-    <ion-item *ngFor="let local of locales" class="local animated fadeIn" lines="none">
+  <div *ngIf="locales.length!=0" class="principal">
+    <ion-item *ngFor="let local of locales; let i = index" class="local animated fadeIn" lines="none">
       <ion-thumbnail slot="start" class="thumbnail">
         <img src="/assets/img/toks.png">
       </ion-thumbnail>
@@ -19,7 +19,7 @@
           <p>Horario: {{local.horaapertura}} - {{local.horacierre}}</p>
         </ion-label>
         <div class="footerLocal">
-            <ion-button fill="clear" slot="end" (click)='menu(local.id_negocio)'>Ver Menú</ion-button>
+            <ion-button fill="clear" slot="end" (click)='menu(local.clientid)'>Ver Menú</ion-button>
             <div class="contenedorEstrellas">
               <ion-icon class="estrella" name='star'></ion-icon>
               <ion-icon class="estrella" name='star'></ion-icon>
@@ -33,18 +33,18 @@
 
   </div>
 
-  <div *ngIf="!locales" class="principal">
+  <div *ngIf="locales.length==0" class="principal">
     <ion-item class="animated infinite slow flash" *ngFor="let item of [1,1,1,1,1,1,1,1,1]" lines="none">
       <ion-thumbnail slot="start" class="thumbnail">
-        <ion-skeleton-text animated class="skellThum"></ion-skeleton-text>
+        <ion-skeleton-text  class="skellThum"></ion-skeleton-text>
       </ion-thumbnail>
       <div class="contenidoLocal">
-          <ion-skeleton-text animated  style="width: 70%"></ion-skeleton-text>
-          <ion-skeleton-text animated class="skellText" style="width: 80%"></ion-skeleton-text>
-          <ion-skeleton-text animated class="skellText" style="width: 85%"></ion-skeleton-text>
+          <ion-skeleton-text   style="width: 70%"></ion-skeleton-text>
+          <ion-skeleton-text  class="skellText" style="width: 80%"></ion-skeleton-text>
+          <ion-skeleton-text  class="skellText" style="width: 85%"></ion-skeleton-text>
         <div class="skellFoot">
-          <ion-skeleton-text animated class="skellText" style="width: 40%"></ion-skeleton-text>
-          <ion-skeleton-text animated class="skellText" style="width: 40%"></ion-skeleton-text>
+          <ion-skeleton-text  class="skellText" style="width: 40%"></ion-skeleton-text>
+          <ion-skeleton-text  class="skellText" style="width: 40%"></ion-skeleton-text>
         </div>
       </div>
     </ion-item>

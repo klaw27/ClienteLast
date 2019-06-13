@@ -19,7 +19,7 @@
       <div class="data" *ngIf="productos">
           <ion-item class="platillo" *ngFor="let producto of productos">
             <ion-thumbnail slot="start" class="thumbnail">
-              <img src="/assets/img/enchiladas.jpg">
+              <img src="{{producto.fotografia}}">
             </ion-thumbnail>
             <div class="contenidoPlatillo">
               <ion-label>
