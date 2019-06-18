@@ -6,8 +6,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EstoreService {
 
-  // server:string = 'http://ec2-13-57-42-231.us-west-1.compute.amazonaws.com/clienteApi/';
-  server:string = "http://localhost:8888/apiCliente/";
+  //server:string = 'http://ec2-13-57-42-231.us-west-1.compute.amazonaws.com/clienteApi/';
+  server:string = 'http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com/clienteApi/';
+  //server:string = "http://localhost:8888/apiCliente/";
 
   constructor( private http: HttpClient) { }
 
@@ -46,5 +47,9 @@ export class EstoreService {
 
   producto(body,file){
     return this.http.post(this.server+file,JSON.stringify(body));
+  }
+
+  soporte(body,file){
+    return this.http.post(this.server+file,JSON.stringify(body));    
   }
 }

@@ -10,29 +10,41 @@
 
 .titulo{
     font-size: 18px;
-    margin-bottom: 25px;
+    margin-bottom: 40px;
 }
 
 .input{
     border: 1px solid rgb(165, 165, 165);
     border-radius: 5px;
-    width: fit-content;
+    width: 65%;
     margin: 0px auto;
     margin-bottom: 15px;
+    text-align: left;
+
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
 
 }
 
 .boton:first-of-type{
-    margin-top: 20px;
+    margin-top: center;
 }
 
-.boton{
+.botonEntrar{
+    
     width: 65%;
-    margin: 0 auto 10px auto;
+    margin: 10px auto 25px auto;
     font-size: 16px;
-    text-transform: capitalize;
-    letter-spacing: normal;
+
 }
+.botonRec{
+    width: 70%;
+    margin: 0 auto 25px auto;
+    font-size: 16px;
+    position: relative;
+
+}
+
 
 .pass{
     position: relative;
@@ -48,3 +60,12 @@
     height: 35px;
 }
 
+.input ion-icon {
+    right: 50px;
+    color: lightgrey;
+}
+
+.error
+{
+color:red;
+}

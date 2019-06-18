@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot='start'> 
+    <ion-buttons slot="start"> 
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
@@ -10,15 +10,25 @@
     <div class="logo">
         <img src="../../assets/img/EstoCuadro.png" alt="logo Estor">
       </div>
-      <div class="registro">
+
+
+      <div class="registrar">
         <h2 text-center class="titulo">Ingresa tu información</h2>
-        <ion-input (keyup)='enter($event)' [(ngModel)]='correo' class="input" placeholder="Correo electronico" type='email'></ion-input>
+        
+        <ion-input #swiper (keyup)="enter($event)" [(ngModel)]="correo" class="input" placeholder="Correo electronico" type="email">
+        <ion-icon name="person"></ion-icon> </ion-input>    
+      
+      </div>
         <div class="pass">
-          <ion-input (keyup)='enter($event)' [type]="passType" [(ngModel)]='password' class="input" placeholder="Contraseña" type='password'></ion-input>
-          <ion-button class="eye" color="light" (click)="cambiarIcono()">
+        <ion-input (keyup)="enter($event)" [type]="passType" [(ngModel)]="password" class="input" placeholder="Contraseña" type="password">
+        <ion-icon name="key"></ion-icon> </ion-input> 
+
+        <ion-button class="eye" color="light" (click)="cambiarIcono()">
               <ion-icon slot="icon-only" name="{{icono}}"></ion-icon>
           </ion-button>
-        </div>
-        <ion-button size='small' expand="full" fill="clear" class="boton" (click)='iniciar()'>Entrar</ion-button>
-      </div>
-</ion-content>
+          </div>
+
+        <ion-button class="botonEntrar" size="small" expand="full" (click)="iniciar()">Entrar</ion-button>
+        <ion-button class="botonRec" size="small" expand="full" fill="clear"  routerLink="/registro">¿Olvidaste tu contraseña?</ion-button>
+
+      </ion-content>

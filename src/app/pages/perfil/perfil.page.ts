@@ -12,6 +12,7 @@ declare function escape(s:string): string;
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.page.scss'],
 })
+
 export class PerfilPage implements OnInit {
 
   usuario:any = {
@@ -30,37 +31,63 @@ export class PerfilPage implements OnInit {
 
   fotografia:any;
 
+  ipnNom:any = "";
+  ipnApeMat:any = "";
+  ipnApePat:any = "";
+
   constructor(public estore : EstoreService,
     public navCtrl: NavController,
     public toastCtrl: ToastController,
     private camara: Camera,
     public actionSheetController: ActionSheetController,
+    public toastController: ToastController,
     private _sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-
-    console.log("hola");
-
       this.usuario = {...JSON.parse(localStorage.getItem('user'))};
       this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.usuario.fotografia}`);
-  
   }
+
+  validar(){
+
+    let body= {
+      ipnNom: this.ipnNom= (document.getElementById('1') as HTMLInputElement).value,
+      ipnApePat: this.ipnApePat = (document.getElementById('2') as HTMLInputElement).value,
+      ipnApeMat: this.ipnApeMat = (document.getElementById('3') as HTMLInputElement).value
+    } 
+
+    if(this.ipnNom == '' && this.ipnApeMat == '' && this.ipnApePat == '' ) {
+    this.presentarToast('Todos los campos son obligatorios');
+    }else if (this.ipnNom== ''){
+      this.presentarToast('El nombre es obligatorio');
+    }else if (this.ipnApeMat == ''){
+      this.presentarToast('El Apellido Materno es obligatorio');
+    }else if (this.ipnApePat == ''){
+      this.presentarToast('El Apellido Paterno es obligatorio');
+    }//SI SE CAPTURO TODA LA INFORMACION REALIZA EL LOGIN
+    else{
+      console.log("hola " + this.ipnNom +" " + this.ipnApePat + " "+ this.ipnApeMat );
+      this.actualizar();
+    }
+  }
+
 
   actualizar(){
 
-    console.log(this.usuario);
-    this.estore.actualizarPerfil(this.usuario, 'perfil.php').subscribe(data=>{
+    
+      console.log(this.usuario);
+      this.estore.actualizarPerfil(this.usuario, 'perfil.php').subscribe(data=>{
       console.log(data);
       if(data['success'] == true) {
-        this.presentarToast("Muy bien perfil actualizado");
+        this.presentarToast("¡El Perfil se actualizo correctamente!");
         localStorage.setItem('user',JSON.stringify(this.usuario));
         setTimeout(()=>{
           this.navCtrl.navigateBack('/dashboard');
         },750);
       }
       else this.presentarToast("Error, algo salio mal");
-    });
-
+        });
+     
   }
 
   async presentarToast(mensaje) {

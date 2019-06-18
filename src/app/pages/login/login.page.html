@@ -12,8 +12,12 @@
 </div>
 <div class="login">
 
-  <h2 text-center class="titulo">Ingresar con</h2>
-  <ion-button size='small' expand="full" fill="clear" class="boton" routerLink='/sesion'>Mi usuario</ion-button>
+  <h2 class="titulo">Ingresa con:</h2>
+  <!--
+      <ion-icon name = "person" item-start> </ion-icon><ion-input placeholder="Usuario"></ion-input>
+      <ion-icon name = "person" item-start> </ion-icon><ion-input placeholder="Password" type = "password"></ion-input>
+  -->
+  <ion-button color= "light" size = "small" expand = "block" class="boton" routerLink="/sesion">Mi Usuario</ion-button>
   <ion-button size='small' expand="block" class="boton" (click)='facebooklog()'>Facebook</ion-button>
   <ion-button color='gmail' size='small' expand="block" class="boton" (click)='googleLogin()'>Gmail</ion-button>
   <ion-button routerLink='/login' color='gmail' size='small' expand="full" fill="clear" class="boton" routerLink='/registro'>Registrarme</ion-button>

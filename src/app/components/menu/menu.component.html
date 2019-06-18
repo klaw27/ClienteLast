@@ -9,44 +9,47 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
+ 
+
     <div class="perfil">
-        <img class='fotoPerfil' id='perfil' [src]="fotografia" alt="Foto de perfil">
-        <h6>{{usuario.nombre}} {{usuario.apellidoPat}} {{usuario.apellidoMat}}</h6>
+      <img class='fotoPerfil' id='perfil' [src]="fotografia" onError= "this.src='/assets/img/default.png'" alt="Foto de perfil">
+
+      <h6>{{usuario.nombre}} {{usuario.apellidoPat}} {{usuario.apellidoMat}}</h6>
     </div>
     <ion-list>
-      <ion-item lines="none" class="menuBoton">
+      <ion-item class="menuBoton">
         <ion-button size="default" fill='clear'  (click)='inicio()'>
-            Inicio
+          <ion-icon name = "home" item-start></ion-icon> Inicio
         </ion-button> 
       </ion-item>
-      <ion-item lines="none" class="menuBoton"> 
+      <ion-item class="menuBoton"> 
           <ion-button size="default" fill='clear' (click)='perfil()'>
-              Mi Perfil
+              <ion-icon name = "person" item-start></ion-icon> Mi Perfil
           </ion-button> 
       </ion-item>
-      <ion-item lines="none" class="menuBoton"> 
+      <ion-item class="menuBoton"> 
           <ion-button size="default" fill='clear' (click)='cerrarMenu()'>
-              Mis Pedidos
+              <ion-icon name = "basket" item-start></ion-icon> Mis Pedidos
           </ion-button> 
       </ion-item>
-      <ion-item lines="none" class="menuBoton"> 
+      <ion-item class="menuBoton"> 
         <ion-button size="default" fill='clear' (click)='metodosPago()'>
-            Mis Metodos de Pago
+            <ion-icon name = "logo-usd" item-start></ion-icon> Mis Metodos de Pago
         </ion-button> 
     </ion-item>
-      <ion-item lines="none" class="menuBoton"> 
+      <ion-item class="menuBoton"> 
           <ion-button size="default" fill='clear' (click)='contacto()'>
-              Contáctanos
+              <ion-icon name = "mail" item-start></ion-icon> Contáctanos
           </ion-button> 
       </ion-item>
-      <ion-item lines="none" class="menuBoton"> 
+      <ion-item class="menuBoton"> 
           <ion-button size="default" fill='clear' (click)='soporte()'>
-              Soporte
+              <ion-icon name = "help-circle" item-start></ion-icon> Soporte
           </ion-button> 
       </ion-item>
       <ion-item lines="none" class="menuBoton"> 
           <ion-button size="default" fill='clear' (click)='logout()'>
-              Cerrar Sesión
+              <ion-icon name = "log-out" item-start></ion-icon>  Cerrar Sesión
           </ion-button> 
       </ion-item>
     </ion-list>

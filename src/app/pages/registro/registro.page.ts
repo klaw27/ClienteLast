@@ -92,20 +92,30 @@ export class RegistroPage implements OnInit {
 
 
     let regEpr = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  
-    if(this.nombre == '' || this.numero == '' || this.correo == '' || this.password == '' ) 
-    
-    this.presentToast('Llene todos los campos');
+    let regEpr2 = /^[a-zA-Z0-9-]*$/;
+    let regEpr3 = /^[0-9-]/;
 
-
-
-    else if( !this.correo.match(regEpr) ){
-
-      this.presentToast('Formato de correo invalido');
-
-    }
-    
-    else if(this.password == this.passVerficada){
+    if(this.nombre == '' && this.numero == '' && this.correo == '' && this.password == '' ) 
+    this.presentToast('Todos los campos son obligatorios');
+    else if (this.nombre == ''){
+      this.presentToast('Debe capturar su nombre');
+    }else if (this.apellidoPat == ''){
+      this.presentToast('Debe capturar su apellido Paterno');
+    }else if (this.apellidoMat == ''){
+      this.presentToast('Debe capturar su apellido Materno');
+    }else if (this.numero == ''){
+      this.presentToast('Debe capturar su numero');
+    }else if (this.correo == ''){
+      this.presentToast('Debe capturar su correo');
+    }else if (this.password == ''){
+      this.presentToast('Debe capturar su password');
+    }else if( !this.correo.match(regEpr) ){
+    this.presentToast('Formato de correo invalido');
+    }else if( !this.password.match(regEpr2)) {
+      this.presentToast('El password debe de ser de 8 a 16 caracteres ');
+    }else if( !this.numero.match(regEpr3)) {
+      this.presentToast("El telefono solo debe contener numeros");
+    }else if(this.password == this.passVerficada){
 
       let userId = Date.now();
       let body= {
@@ -117,7 +127,6 @@ export class RegistroPage implements OnInit {
         password: this.password,
         userId: userId
       }
-  
       this.estore.registrarUsuario(body, 'registrar.php').subscribe((data)=>{
         if(data['success'] == false){
           this.presentAlert();

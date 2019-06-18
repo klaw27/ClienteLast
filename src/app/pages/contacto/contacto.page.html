@@ -7,7 +7,7 @@
   </ion-header>
 <ion-content padding>
     <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>
-    <h3>Ubicacion</h3>
+    <h3>Ubicación</h3>
     <p>Pino 219, Jardines de Irapuato</p>
     <div class="ubicacion">
       <div id="mapa"></div>
@@ -23,24 +23,25 @@
           <p>462 215 6190 Oficina</p>        
       </div>
     </div>
-    <h3>Redes Sociales</h3>
+    <h3>Redes Sociales</h3> 
     <ion-grid>
-      <ion-row>
-        <ion-col size="4">
-          <img src="/assets/img/facebook.png" alt="Facebook">
-
-        </ion-col>
-        <ion-col size="4">
-          <img src="/assets/img/twitter.png" alt="Twitter">
-
-        </ion-col>
-        <ion-col size="4">
-          <img src="/assets/img/instagram.png" alt="Instagram">
-
-        </ion-col>
-      </ion-row>
+      
+        <ion-row>
+            <ion-col size="3" offset="2.5">
+                <img src="/assets/img/facebook.png" alt="Facebook" (click)="OpenFB();" > 
+            </ion-col>
+            <ion-col size="3" offset="0.5">
+                <img src="/assets/img/instagram.png" alt="Instagram" (click)="OpenIG();">
+            </ion-col>
+          </ion-row>
     </ion-grid>
     <div class="ventas">
-      <p>!Te gustaria inscribir tu empresa o negocio, ventas@elestor.mx, estamos para servirte!</p>
+      <p>¿Te gustaria inscribir tu empresa o negocio, ventas@elestor.mx, estamos para servirte?</p>
     </div>
+
+    <ion-fab vertical="bottom" class="fab" horizontal="start" slot="fixed">
+      <ion-fab-button class="faBoton" size="large" (click)="goCarrito()" translucent>
+          <ion-icon class="iconoFab" name='cart'></ion-icon>
+      </ion-fab-button>
+  </ion-fab>
 </ion-content>

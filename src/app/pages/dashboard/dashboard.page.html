@@ -5,7 +5,7 @@
 
     <div class="principal">
 
-      <h6 class='tituloLugar'>Comida Preparada</h6>
+      <h6 class='tituloLugar'>COMIDA PREPARADA</h6>
       <ion-slides [options]="slideOpts" class="slide">
           <ion-slide *ngFor='let comida of negocios.comida' class='lugar' (click)="locales(comida.nombre)">
             <img src='/assets/img/comida/{{comida.icono}}' alt="" class='icono'>  
@@ -13,7 +13,7 @@
           </ion-slide>
       </ion-slides>
     
-      <h6 class='tituloLugar'>Bebidas</h6>
+      <h6 class='tituloLugar'>BEBIDAS</h6>
       <ion-slides [options]="slideOpts" class="slide">
           <ion-slide *ngFor='let bebidas of negocios.bebidas' class='lugar' (click)="locales(bebidas.nombre)">
             <img src='/assets/img/bebidas/{{bebidas.icono}}' alt="" class='icono'>  
@@ -21,7 +21,7 @@
           </ion-slide>
       </ion-slides>
   
-        <h6 class='tituloLugar'>Postres</h6>
+        <h6 class='tituloLugar'>POSTRES</h6>
         <ion-slides [options]="slideOpts" class="slide">
             <ion-slide *ngFor='let postres of negocios.postres' class='lugar' (click)="locales(postres.nombre)">
               <img src='/assets/img/postres/{{postres.icono}}' alt="" class='icono'>  
@@ -29,11 +29,11 @@
             </ion-slide>
         </ion-slides>
   
-          <h6 class='tituloLugar'>Damas</h6>
+          <h6 class='tituloLugar'>SUMINISTROS</h6>
           <ion-slides [options]="slideOpts" class="slide">
-              <ion-slide *ngFor='let damas of negocios.damas' class='lugar' (click)="locales(damas.nombre)">
-                <img src='/assets/img/damas/{{damas.icono}}' alt="" class='icono'>  
-                <p class='titulo'>{{damas.nombre}}</p>
+              <ion-slide *ngFor='let suministros of negocios.suministros' class='lugar' (click)="locales(suministros.nombre)">
+                <img src='/assets/img/damas/{{suministros.icono}}' alt="" class='icono'>  
+                <p class='titulo'>{{suministros.nombre}}</p>
               </ion-slide>
           </ion-slides>
  

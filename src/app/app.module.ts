@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -18,6 +18,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
+
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyBBpfZ5-RiG2fGwpWFCSimR2CFtXXnTGJI",
@@ -50,7 +52,9 @@ export const firebaseConfig = {
     Camera,
     Geolocation,
     AngularFireDatabase,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    EmailComposer,
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    
   ],
   bootstrap: [AppComponent]
 })

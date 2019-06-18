@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 declare var google;
 
 @Component({
@@ -38,6 +39,16 @@ export class ContactoPage implements OnInit {
 
       console.log(marker);
 
+    }
+
+    OpenFB()
+    {
+    window.open("https://www.facebook.com/ElEstorMexico",'_system', 'location=yes');
+    }
+
+    OpenIG()
+    {
+    window.open("https://www.instagram.com/",'_system', 'location=yes');
     }
 
 }

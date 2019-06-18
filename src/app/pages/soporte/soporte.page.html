@@ -7,9 +7,19 @@
   </ion-header>
 <ion-content padding>
     <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>
-    <p class="text1">¿Estas teniendo problremas con tu app?</p>
-    <p class="text2">soporte@elestor.mx</p>
+    <p class="text1">¿Estas teniendo problemas con tu app?</p>
+    <!--<p class="text2">soporte@elestor.mx</p>-->
     <img class="perfil" src="/assets/img/perfil.jpg" alt="">
-    <p class="text3">Sera un placer atenderte</p>
+    <p class="text3">¡Sera un placer atenderte!</p>
 
+    <ion-input [(ngModel)]='nombre' class="input" placeholder="Nombre" type="text"></ion-input>
+    <ion-input [(ngModel)]='correo' class="input" placeholder="Email" type="email"></ion-input>
+    <ion-textarea rows="4" [(ngModel)]='consulta' class="input" placeholder="Comentarios..." type="text"></ion-textarea>
+    <ion-button expand="full" class="boton" (click)="Contactar()" >Enviar</ion-button>
+
+    <ion-fab vertical="bottom" class="fab" horizontal="start" slot="fixed">
+      <ion-fab-button class="faBoton" size="large" (click)="goCarrito()" translucent>
+          <ion-icon class="iconoFab" name='cart'></ion-icon>
+      </ion-fab-button>
+  </ion-fab>
 </ion-content>

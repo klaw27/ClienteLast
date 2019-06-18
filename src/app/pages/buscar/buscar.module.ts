@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, MenuController, NavController } from '@ionic/angular';
 
 import { BuscarPage } from './buscar.page';
 
@@ -23,4 +23,12 @@ const routes: Routes = [
   ],
   declarations: [BuscarPage]
 })
-export class BuscarPageModule {}
+export class BuscarPageModule {
+
+  
+  constructor(public menu: MenuController,
+    private navCtrl : NavController) {}
+    
+  
+
+}
