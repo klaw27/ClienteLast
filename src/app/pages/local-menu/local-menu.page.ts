@@ -32,7 +32,7 @@ export class LocalMenuPage implements OnInit {
       funcion: "all"
     };
     console.log(body);
-    this.estore.productos(body, "productos.php").subscribe(data=>{
+    this.estore.productos(body, "negocio.php").subscribe(data=>{
       console.log(data);
       if(data['success']){
         this.productos = data['productos'];

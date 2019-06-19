@@ -41,7 +41,7 @@ export class DashboardPage implements OnInit {
     },
     {
       nombre: 'Cafeterias',
-      icono: 'Pizza.png'
+      icono: 'Cafe.png'
     }
   ],
   bebidas: [

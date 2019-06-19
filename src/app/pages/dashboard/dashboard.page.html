@@ -32,7 +32,7 @@
           <h6 class='tituloLugar'>SUMINISTROS</h6>
           <ion-slides [options]="slideOpts" class="slide">
               <ion-slide *ngFor='let suministros of negocios.suministros' class='lugar' (click)="locales(suministros.nombre)">
-                <img src='/assets/img/damas/{{suministros.icono}}' alt="" class='icono'>  
+                <img src='/assets/img/suministros/{{suministros.icono}}' alt="" class='icono'>  
                 <p class='titulo'>{{suministros.nombre}}</p>
               </ion-slide>
           </ion-slides>
