@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'contacto', loadChildren: './pages/contacto/contacto.module#ContactoPageModule' },
   { path: 'soporte', loadChildren: './pages/soporte/soporte.module#SoportePageModule' },
   { path: 'metodo-pago', loadChildren: './pages/metodo-pago/metodo-pago.module#MetodoPagoPageModule' },
+  { path: 'pedidos', loadChildren: './pages/pedidos/pedidos.module#PedidosPageModule' },
 ];
 
 @NgModule({

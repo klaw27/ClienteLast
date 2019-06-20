@@ -1,7 +1,16 @@
-<app-header></app-header>
-<ion-content class="contenido" >
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Regresar</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-  <div class="data principal" *ngIf="carrito.length != 0">
+<ion-content padding>
+  <!--  <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>-->
+  
+    <div class="data principal" *ngIf="carrito.length != 0">
     <ion-card class="pedido">
       <ion-card-header>
         <div class="ubicacion">

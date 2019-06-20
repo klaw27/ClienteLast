@@ -1,11 +1,8 @@
 .pago{
-    display: flex;
-    width: 40%;
-    align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-.card,.efectivo,.terminal{
+.card,.efectivo,.terminal,.online{
     width: 45px;
     height: 45px;
 }
@@ -20,4 +17,9 @@
 
 .terminal{
     color: #7676f9;
+}
+
+.etiqueta {
+padding-left: 15px;
+//margin-top: 15px,
 }

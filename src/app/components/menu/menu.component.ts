@@ -79,4 +79,10 @@ export class MenuComponent {
 
   }
 
+  pedidos(){
+    this.router.navigateByUrl(`/pedidos`);
+    this.cerrarMenu();
+
+  }
+
 }

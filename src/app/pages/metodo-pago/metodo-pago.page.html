@@ -1,33 +1,43 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
       <ion-buttons slot="start">
         <ion-back-button></ion-back-button>
       </ion-buttons>
-      <ion-title>Metodos de pago</ion-title>
+      <ion-title>Métodos de Pago</ion-title>
     </ion-toolbar>
   </ion-header>
 
-<ion-content padding>
-  <h3>Pago</h3>
-
+  <ion-content padding>
+      <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>
+ 
+  <ion-list >
   <div class="pago">
+    <ion-item>
       <ion-icon class="card" name="card"></ion-icon>
-      <p>Tarjeta Bancaria</p>
+      <ion-label class ="etiqueta"> Tarjeta Bancaria </ion-label>
+      <ion-icon name="arrow-dropright-circle" slot="end"></ion-icon>
+    </ion-item>
   </div>
   <div class="pago">
+    <ion-item>
       <ion-icon class="efectivo" name="cash"></ion-icon>
-      <p>Efectivo </p>
+      <ion-label class ="etiqueta"> Efectivo </ion-label>
+    </ion-item>
   </div>
   <div class="pago">
+     <ion-item> 
       <ion-icon class="terminal" name="wallet"></ion-icon>      
-      <p>Terminal </p>
+      <ion-label class ="etiqueta"> Terminal </ion-label>
+     </ion-item> 
   </div>
   <div class="pago">
-      <ion-icon class="terminal" name="paper"></ion-icon>      
-      <p>Pago en Linea</p>
+    <ion-item> 
+      <ion-icon class="online" name="desktop"></ion-icon>      
+      <ion-label class ="etiqueta"> Pago en Linea </ion-label>
+    </ion-item> 
   </div>
-
-  <ion-button expand = "full">Agregar tarjeta de crédito y débito</ion-button>
+</ion-list>
+  <ion-button fill = "clear">Agregar tarjeta de crédito y débito</ion-button>
   <ion-fab vertical="bottom" class="fab" horizontal="start" slot="fixed">
     <ion-fab-button class="faBoton" size="large" (click)="goCarrito()" translucent>
         <ion-icon class="iconoFab" name='cart'></ion-icon>

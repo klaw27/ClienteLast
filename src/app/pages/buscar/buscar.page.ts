@@ -10,35 +10,44 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BuscarPage implements OnInit {
   items:any;
-  lista=[{nombre:"Tortas"},
-          {nombre:"Carnitas"},
-          {nombre:"Tortas `Las tortugas`"},
-          {nombre:"Cerveza"},];
+  //lista:any;
+  lista=[{nombre:"Tortas",foto:"tortas.png"},
+          {nombre:"Carnitas",foto:"tortas.png"},
+          {nombre:"Tortas `Las tortugas`",foto:"tortas.png"},
+          {nombre:"Cerveza", foto:"tortas.png"}];
+
 
   constructor(public alertCtrl: AlertController,public estore : EstoreService,
-    private activatedRoute: ActivatedRoute,) { 
-     this.iniBusqueda();
+    private activatedRoute: ActivatedRoute) { 
+      //this.ionViewDidLoad();
+     
 
+/*para la BD
+      let body = {
+        categoria: "",
+        funcion: 'all'
+      }
+      this.estore.locales(body,"negocio.php").subscribe(data=>{
+        console.log(data);
+        this.lista = data['negocio'];
+        console.log(this.lista);
+      });*/    
+    this.iniBusqueda();
   }
+
+  /*ionViewDidLoad(){ 
+    this.estore.obtenerDatos()
+    .suscribe((data)=>{this.lista + data;}, 
+    (error)=>{console.log(error);})
+    
+    }*/
+    
 
   iniBusqueda(){ 
     this.items = this.lista;
 
 }
   ngOnInit() {
-    /*console.log(this.locales);
-    this.titulo = this.activatedRoute.snapshot.paramMap.get('id');
-    let body = {
-      categoria: this.titulo,
-      funcion: 'all'
-    }
-    this.estore.locales(body,"negocio.php").subscribe(data=>{
-      console.log(data);
-      this.locales = data['negocio'];
-      console.log(this.locales);
-    }); */
-
-
   }
 
   buscarEstore(event){

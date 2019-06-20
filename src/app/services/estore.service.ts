@@ -55,6 +55,9 @@ export class EstoreService {
     return this.http.post(this.server+file,JSON.stringify(body));    
   }
 
+  obtenerDatos(){
+    return this.http.get("https://jsonplaceholder.typicode.com/users");
+    }
 
 
 
