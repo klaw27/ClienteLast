@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { EstoreService } from 'ClienteLast/src/app/services/estore.service';
+import { EstoreService } from '../../services/estore.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

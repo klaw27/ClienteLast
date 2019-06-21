@@ -20,20 +20,23 @@
   </div>
   <div class="pago">
     <ion-item>
-      <ion-icon class="efectivo" name="cash"></ion-icon>
-      <ion-label class ="etiqueta"> Efectivo </ion-label>
+      <ion-icon class="efectivo" name="cash" ></ion-icon>
+      <ion-label class ="etiqueta"> Efectivo </ion-label>     
+      <ion-icon name="information-circle" slot="end" (click)="presentPopover($event)"></ion-icon>
     </ion-item>
   </div>
   <div class="pago">
      <ion-item> 
       <ion-icon class="terminal" name="wallet"></ion-icon>      
-      <ion-label class ="etiqueta"> Terminal </ion-label>
+      <ion-label class ="etiqueta"> Terminal </ion-label>        
+      <ion-icon name="information-circle" slot="end"></ion-icon>
      </ion-item> 
   </div>
   <div class="pago">
     <ion-item> 
       <ion-icon class="online" name="desktop"></ion-icon>      
-      <ion-label class ="etiqueta"> Pago en Linea </ion-label>
+      <ion-label class ="etiqueta"> Pago en Linea </ion-label>   
+      <ion-icon name="information-circle" slot="end"></ion-icon>
     </ion-item> 
   </div>
 </ion-list>

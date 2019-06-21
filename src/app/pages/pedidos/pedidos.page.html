@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Regresar</ion-title>
+    <ion-title>Mis Pedidos</ion-title>
   </ion-toolbar>
       <!-- Segmentacion de pantallas -->
 <ion-segment [(ngModel)]="segment">
@@ -24,8 +24,13 @@
     <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>
  <ion-list >
 		<ion-item *ngFor="let item of items">
+        <ion-thumbnail slot="start" class="thumbnail">
+            <img src="/assets/img/toks.png" >
+        </ion-thumbnail>
       <ion-label>
-          {{item.nombre}}-{{item.foto}}
+          <h6 class=tituloLocal>{{item.nombre}}</h6>
+          <p>{{item.foto}} {{item.foto}}</p>
+          <p>Horario: {{item.foto}} - {{item.foto}}</p>
       </ion-label>
     </ion-item>
 	</ion-list>

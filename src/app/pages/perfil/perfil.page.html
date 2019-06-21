@@ -3,13 +3,12 @@
       <ion-buttons slot="start">
         <ion-back-button></ion-back-button>
       </ion-buttons>
-      <ion-title>Regresar</ion-title>
+      <ion-title>Mi Perfil</ion-title>
     </ion-toolbar>
   </ion-header>
 <ion-content padding>
     <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>
 
-  <h2 class='titulo'>Mi Perfil</h2>
 
   <div class="perfil">
     <img class='fotoPerfil' id='perfil' [src]="fotografia"  onError= "this.src='/assets/img/default.png'"  alt="Foto de perfil"> 
@@ -21,12 +20,15 @@
   </div>
 
   <div class="informacion">
-      <ion-input  class="input" [(ngModel)]='usuario.nombre' id="1" placeholder="Nombre (s)" type='text'></ion-input>
+
+      <ion-input position="floating" class="input" [(ngModel)]='usuario.nombre' id="1" placeholder="Nombre (s)" type='text'></ion-input>
       <ion-input  class="input" [(ngModel)]='usuario.apellidoPat' id = "2" placeholder="Apellido Paterno" type='text'></ion-input>
       <ion-input  class="input" [(ngModel)]='usuario.apellidoMat' id="3" placeholder="Apellido Materno" type='text'></ion-input>
       <ion-input disabled  class="input" [(ngModel)]='usuario.email' placeholder="Correo" type='email'></ion-input>
       <ion-input disabled class="input" [(ngModel)]='usuario.telefono' placeholder="Número Telefónico" type='phone'></ion-input>
   </div>
+
+
 
   <!-- <div class="Envio">
       <h4 class='tituloEnvio'>Domicilio Más Actual</h4>
@@ -49,7 +51,7 @@
     <ion-input  class="input" [(ngModel)]='usuario.rfc' placeholder="RFC" type='text'></ion-input>
 </div> -->
 
-    <ion-button size='default' expand="full" class="btnUpdate" (click)='validar()'>Guardar Cambios</ion-button>
+    <ion-button size='default' expand="block" class="btnUpdate" (click)='validar()'>Guardar Cambios</ion-button>
 
     <ion-fab vertical="bottom" class="fab" horizontal="start" slot="fixed">
       <ion-fab-button class="faBoton" size="large" (click)="goCarrito()" translucent>
