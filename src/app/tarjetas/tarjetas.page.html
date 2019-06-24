@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Formas de Pago</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>
+    <h3>Tarjetas de Crédito o Debito </h3>
+    <ion-list >
+      <ion-item *ngFor="let item of items">
+          <ion-thumbnail slot="start" class="thumbnail">
+              <img src="/assets/img/card.jpg"  class="card">
+          </ion-thumbnail>
+        <ion-label>
+            <h6 class=tituloLocal>{{item.numero}}</h6>
+            <p>Estatus: {{item.estatus}}</p>
+            <p>Expira: {{item.expira}} </p>
+        </ion-label><ion-icon name ="trash" slot = "end" (click)= "deleteCard()"></ion-icon>
+      </ion-item>
+    </ion-list>
+</ion-content>

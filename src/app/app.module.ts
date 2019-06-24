@@ -18,8 +18,10 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
+import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { HomePopoverComponent } from './home-popover/home-popover.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyBBpfZ5-RiG2fGwpWFCSimR2CFtXXnTGJI",
@@ -37,8 +39,11 @@ export const firebaseConfig = {
   entryComponents: [],
   imports: [
     BrowserModule, 
+    FormsModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(), 
     AppRoutingModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ComponentsModule,
     AngularFireModule.initializeApp(firebaseConfig),

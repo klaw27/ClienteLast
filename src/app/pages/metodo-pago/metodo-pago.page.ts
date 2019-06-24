@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { ViewController } from '@ionic/core';
 import { HomePopoverComponent } from 'src/app/home-popover/home-popover.component';
+import { TerminalComponent } from 'src/app/home-popover/terminal/terminal.component';
+import { PagoOnlineComponent } from 'src/app/home-popover/pago-online/pago-online.component';
 
 @Component({
   selector: 'app-metodo-pago',
@@ -16,15 +18,30 @@ export class MetodoPagoPage implements OnInit {
   }
 
 
-
-
 async presentPopover(event){
   const popover = await this.popoverCtrl.create({
     component: HomePopoverComponent,
-    event
+    event,
+    translucent: true
     });
   return await popover.present();
 }
- 
 
+async Terminal(event){
+  const popover = await this.popoverCtrl.create({
+    component: TerminalComponent,
+    event,
+    translucent: true
+    });
+  return await popover.present();
+}
+
+async PagoOnlineInfo(event){
+  const popover = await this.popoverCtrl.create({
+    component: PagoOnlineComponent,
+    event,
+    translucent: true
+    });
+  return await popover.present();
+}
 }

@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar class="toolbarBack">
-    <ion-title text-center>
+  <ion-toolbar class="toolbarBack" color="primary">
+    <ion-title text-center >
       Bienvenido
     </ion-title>
   </ion-toolbar>
@@ -11,16 +11,36 @@
   <img src="../../assets/img/EstoCuadro.png" alt="logo Estor">
 </div>
 <div class="login">
+  <h2 class="titulo">Ingresa con usuario y contraseña:</h2>
+  <ion-input #swiper (keyup)="enter($event)" [(ngModel)]="correo" class="input" placeholder="Correo electronico" type="email">
+  <ion-icon name="person"></ion-icon> </ion-input>    
+  <div class="pass">
+      <ion-input (keyup)="enter($event)" [type]="passType" [(ngModel)]="password" class="input" placeholder="Contraseña" type="password">
+      <ion-icon name="key"></ion-icon> </ion-input> 
 
-  <h2 class="titulo">Ingresa con:</h2>
-  <!--
-      <ion-icon name = "person" item-start> </ion-icon><ion-input placeholder="Usuario"></ion-input>
-      <ion-icon name = "person" item-start> </ion-icon><ion-input placeholder="Password" type = "password"></ion-input>
-  -->
+      <ion-button class="eye" color="light" (click)="cambiarIcono()">
+            <ion-icon slot="icon-only" name="{{icono}}"></ion-icon>
+        </ion-button>
+        </div>
+
+        <ion-button class="botonEntrar" size="small" expand ="block"  (click)="iniciar()">Entrar</ion-button>
+      
+        <h2 class="titulo">O inicia sesion con:</h2> 
+    <ion-grid>     
+        <ion-row>
+            <ion-col size="3" offset="2.5">
+                <img class ="imagen" src="/assets/img/fb.png" alt="Facebook" (click)="facebooklog();" > 
+            </ion-col>
+            <ion-col size="3" offset="0.5">
+                <img class ="imagen" src="/assets/img/google.png" alt="Instagram" (click)="googleLogin();">
+            </ion-col>
+          </ion-row>
+    </ion-grid>
+
+  <ion-button color='gmail' size='small' expand="full" fill="clear" class="boton" routerLink='/registro'>Registrarme</ion-button>
+  <ion-button class="botonRec" size="small" expand="full" fill="clear"  routerLink="/registro">¿Olvidaste tu contraseña?</ion-button>
+
   <ion-button color= "light" size = "small" expand = "block" class="boton" routerLink="/sesion">Mi Usuario</ion-button>
-  <ion-button size='small' expand="block" class="boton" (click)='facebooklog()'>Facebook</ion-button>
-  <ion-button color='gmail' size='small' expand="block" class="boton" (click)='googleLogin()'>Gmail</ion-button>
-  <ion-button routerLink='/login' color='gmail' size='small' expand="full" fill="clear" class="boton" routerLink='/registro'>Registrarme</ion-button>
 
 </div>
 </ion-content>

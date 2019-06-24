@@ -15,7 +15,7 @@
     <ion-item>
       <ion-icon class="card" name="card"></ion-icon>
       <ion-label class ="etiqueta"> Tarjeta Bancaria </ion-label>
-      <ion-icon name="arrow-dropright-circle" slot="end"></ion-icon>
+      <ion-icon name="arrow-dropright-circle" slot="end" routerLink="/tarjetas"></ion-icon>
     </ion-item>
   </div>
   <div class="pago">
@@ -29,18 +29,18 @@
      <ion-item> 
       <ion-icon class="terminal" name="wallet"></ion-icon>      
       <ion-label class ="etiqueta"> Terminal </ion-label>        
-      <ion-icon name="information-circle" slot="end"></ion-icon>
+      <ion-icon name="information-circle" slot="end"  (click)="Terminal($event)"></ion-icon>
      </ion-item> 
   </div>
   <div class="pago">
     <ion-item> 
       <ion-icon class="online" name="desktop"></ion-icon>      
       <ion-label class ="etiqueta"> Pago en Linea </ion-label>   
-      <ion-icon name="information-circle" slot="end"></ion-icon>
+      <ion-icon name="information-circle" slot="end" (click)="PagoOnlineInfo($event)"></ion-icon>
     </ion-item> 
   </div>
 </ion-list>
-  <ion-button fill = "clear">Agregar tarjeta de crédito y débito</ion-button>
+  <ion-button fill = "clear" routerLink="/add-card">Agregar tarjeta de crédito y débito</ion-button>
   <ion-fab vertical="bottom" class="fab" horizontal="start" slot="fixed">
     <ion-fab-button class="faBoton" size="large" (click)="goCarrito()" translucent>
         <ion-icon class="iconoFab" name='cart'></ion-icon>

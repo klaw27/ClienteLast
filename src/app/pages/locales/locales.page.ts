@@ -12,17 +12,17 @@ import { CarritoService } from '../../services/carrito.service';
 })
 export class LocalesPage implements OnInit {
 
-  titulo:any;
+  titulo: any;
   locales = [];
-  carrito:boolean = false;
+  carrito: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
-    private navCtrl:NavController,
-    public estore : EstoreService,
+    private navCtrl: NavController,
+    public estore: EstoreService,
     public _carrito: CarritoService) { }
 
-  ionViewDidEnter(){
-    if(this._carrito.items.length != 0) this.carrito = true;
+  ionViewDidEnter() {
+    if (this._carrito.items.length != 0) this.carrito = true;
   }
 
   ngOnInit() {
@@ -32,22 +32,24 @@ export class LocalesPage implements OnInit {
       categoria: this.titulo,
       funcion: 'all'
     }
-    this.estore.locales(body,"negocio.php").subscribe(data=>{
+    debugger
+    this.estore.locales(body, "negocio.php").subscribe(data => {
+      debugger
       console.log(data);
       this.locales = data['negocio'];
       console.log(this.locales);
     });
   }
 
-  salir(){
+  salir() {
     this.navCtrl.navigateBack('/dashboard');
   }
 
-  menu(id){
-    this.navCtrl.navigateForward('/local-menu/'+id);
+  menu(id) {
+    this.navCtrl.navigateForward('/local-menu/' + id);
   }
 
-  goCarrito(){
+  goCarrito() {
     this.navCtrl.navigateForward('/carrito');
   }
 

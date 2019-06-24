@@ -3,7 +3,7 @@
 }
 
 .logo img{
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
     display: block;
 }
@@ -14,13 +14,13 @@
     letter-spacing: normal;
     text-align: start;
 }
-.boton{
+/*.boton{
     width: 70%;
     margin: 0 auto 25px auto;
     font-size: 18px;
     text-transform: capitalize;
     letter-spacing: normal;
-}
+}*/
 
 .copyright{
     position: fixed;
@@ -32,4 +32,89 @@
 
 .empresa{
     font-size: 16px;
+}
+
+.toolbarBack{
+    --background: rgb(250, 250, 250);
+}
+
+.logo img{
+    width: 75%;
+    margin: 0 auto;
+    display: block;
+}
+
+.titulo{
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.input{
+    border: 1px solid rgb(165, 165, 165);
+    border-radius: 5px;
+    width: 65%;
+    margin: 0px auto;
+    margin-bottom: 15px;
+    text-align: left;
+
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+
+}
+
+.boton:first-of-type{
+    margin-top: center;
+}
+
+.botonEntrar{
+    
+    width: 65%;
+    margin: 10px auto 25px auto;
+    font-size: 16px;
+
+}
+.botonRec{
+    width: 70%;
+    margin: 0 auto 25px auto;
+    font-size: 16px;
+    position: relative;
+
+}
+
+
+.pass{
+    position: relative;
+}
+
+.eye{
+    --padding-start: 0;
+    --padding-end: 0;
+    position: absolute;
+    top: 0;
+    right: 8%;
+    width: 35px;
+    height: 35px;
+}
+
+.input ion-icon {
+    right: 50px;
+    color: lightgrey;
+}
+
+.error
+{
+color:red;
+}
+
+.redes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center; 
+    grid-template-columns: 1fr 1fr;
+}
+
+.imagen {
+    width: 80px;
+    height: 80px;
 }

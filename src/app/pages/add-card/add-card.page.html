@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Agregar Tarjeta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <!--<img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>-->
+    
+    <div class="backTarjeta">
+        <div class="contenTarjeta">
+          <div class="esfera"></div>
+          <div class="esfera2"></div>
+          <img class="chip" src="/assets/img/chip.png" alt="" srcset="">
+          <div class="masterCard">
+            <div class="rojo"></div>
+            <div class="amarillo"></div>
+          </div>
+          <div class="infoTarjeta">
+              <div class="numTarjeta">
+                  <span class="cuarteto">1234</span>
+                  <span class="cuarteto">****</span>
+                  <span class="cuarteto">****</span>
+                  <span class="cuarteto">****</span>
+                </div>
+                <div class="nomFecha">
+                  <span class=nombre></span>
+                  <span class="fecha"></span>
+                </div>    
+          </div>  
+        </div>
+     </div>
+    
+    <P>DATOS DE LA TARJETA</P>
+
+    <form [formGroup]="myForm" (ngSubmit)="saveData()" novalidate> 
+        <ion-item>
+            <ion-label position="stacked">Nombre del titular:</ion-label>
+            <ion-input formControlName="titular" type="text"></ion-input>
+          </ion-item>
+          <div class = "error-messages" *ngIf="myForm.get('titular').errors && myForm.get('titular').dirty">
+            <ng-container>
+                <p color="danger" ion-text *ngIf="myForm.get('titular').hasError('required')">Campo requerido</p>
+            </ng-container>            
+          </div>
+
+          <ion-item>
+              <ion-label position="stacked">Número de tarjeta:</ion-label>
+              <ion-input formControlName="numberCard" type="number" placeholder="XXXX-XXXX-XXXX-XXXX"></ion-input>
+            </ion-item>
+            <div class = "error-messages" *ngIf="myForm.get('numberCard').errors && myForm.get('numberCard').dirty">
+              <ng-container>
+                  <p color="danger" ion-text *ngIf="myForm.get('numberCard').hasError('required')">Campo requerido</p>
+                  <p color="danger" ion-text *ngIf="myForm.get('numberCard').hasError('pattern')">Debe capturar 16 caracteres</p>
+              </ng-container>            
+            </div>
+            <ion-item>
+                <ion-label position="stacked">Fecha de vencimiento:</ion-label>
+                <ion-datetime formControlName="vencimiento" display-format="MM/YYYY" min="2019" max="2025-12-31" placeholder="MM / YYYY"></ion-datetime> 
+                   </ion-item>
+              <div class = "error-messages" *ngIf="myForm.get('vencimiento').errors && myForm.get('vencimiento').dirty">
+                <ng-container>
+                    <p color="danger" ion-text *ngIf="myForm.get('vencimiento').hasError('required')">Campo requerido</p>
+               </ng-container>            
+              </div>
+
+              <ion-item>
+                  <ion-label position="stacked">Código de seguridad:</ion-label>
+                  <ion-input formControlName="cvv" type="number" placeholder="(CVV)"></ion-input>
+                </ion-item>
+                <div class = "error-messages" *ngIf="myForm.get('cvv').errors && myForm.get('cvv').dirty">
+                  <ng-container>
+                      <p color="danger" ion-text *ngIf="myForm.get('cvv').hasError('required')">Campo requerido</p>
+                      <p color="danger" ion-text *ngIf="myForm.get('cvv').hasError('pattern')">Maximo 4 caracteres</p>
+                  </ng-container>            
+                </div>
+
+  <div class ="btn">
+      <ion-button expand ="block" color ="primary" [disabled]="myForm.invalid" (click)="saveData()">Guardar</ion-button>
+  </div>
+  </form>
+            
+ </ion-content>
