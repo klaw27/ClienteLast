@@ -9,18 +9,19 @@
 }
 
 .titulo{
-    font-size: 20px;
-    margin-bottom: 50px;
-    letter-spacing: normal;
-    text-align: start;
-}
-/*.boton{
-    width: 70%;
-    margin: 0 auto 25px auto;
     font-size: 18px;
-    text-transform: capitalize;
+    margin-bottom: 25px;
     letter-spacing: normal;
-}*/
+    text-align: left;
+    margin-left: 15px;
+}
+
+.titulo2{
+    font-size: 16px;
+    margin-bottom: 25px;
+    letter-spacing: normal;
+    text-align: center;
+}
 
 .copyright{
     position: fixed;
@@ -44,56 +45,65 @@
     display: block;
 }
 
-.titulo{
+.titulo2{
     font-size: 18px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .input{
-    border: 1px solid rgb(165, 165, 165);
-    border-radius: 5px;
     width: 65%;
-    margin: 0px auto;
     margin-bottom: 15px;
     text-align: left;
-
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-
 }
 
-.boton:first-of-type{
+/*.boton:first-of-type{
     margin-top: center;
-}
+}*/
 
 .botonEntrar{
-    
-    width: 65%;
-    margin: 10px auto 25px auto;
+    width: 80%;
+    margin: 10px auto 0px auto;
     font-size: 16px;
 
 }
-.botonRec{
-    width: 70%;
-    margin: 0 auto 25px auto;
-    font-size: 16px;
-    position: relative;
 
+.botonRec{
+    //width: 80%;
+    margin: 10px auto 15px auto;
+    font-size: 12px;
+    text-align: center;
+    margin-right: 27px;
+
+}
+
+.registro{
+    //width: 80%;
+    font-size: 18px;
+}
+
+.btnregistro{
+    //width: 80%;
+    font-size: 13px;
+    margin: 0px auto 0px auto;
 }
 
 
 .pass{
     position: relative;
+    width: 80%;
+    margin-left: 25px;
+    margin-bottom: 25px;
 }
 
 .eye{
-    --padding-start: 0;
-    --padding-end: 0;
-    position: absolute;
+   // --padding-start: 0;
+   // --padding-end: 0;
+   // position: absolute;
     top: 0;
     right: 8%;
     width: 35px;
     height: 35px;
+    margin-left: 90px;
 }
 
 .input ion-icon {
@@ -112,9 +122,24 @@ color:red;
     justify-content: center;
     text-align: center; 
     grid-template-columns: 1fr 1fr;
+    margin: 0px auto 0px auto;
 }
 
 .imagen {
-    width: 80px;
-    height: 80px;
+   width: 130px;
+   //height: 150%;
 }
+
+.iconinput{
+    margin-left: 0px;
+}    
+
+.login{
+    width: 80%;
+ margin-left: 25px;
+  }
+
+  .inplogin{
+    margin-left: 15px;
+     }
+
