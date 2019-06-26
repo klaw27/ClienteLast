@@ -39,7 +39,7 @@
               <ion-item class="platillo ion-activatable" (click)="editarProducto(producto.id_producto)" lines="none" *ngFor="let producto of carrito">
                   <ion-ripple-effect></ion-ripple-effect>
                   <ion-thumbnail slot="start" class="thumbnail">
-                    <img src="/assets/img/enchiladas.jpg">
+                    <img src="/assets/img/enchiladas.jpg" onError= "this.src='/assets/img/default_productos.png'">
                   </ion-thumbnail>
                   <div class="contenidoPlatillo">
                     <ion-label>

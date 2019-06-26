@@ -13,7 +13,7 @@ import { CarritoService } from '../../services/carrito.service';
 export class LocalMenuPage implements OnInit {
 
   id:any;
-  productos:any;
+  productos: [];
   carrito:boolean = false;
 
   constructor(public navCtrl: NavController,
@@ -26,19 +26,25 @@ export class LocalMenuPage implements OnInit {
     }
 
   ngOnInit() {
+    console.log(this.productos);
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     let body = {
       id: this.id,
       funcion: "all"
     };
     console.log(body);
-    this.estore.productos(body, "negocio.php").subscribe(data=>{
+    this.estore.productos(body, "productos.php").subscribe(data=>{
       console.log(data);
       if(data['success']){
         this.productos = data['productos'];
         console.log(this.productos);
       }
     });
+
+
+
+
+
   }
 
   salir(){

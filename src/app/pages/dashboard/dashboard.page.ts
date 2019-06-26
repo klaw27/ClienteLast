@@ -20,7 +20,7 @@ export class DashboardPage implements OnInit {
 
   negocios = {
     comida: [{
-      nombre: 'Comida Preparada',
+      nombre: 'Restaurantes',
       icono: 'Resto.png'
     },
     
@@ -69,7 +69,7 @@ export class DashboardPage implements OnInit {
       icono: 'Crepas.png'
     },
     {
-      nombre: 'Pastelerías',
+      nombre: 'Pastelerias',
       icono: 'Pastelerias.png'
     },
     {

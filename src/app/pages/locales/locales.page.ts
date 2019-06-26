@@ -32,9 +32,8 @@ export class LocalesPage implements OnInit {
       categoria: this.titulo,
       funcion: 'all'
     }
-    debugger
     this.estore.locales(body, "negocio.php").subscribe(data => {
-      debugger
+
       console.log(data);
       this.locales = data['negocio'];
       console.log(this.locales);

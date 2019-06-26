@@ -10,9 +10,9 @@
   <div *ngIf="locales.length!=0" class="principal">
     <ion-item *ngFor="let local of locales; let i = index" class="local animated fadeIn" lines="none">
       <ion-thumbnail slot="start" class="thumbnail">
-        <img src="/assets/img/toks.png" (click)='menu(local.clientid)' >
+        <img src="tests.png" onError= "this.src='/assets/img/default_negocio.png'" (click)='menu(local.id_negocio)' >
       </ion-thumbnail>
-      <div class="contenidoLocal" (click)='menu(local.clientid)'>
+      <div class="contenidoLocal" (click)='menu(local.id_negocio)'>
         <ion-label>
           <h6 class=tituloLocal>{{local.nombre}}</h6>
           <p>{{local.colonia}} {{local.callenumero}}</p>

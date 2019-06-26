@@ -5,7 +5,7 @@
   <div class="contBanner">
     <img class=banner src="/assets/img/banner.jpg" alt="">
     <div class="contLogo">
-      <img class=logo src="/assets/img/toks.png" alt="">
+      <img class=logo src="/assets/img/bannernegocio.png" onError= "this.src='/assets/img/default_banner.png'"alt="">
     </div>
   </div>
 
@@ -19,7 +19,7 @@
       <div class="data" *ngIf="productos">
           <ion-item class="platillo" *ngFor="let producto of productos">
             <ion-thumbnail slot="start" class="thumbnail">
-              <img src="{{producto.fotografia}}">
+              <img src="{{producto.fotografia}}" onError= "this.src='/assets/img/default_productos.png'">
             </ion-thumbnail>
             <div class="contenidoPlatillo">
               <ion-label>
