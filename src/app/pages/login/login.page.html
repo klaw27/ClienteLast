@@ -11,7 +11,7 @@
   <img src="../../assets/img/EstoCuadro.png" alt="logo Estor">
 </div>
 
-  <h2 class="titulo">Ingresa con usuario y contraseña:</h2>
+  <h1 class="titulo">Ingresa con usuario y contraseña:</h1>
   
    <ion-item class="login">
       <ion-icon class = "iconinput" name="person"></ion-icon> 
@@ -23,18 +23,25 @@
       <ion-icon class = "iconinput" name="unlock"></ion-icon>    
       <ion-input class = "inplogin" (keyup)="enter($event)" [type]="passType" [(ngModel)]="password" placeholder="Contraseña" type="password"></ion-input>
 
-       <ion-button class="eye" color="light" (click)="cambiarIcono()">
-         <ion-icon slot="icon-only" name="{{icono}}"></ion-icon></ion-button> 
-    </ion-item> 
+    <ion-button class="eye" color="light" (click)="cambiarIcono()">
+        <ion-icon slot="icon-only" name="{{icono}}"></ion-icon></ion-button> 
+      </ion-item>
   </div> 
-<ion-button class="botonEntrar"  expand ="block"  (click)="iniciar()">Entrar</ion-button>
+
+<ion-button class="botonEntrar"  expand ="block"  (click)="iniciar()">ENTRAR</ion-button>
 <div class="botonRec" float-right>
-<ion-button  fill="clear" expand ="block" routerLink="/registro">¿Olvidaste tu contraseña?</ion-button>   
+    <a routerLink='/registro'>¿Olvidaste tu contraseña?</a>
+    <!--<ion-button  fill="clear" expand ="block" routerLink="/registro">¿Olvidaste tu contraseña?</ion-button>  -->
 </div>
 
+
+
+
 <div class="titulo2">
-<img src="/assets/img/line.png" >Ó inicia sesión con:<img src="/assets/img/line.png">
+  <h2 class="linea"><span>Ó inicia sesión con:</span></h2> 
 </div>
+
+
     <div class="redes">
     <ion-grid>     
         <ion-row>
@@ -48,8 +55,5 @@
     </ion-grid>
   </div>
 
-     <h3 class="registro">¿Aún no tienes cuenta? <ion-button fill="clear" class="btnregistro" routerLink='/registro'>Registrate</ion-button> </h3> 
-
-     <ion-button color= "light" size = "small" expand = "block" class="boton" routerLink="/sesion">Mi Usuario</ion-button>
-
+     <h3 class="registro">¿Aún no tienes cuenta? <a routerLink='/registro'>REGISTRATE</a> </h3>
 </ion-content>

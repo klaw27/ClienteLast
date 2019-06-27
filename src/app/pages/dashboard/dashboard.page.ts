@@ -25,17 +25,17 @@ export class DashboardPage implements OnInit {
     },
     
     {
-      nombre: 'Taquerias',
+      nombre: 'Tacos',
       icono: 'Tacos.png'
 
     },
     {
-      nombre: 'Hotdogs',
+      nombre: 'Hamburguesas y Hotdogs',
       icono: 'Hotdogs.png'
 
     },
     {
-      nombre: 'Pizzerias',
+      nombre: 'Pizza',
       icono: 'Pizza.png'
 
     },
@@ -46,7 +46,7 @@ export class DashboardPage implements OnInit {
   ],
   bebidas: [
     {
-      nombre: 'Vinos',
+      nombre: 'Vinos y Licores',
       icono: 'Vino.png'
     },
     {
@@ -83,26 +83,28 @@ export class DashboardPage implements OnInit {
   ],
   suministros: [
     {
-      nombre: 'Bolsos',
+      nombre: 'Frutas y Verduras',
       icono: 'Bolsos.png'
     },
     {
-      nombre: 'Zapatos',
+      nombre: 'Carniceria',
       icono: 'Zapatos.png'
     },
     {
-      nombre: 'Joyerías',
+      nombre: 'Polleria',
       icono: 'Joyeria.png'
     },
     {
-      nombre: 'Boutiques',
+      nombre: 'Pescados y Mariscos',
       icono: 'Ropa.png'
     }
   ]
   };
 
+
   ngOnInit() {
     this.menu.enable(true);
+
 
   }
 

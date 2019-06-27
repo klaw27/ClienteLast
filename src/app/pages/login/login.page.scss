@@ -10,7 +10,7 @@
 
 .titulo{
     font-size: 18px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     letter-spacing: normal;
     text-align: left;
     margin-left: 15px;
@@ -45,10 +45,10 @@
     display: block;
 }
 
-.titulo2{
+/*.titulo2{
     font-size: 18px;
     margin-bottom: 15px;
-}
+}*/
 
 .input{
     width: 65%;
@@ -71,14 +71,14 @@
     //width: 80%;
     margin: 10px auto 15px auto;
     font-size: 12px;
-    text-align: center;
-    margin-right: 27px;
+   // text-align: center;
+    margin-right: 43px;
 
 }
 
 .registro{
     //width: 80%;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .btnregistro{
@@ -100,10 +100,12 @@
    // --padding-end: 0;
    // position: absolute;
     top: 0;
-    right: 8%;
+    //right: 8%;
     width: 35px;
     height: 35px;
-    margin-left: 90px;
+   // margin-left: 90px;
+    
+   // margin-right: 10px;
 }
 
 .input ion-icon {
@@ -143,3 +145,44 @@ color:red;
     margin-left: 15px;
      }
 
+
+
+///////////////////////////////////////////////
+
+h2 {
+  font: 16px sans-serif;
+  margin-top: 70px;
+  text-align: center;
+ margin-bottom: 15px;
+}
+
+h2.linea {
+ position: relative;
+  z-index: 1;
+}
+h2.linea:before {
+  border-top: 1px solid lightgray;
+  content: "";
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 85%;
+  z-index: -1;
+}
+h2.linea span {
+
+  background: #fff;
+  padding: 0 15px;
+}
+
+a{
+    font: 14px sans-serif;
+  }
+
+  h3 {
+  
+  margin-left: 15px;
+}
