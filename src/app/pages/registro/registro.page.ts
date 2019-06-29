@@ -18,7 +18,7 @@ export class RegistroPage implements OnInit {
   passVerficada:string = '';
   apellidoPat:string = "";
   apellidoMat:string = "";
-
+  politica:boolean = false;
   icono = "eye";
   passType = 'password';
   icono2 = "eye";
@@ -115,6 +115,8 @@ export class RegistroPage implements OnInit {
       this.presentToast('El password debe de ser de 8 a 16 caracteres ');
     }else if( !this.numero.match(regEpr3)) {
       this.presentToast("El telefono solo debe contener numeros");
+    }else if (this.politica == false){
+      this.presentToast("Debe aceptar la politica de privacidad");
     }else if(this.password == this.passVerficada){
 
       let userId = Date.now();
@@ -140,8 +142,8 @@ export class RegistroPage implements OnInit {
 
     else{
       this.presentToast('Las contraseñas no son iguales');
-
     }
+    
   }
 
 }

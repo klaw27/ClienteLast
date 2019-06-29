@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'pedidos', loadChildren: './pages/pedidos/pedidos.module#PedidosPageModule' },
   { path: 'tarjetas', loadChildren: './tarjetas/tarjetas.module#TarjetasPageModule' },
   { path: 'add-card', loadChildren: './pages/add-card/add-card.module#AddCardPageModule' },
+  { path: 'politica', loadChildren: './pages/politica/politica.module#PoliticaPageModule' },
 ];
 
 @NgModule({

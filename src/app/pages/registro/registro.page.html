@@ -29,6 +29,11 @@
               <ion-icon slot="icon-only" name="{{icono2}}"></ion-icon>
           </ion-button>
         </div>
-        <ion-button size='small' expand="full" fill="clear" class="boton" (click)='registrarse()'>Registrarme</ion-button>
-         </div>
+      </div>
+
+        <ion-checkbox [(ngModel)]='politica'></ion-checkbox><ion-label> He leido y acepto la </ion-label><a routerLink='/politica'>Politica de privacidad</a>
+
+  
+        <ion-button size='small' expand="full" class="boton" (click)='registrarse()'>Registrarme</ion-button>
+        
 </ion-content>
