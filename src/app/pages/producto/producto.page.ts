@@ -5,6 +5,7 @@ import { EstoreService } from '../../services/estore.service';
 import { CarritoService } from '../../services/carrito.service';
 
 
+
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.page.html',
@@ -16,12 +17,14 @@ export class ProductoPage implements OnInit {
   idNegocio:any;
   producto:any = {
     nombre: '',
-    cantidad: '',
+    tiempopreparacion: '',
     descripcion: '',
     precio: ''
   };
   cantidad:any = 1;
-  editar:any = false;;
+  editar:any = false;
+  cantidadActual: any;
+;
 
   constructor(
     public navCtrl: NavController,
@@ -54,6 +57,7 @@ export class ProductoPage implements OnInit {
     else{
       this.editar = true;
       this.producto =  this._carrito.getItem(this.id);
+      //como se muestra en carrito
       this.cantidad = this.producto['cantidadCarrito'];
     }
 
@@ -82,17 +86,21 @@ export class ProductoPage implements OnInit {
 
   }
 
+
   agregar(){
-    this.producto['cantidadCarrito'] = this.cantidad;
+    this.producto['cantidadCarrito'] =  this.cantidad;
     this.producto['precioCarrito'] = this.cantidad * this.producto.precio;
-    this._carrito.agregarProducto(this.producto);
+    this._carrito.agregarProducto(this.id,this.producto);
     this._carrito.idNegocio = this.idNegocio;
     this._carrito.guardar_idNegocio();
-    this.navCtrl.pop();
-  }
+    this.navCtrl.navigateForward('/carrito');
+    //this.navCtrl.pop();
+}
 
   actualizar(){
+    console.log(this.producto['cantidadCarrito']);
     this.producto['cantidadCarrito'] = this.cantidad;
+    //this.producto['cantidadCarrito'] = this.producto['cantidadCarrito']  + this.cantidad;
     this.producto['precioCarrito'] = this.cantidad * this.producto.precio;
     this._carrito.actualizarItem(this.id,this.producto);
     this._carrito.idNegocio = this.idNegocio;

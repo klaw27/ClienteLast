@@ -1,9 +1,9 @@
 <ion-header>
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
+    <ion-toolbar color="danger">
+      <ion-buttons slot="start" >
+        <ion-back-button (click)='salir()'></ion-back-button>
       </ion-buttons>
-      <ion-title>Regresar</ion-title>
+      <ion-title>Mi Carrito</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -36,22 +36,24 @@
           </ion-card-header>
         
           <ion-card-content>
-              <ion-item class="platillo ion-activatable" (click)="editarProducto(producto.id_producto)" lines="none" *ngFor="let producto of carrito">
+              <ion-item class="platillo ion-activatable"  lines="none" *ngFor="let producto of carrito">
                   <ion-ripple-effect></ion-ripple-effect>
                   <ion-thumbnail slot="start" class="thumbnail">
                     <img src="/assets/img/enchiladas.jpg" onError= "this.src='/assets/img/default_productos.png'">
                   </ion-thumbnail>
-                  <div class="contenidoPlatillo">
+                  <div class="contenidoPlatillo" (click)="editarProducto(producto.id_producto)">
                     <ion-label>
                       <h6 class=tituloPlatillo>{{producto.nombre}}</h6>
                       <p>{{producto.descripcion}}</p>
-                      <p>{{producto.cantidad}} Piezas.</p>
+                      <p>Tiempo de preparacion: {{producto.tiempopreparacion}} Min.</p>
                     </ion-label>
                     <div>
-                        <p class="precio">X {{producto.cantidadCarrito}} ${{producto.precioCarrito}} MXN</p>
+                        <p class="precio"> {{producto.cantidadCarrito}} X ${{producto.precioCarrito}} MXN</p>
                     </div>
                   </div>
+                  <ion-icon name ="trash" slot = "end" (click)="eliminar(producto.id_producto)"></ion-icon>
               </ion-item>
+              
               <div class="costo">
                 <div>
                   <span>Subtotal</span>
@@ -70,7 +72,8 @@
                 <ion-label>Metodo de Pago</ion-label>
                 <ion-select value="efectivo" [(ngModel)]="metPago">
                   <ion-select-option selected value="efectivo">Efectivo</ion-select-option>
-                  <ion-select-option value="tarjeta">Pago con tarjeta</ion-select-option>
+                  <ion-select-option value="tarjeta">Terminal</ion-select-option>                  
+                  <ion-select-option value="Pago en linea">Pago en linea</ion-select-option>
                 </ion-select>
               </ion-item>
           </ion-card-content>
@@ -86,8 +89,8 @@
   </div>
 
 
-  <ion-buttons class="atras"> 
+  <!--<ion-buttons class="atras"> 
       <ion-button size='small' expand="full" fill="clear" class="boton" (click)='salir()'>Atrás</ion-button>
-  </ion-buttons>
+  </ion-buttons>-->
 
 </ion-content>

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-terminal',
-  templateUrl: './terminal.component.html',
-  styleUrls: ['./terminal.component.scss'],
+  selector: 'app-reparto-tipo',
+  templateUrl: './reparto-tipo.component.html',
+  styleUrls: ['./reparto-tipo.component.scss'],
 })
-export class TerminalComponent implements OnInit {
+export class RepartoTipoComponent implements OnInit {
 
   constructor(public popoverCtrl: PopoverController) { }
 
@@ -15,5 +15,4 @@ export class TerminalComponent implements OnInit {
   close(){
     this.popoverCtrl.dismiss();
   }
-
 }

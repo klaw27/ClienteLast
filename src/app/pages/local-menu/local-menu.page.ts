@@ -42,9 +42,6 @@ export class LocalMenuPage implements OnInit {
     });
 
 
-
-
-
   }
 
   salir(){

@@ -1,0 +1,89 @@
+<app-header>
+  </app-header>
+<ion-content padding>
+
+    <div class="data principal" *ngIf="carrito.length != 0">
+    <h4 class="tit">Solicita a tu Repartidor</h4>
+
+    
+    <div id="mapa3"></div>
+
+    <ion-card class="pedido">
+  
+      <ion-card-header>
+        <div class="ubicacion">
+          <div class="dirOpcion">
+            <ion-label class="calle">
+              <h6 class="titori">ORIGEN:</h6>
+              <h6 class="titCalle">Claudia Mojica</h6>
+              <h6 class="titCalle">4772636534</h6>
+              <h6 class="titCalle">{{calle}}</h6>
+              <p class="calleSec">{{calleSecundario}}</p>
+            </ion-label>
+            <div class="direccion">
+              <ion-button fill="clear" (click)="ubicacion()">
+                <ion-icon slot="start" class="icono" name="pin"></ion-icon>
+                Cambiar ubicación
+              </ion-button>  
+              <ion-button fill="clear" (click)="ubicacionActual()">
+                <ion-icon slot="start" class="icono" name="navigate"></ion-icon>
+                Ubicación actual
+              </ion-button>                    
+            </div>
+            <!--<div id="mapa3"></div>-->
+
+          </div>
+        </div>
+
+        <div class="ubicacion">
+            <div class="dirOpcion">
+              <ion-label class="calle">
+                <h6 class="titori">DESTINO:</h6>
+                <h6 class="titCalle">Alejandra Padilla</h6>
+                <h6 class="titCalle">4771092089</h6>
+                <h6 class="titCalle">Lopez de velasco</h6>
+                <p class="calleSec">Las Trojes</p>
+              </ion-label>
+              <div class="direccion">
+                <ion-button fill="clear" (click)="ubicacion()">
+                  <ion-icon slot="start" class="icono" name="pin"></ion-icon>
+                  Indicar ubicación destino
+                </ion-button>                    
+              </div>
+            </div>
+          </div>
+          </ion-card-header>
+
+          <ion-card-content>         
+              <h6 class="titori">Resumen del pedido:</h6>
+                  Instrucciones: <ion-input class="input" placeholder="Captura tus indicaciones aqui..." type="text"></ion-input>
+              <div class="costo">
+                  <div>
+                      <span>Distancia Total (Kilometros)</span>
+                      <span>4 KM</span>
+                    </div>
+                <div>
+                  <span>Costo de envio (primeros 3 Kilometros)</span>
+                  <span>${{costEnvio}}.00</span>
+                </div>
+                <div>
+                    <span>Kilometro adicional: 1KM</span>
+                    <span>${{subTotal.toFixed(2)}}.00</span>
+                  </div>
+                <div class="total">
+                  <span>Total del Envio</span>
+                  <span>${{total.toFixed(2)}}</span>
+                </div>
+              </div>
+              <ion-item class="metPago">
+                <ion-label>¿Quien Paga?</ion-label>
+                <ion-select value="efectivo" [(ngModel)]="metPago">
+                  <ion-select-option selected value="efectivo">Cliente</ion-select-option>
+                  <ion-select-option value="tarjeta">Repartidor</ion-select-option>           
+                </ion-select>
+              </ion-item>
+          </ion-card-content>
+        </ion-card>
+        <ion-button expand="full" (click)="Solicitar()">Solicitar Repartidor</ion-button>
+  </div>
+</ion-content>

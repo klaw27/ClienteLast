@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { DashboardPage } from './dashboard.page';
 
 import { ComponentsModule } from '../../components/components.module';
+import { RepartoTipoComponent } from 'src/app/home-popover/reparto-tipo/reparto-tipo.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
     ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [DashboardPage]
+  entryComponents: [RepartoTipoComponent],
+  declarations: [DashboardPage,RepartoTipoComponent]
 })
 export class DashboardPageModule {}

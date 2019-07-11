@@ -4,6 +4,10 @@
         <ion-back-button></ion-back-button>
       </ion-buttons>
       <ion-title>Métodos de Pago</ion-title>
+      <ion-buttons slot="end">
+          <ion-icon class="iconbuscar" name='search' slot = "end"></ion-icon>
+          <ion-icon class="iconcarrito" name='cart' slot = "end"></ion-icon>
+       </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
@@ -11,13 +15,13 @@
       <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>
  
   <ion-list >
-  <div class="pago">
+  <!--<div class="pago">
     <ion-item>
       <ion-icon class="card" name="card"></ion-icon>
       <ion-label class ="etiqueta"> Tarjeta Bancaria </ion-label>
       <ion-icon name="arrow-dropright-circle" slot="end" routerLink="/tarjetas"></ion-icon>
     </ion-item>
-  </div>
+  </div>-->
   <div class="pago">
     <ion-item>
       <ion-icon class="efectivo" name="cash" ></ion-icon>
@@ -34,10 +38,16 @@
   </div>
   <div class="pago">
     <ion-item> 
-      <ion-icon class="online" name="desktop"></ion-icon>      
-      <ion-label class ="etiqueta"> Pago en Linea </ion-label>   
+      <!--<ion-icon class="online" name="desktop"></ion-icon>      -->
+      <ion-icon class="card" name="card"></ion-icon>
+      <ion-label class ="etiqueta"> Pago en Linea  <p>Mis tarjetas registradas </p></ion-label>
+      <ion-icon name="arrow-dropright-circle" slot="end" routerLink="/tarjetas"></ion-icon>
       <ion-icon name="information-circle" slot="end" (click)="PagoOnlineInfo($event)"></ion-icon>
-    </ion-item> 
+    </ion-item>
+  <!--  <ion-label class ="mycard"> Mis tarjetas registradas </ion-label>-->
+
+
+
   </div>
 </ion-list>
   <ion-button fill = "clear" routerLink="/add-card">Agregar tarjeta de crédito y débito</ion-button>

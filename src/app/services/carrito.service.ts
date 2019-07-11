@@ -6,15 +6,34 @@ import { Injectable } from '@angular/core';
 export class CarritoService {
 
   items = [];
-  idNegocio:any;
+
+  idNegocio:any;  
+
 
   constructor() { 
     this.cargar_productos();
   }
 
-  agregarProducto(item){
-    this.items.push(item);
-    this.guardar_productos();
+  agregarProducto(id,item){
+
+    let x = this.items.map((data,indice)=>{
+      if(data['id_producto']==id){
+        return indice;
+      }
+    });
+
+    if(x>= [0]){    
+      console.log("actualiza");
+      //obtener los productos que ya hay
+      console.log("indice " + x);
+      this.actualizarItem(id,item);
+    }else{
+      console.log("nuevo");
+      this.items.push(item);
+      this.guardar_productos();
+    }
+
+
   }
 
   getItem(id){
@@ -23,19 +42,21 @@ export class CarritoService {
         return indice;
       }
     });
-
     return this.items[item[0]];
-
   }
 
   actualizarItem(id,newData){
+      
+    //actualizar
     let item = this.items.map((data,indice)=>{
       if(data['id_producto']==id){
         this.items[indice] = newData;
       }
     });
-
     this.guardar_productos();
+
+
+
 
   }
 

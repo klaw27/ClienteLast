@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +8,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public menu: MenuController) { }
+  constructor(public menu: MenuController,private navCtrl : NavController) { }
 
   ngOnInit() {
   }
@@ -17,4 +17,12 @@ export class HeaderComponent implements OnInit {
     this.menu.toggle();
   }
 
+
+  goCarrito(){
+    this.navCtrl.navigateForward('/carrito');
+  }
+
+  goBuscar(){
+    this.navCtrl.navigateForward("/buscar");
+  }
 }

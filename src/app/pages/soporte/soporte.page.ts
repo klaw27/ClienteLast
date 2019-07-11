@@ -16,6 +16,7 @@ export class SoportePage implements OnInit {
   nombre:any ='';
   correo:any = '';
   consulta:any = '';
+  telefono:any = '';
 
   constructor(    public estore: EstoreService,
     private router : Router,
@@ -29,10 +30,12 @@ export class SoportePage implements OnInit {
   Contactar() {
     let regEpr = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   
-    if(this.nombre == '' && this.correo == '' &&  this.consulta == '' ) {
+    if(this.nombre == '' && this.correo == '' &&  this.consulta == '' &&  this.telefono == ''  ) {
     this.presentToast('Todos los campos son obligatorios');
     }else if (this.nombre == ''){
       this.presentToast('Debe capturar su nombre');
+    }else if (this.telefono == ''){
+      this.presentToast('Debe capturar su Telefono');
     }else if (this.correo == ''){
       this.presentToast('Debe capturar su correo');
     }else if (this.consulta == ''){
@@ -44,8 +47,9 @@ export class SoportePage implements OnInit {
       let body= {
         nombre: this.nombre,
         correo: this.correo,
-        consulta: this.consulta
-      } 
+        consulta: this.consulta,
+        telefono: this.telefono
+            } 
       let email = {
         to: 'klaw_moica7@hotmail.com',
         subject: "Consulta de: " + this.correo,

@@ -63,4 +63,12 @@ export class EstoreService {
       return this.http.post(this.server+file,JSON.stringify(body));    
     }
 
+    dashboardSub(body,file){
+      return this.http.post(this.server+file,JSON.stringify(body));    
+    }
+
+    toolbarbusqueda(body,file){
+      return this.http.post(this.server+file,JSON.stringify(body)); 
+      }
+
 }

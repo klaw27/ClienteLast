@@ -92,7 +92,8 @@ export class RegistroPage implements OnInit {
 
 
     let regEpr = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    let regEpr2 = /^[a-zA-Z0-9-]*$/;
+    //let regEpr2 = /^[a-zA-Z0-9-]*$/;
+    let regEpr2 =/^[a-z0-9_-]{8,16}$/;
     let regEpr3 = /^[0-9-]/;
 
     if(this.nombre == '' && this.numero == '' && this.correo == '' && this.password == '' ) 

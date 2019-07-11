@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, NavController } from '@ionic/angular';
+import { MenuController, NavController, PopoverController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { EstoreService } from 'src/app/services/estore.service';
+import { RepartoTipoComponent } from 'src/app/home-popover/reparto-tipo/reparto-tipo.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
+  subcategorias: [{id_catNegocio: "", nombre: ""}];
+  categorias: [{id_catNegocio: "", nombre: "", descripcion: ""}];
+  id:any;
 
   slideOpts = {
     effect: 'flip',
@@ -15,8 +20,12 @@ export class DashboardPage implements OnInit {
     freeMode: true
   };
  
-  constructor(public menu: MenuController,
-    private navCtrl : NavController) {}
+  constructor(public menu: MenuController,public estore : EstoreService,
+    private navCtrl : NavController,public popoverCtrl: PopoverController,public alertCtrl: AlertController) {}
+
+
+
+    
 
   negocios = {
     comida: [{
@@ -84,19 +93,19 @@ export class DashboardPage implements OnInit {
   suministros: [
     {
       nombre: 'Frutas y Verduras',
-      icono: 'Bolsos.png'
+      icono: 'Frutas y Verduras.png'
     },
     {
       nombre: 'Carniceria',
-      icono: 'Zapatos.png'
+      icono: 'Carniceria.png'
     },
     {
       nombre: 'Polleria',
-      icono: 'Joyeria.png'
+      icono: 'Polleria.png'
     },
     {
       nombre: 'Pescados y Mariscos',
-      icono: 'Ropa.png'
+      icono: 'Pescados y Mariscos.png'
     }
   ]
   };
@@ -104,6 +113,36 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
     this.menu.enable(true);
+
+    console.log(this.categorias);
+    this.id = "";
+    let body = {
+      id: this.id,
+      funcion: "all"
+    };
+    console.log(body);
+    this.estore.dashboard(body, "categorias.php").subscribe(data=>{
+      console.log(data);
+      if(data['success']){
+        this.categorias = data['categorias'];
+        console.log(this.categorias);
+      }
+    });
+
+    console.log(this.subcategorias);
+    this.id = "";
+    let body2 = {
+      id: this.id,
+      funcion: "all"
+    };
+    console.log(body);
+    this.estore.dashboardSub(body2, "subcategorias.php").subscribe(data=>{
+      console.log(data);
+      if(data['success']){
+        this.subcategorias = data['categorias'];
+        console.log(this.subcategorias);
+      }
+    });
 
 
   }
@@ -127,5 +166,50 @@ export class DashboardPage implements OnInit {
   goUbicacion(){
     this.navCtrl.navigateForward('/card');
   }
+
+  async TipoReparto(){
+    const alert = await this.alertCtrl.create({
+      header: '¿Que tipo de servicio deseas?',
+      inputs: [
+        {
+          name: 'radio1',
+          type: 'radio',
+          label: 'Solicitar Repartidor',
+          value: 'repartidor',
+          checked: true
+        },
+        {
+          name: 'radio2',
+          type: 'radio',
+          label: 'Mandado',
+          value: 'mandado'
+        }
+      ],
+      
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+            console.log();
+          }
+        }, {
+          text: 'Aceptar',
+          handler:(data:string) => {
+            console.log('OK clicked. Data -> ' + data);
+            if(data == "mandado"){
+              this.navCtrl.navigateForward("/mandado");
+            }else {
+              this.navCtrl.navigateForward("/repartidor");
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
+
+}
 
 }

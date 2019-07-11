@@ -9,61 +9,83 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./buscar.page.scss'],
 })
 export class BuscarPage implements OnInit {
-  items:any;
-  //lista:any;
-  lista=[{nombre:"Tortas",foto:"tortas.png"},
-          {nombre:"Carnitas",foto:"tortas.png"},
-          {nombre:"Tortas `Las tortugas`",foto:"tortas.png"},
-          {nombre:"Cerveza", foto:"tortas.png"}];
+  items:any = {
+    id_producto:'',
+    nombre: '',
+    descripcion: '',
+    cantidad: '',
+    precio: ''
+  };
+
+  lista=[{id_producto:"",nombre:"Tortas",descripcion:"tortas.png",cantidad:"tortas.png",precio:"200"},
+  {id_producto:"",nombre:"Carnitas",descripcion:"tortas.png",cantidad:"tortas.png",precio:"200"},
+  {id_producto:"",nombre:"Tortas `Las tortugas`",descripcion:"tortas.png",cantidad:"tortas.png",precio:"200"},
+  {id_producto:"", nombre:"Cerveza",descripcion:"tortas.png",cantidad:"tortas.png",precio:"200"}];
+
+  criterio :any;
+  empty: any = [];
+  indexCount = 0;
+
+  id:any;
+  //productos: [];
+  productos:any = [{
+    id_producto:'',
+    nombre: '',
+    descripcion: '',
+    cantidad: '',
+    precio: ''
+  }];
 
 
   constructor(public alertCtrl: AlertController,public estore : EstoreService,
     private activatedRoute: ActivatedRoute) { 
       //this.ionViewDidLoad();
-     
-
-/*para la BD
-      let body = {
-        categoria: "",
-        funcion: 'all'
+     // this.iniBusqueda();
       }
-      this.estore.locales(body,"negocio.php").subscribe(data=>{
-        console.log(data);
-        this.lista = data['negocio'];
-        console.log(this.lista);
-      });*/    
-    this.iniBusqueda();
-  }
 
-  /*ionViewDidLoad(){ 
-    this.estore.obtenerDatos()
-    .suscribe((data)=>{this.lista + data;}, 
-    (error)=>{console.log(error);})
-    
-    }*/
     
 
-  iniBusqueda(){ 
+  iniBusqueda(){
     this.items = this.lista;
-
 }
-  ngOnInit() {
+
+  ngOnInit() {  
   }
 
-  buscarEstore(event){
-    const criterio = event.target.value;
-    console.log(criterio);
-    
-    
-    if(criterio && criterio.trim() != ""){
-     
-     this.items = this.items.filter((item) =>{
-        return (item.nombre.toLowerCase().indexOf(criterio.toLowerCase()) >-1);
-      })      
-    }else {
+ buscarEstore(event){
+  console.log(this.productos);
+  this.id = this.activatedRoute.snapshot.paramMap.get('id');
+  let body = {
+    id: this.id,
+    funcion: "all"
+  };
+  console.log(body);
+  this.estore.toolbarbusqueda(body, "toolbarsearch.php").subscribe(data=>{
+    console.log(data);
+    if(data['success']){
+      this.productos = data['productos'];
+      console.log(this.productos);
+    }
+  });
+
+    this.criterio = event.target.value;
+    console.log(this.criterio);
+
+    if(this.criterio && this.criterio.trim() != ""){
       this.iniBusqueda();
+      console.log(this.items);     
+
+      this.items = this.items.filter((item) =>{
+        return (item.nombre.toLowerCase().indexOf(this.criterio.toLowerCase()) >-1);
+      })      
+    }
+    else{     
+      this.indexCount = 1;
+      console.log ("no capturo nada");
+     this.items = this.empty;
     }
   }
-
+  
+  
 
 }

@@ -6,6 +6,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingPage } from '../loading/loading.page';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { EstoreService } from '../../services/estore.service';
+import { ActivatedRoute } from '@angular/router';
 
 declare var google;
 
@@ -26,17 +27,20 @@ export class CarritoPage  {
   calleSecundario = "";
   metPago="efectivo";
 
+
   constructor(public menu: MenuController,
     public navCtrl: NavController,
     public _carrito: CarritoService,
     public _estore: EstoreService,
     public modalController: ModalController,
+    private activatedRoute: ActivatedRoute,
     private geolocation: Geolocation,
     private AfDb: AngularFireDatabase) { }
 
   ionViewWillEnter() {
     this.carrito = this._carrito.items;
     this.ubicacionActual();
+   
 
   }
 
@@ -155,7 +159,9 @@ export class CarritoPage  {
   }
 
   async pedido(){
-    console.log(this._carrito);
+
+    
+   console.log(this._carrito);
     let usuario = {...JSON.parse(localStorage.getItem('user'))};
     console.log(usuario);
     let hora = Date.now();
@@ -204,5 +210,11 @@ export class CarritoPage  {
     }
   }
   
+  eliminar(id){
+    console.log(id);
+  this._carrito.eliminarItem(id);
+  //this.navCtrl.pop();
+  }
+
 }
 

@@ -1,0 +1,29 @@
+<ion-content>
+    <div class="title">   
+    <ion-item> 
+    <label>Tipo de Servicio</label>
+    <ion-icon name="close" slot = "end" (click)="close()"></ion-icon>
+  </ion-item> 
+  </div> 
+  <div class="info"> 
+    <ion-list>
+        <ion-radio-group>
+          <ion-list-header>
+            <ion-label>¿Que tipo de servicio deseas?</ion-label>
+          </ion-list-header>
+      
+          <ion-item>
+            <ion-label>Solicitar Repartidor</ion-label>
+            <ion-radio slot="start" value="biff" checked></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Mandado</ion-label>
+            <ion-radio slot="start" value="griff"></ion-radio>
+          </ion-item>
+
+        </ion-radio-group>
+      </ion-list>
+      
+  </div>
+  </ion-content>
