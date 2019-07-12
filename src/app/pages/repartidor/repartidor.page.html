@@ -13,13 +13,13 @@
       <ion-card-header>
         <div class="ubicacion">
           <div class="dirOpcion">
-            <ion-label class="calle">
+            <ion-label class="calle" >
               <h6 class="titori">ORIGEN:</h6>
               <h6 class="titCalle">Claudia Mojica</h6>
-              <h6 class="titCalle">4772636534</h6>
+              <h6 class="titCalle">4772636534</h6> 
               <h6 class="titCalle">{{calle}}</h6>
               <p class="calleSec">{{calleSecundario}}</p>
-            </ion-label>
+            </ion-label> 
             <div class="direccion">
               <ion-button fill="clear" (click)="ubicacion()">
                 <ion-icon slot="start" class="icono" name="pin"></ion-icon>
@@ -38,14 +38,15 @@
         <div class="ubicacion">
             <div class="dirOpcion">
               <ion-label class="calle">
-                <h6 class="titori">DESTINO:</h6>
-                <h6 class="titCalle">Alejandra Padilla</h6>
-                <h6 class="titCalle">4771092089</h6>
-                <h6 class="titCalle">Lopez de velasco</h6>
-                <p class="calleSec">Las Trojes</p>
+                <h6 class="titori">DESTINO: <a (click)="editarDestino()" *ngIf="nomDestino==''">(EDITAR)</a> 
+                  <ion-icon slot="end" class="iconoEdit" name="open" (click)="editarDestino()"></ion-icon></h6>
+                <h6 class="titCalle">{{nomDestino}}</h6>
+                <h6 class="titCalle">{{telDestino}}</h6>
+                <h6 class="titCalle">{{calleDest}}</h6>
+                <p class="calleSec">{{calleSecundarioDest}}</p>
               </ion-label>
               <div class="direccion">
-                <ion-button fill="clear" (click)="ubicacion()">
+                <ion-button fill="clear" (click)="ubicacionDestino()">
                   <ion-icon slot="start" class="icono" name="pin"></ion-icon>
                   Indicar ubicación destino
                 </ion-button>                    
@@ -60,19 +61,20 @@
               <div class="costo">
                   <div>
                       <span>Distancia Total (Kilometros)</span>
-                      <span>4 KM</span>
+                      <span>{{distancia}} km</span>
                     </div>
                 <div>
                   <span>Costo de envio (primeros 3 Kilometros)</span>
-                  <span>${{costEnvio}}.00</span>
+                  <span>${{envio3km.toFixed(2)}}</span>
                 </div>
                 <div>
-                    <span>Kilometro adicional: 1KM</span>
-                    <span>${{subTotal.toFixed(2)}}.00</span>
+                    <span>Kilometro adicional: {{Nokmextra}} km</span>
+                    <!--<span>${{subTotal.toFixed(2)}}.00</span>-->
+                    <span>${{kmextra.toFixed(2)}}</span>
                   </div>
                 <div class="total">
                   <span>Total del Envio</span>
-                  <span>${{total.toFixed(2)}}</span>
+                  <span>${{envioTotal.toFixed(2)}}</span>
                 </div>
               </div>
               <ion-item class="metPago">

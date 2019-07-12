@@ -23,9 +23,19 @@ export class RepartidorPage {
   total = 0;
   costEnvio = 0;
   coordenadas={};
+  coordenadasDes={};
   calle = "";
   calleSecundario = "";
+  calleDest = "";
+  calleSecundarioDest = "";
   metPago="efectivo";
+  nomDestino="";
+  telDestino="";
+  distancia=0;
+  kmextra=0;
+  Nokmextra=0;
+  envio3km=0;
+  envioTotal=0;
 
   constructor(public menu: MenuController,
     public navCtrl: NavController,
@@ -44,7 +54,9 @@ export class RepartidorPage {
 
     callDistancia(){
       let origin = new google.maps.LatLng(this.coordenadas['lat'], this.coordenadas['lng'] );
-      let destination = new google.maps.LatLng(this.carrito[0]['latitud'], this.carrito[0]['longitud']);
+      let destination = new google.maps.LatLng(this.coordenadasDes['latitud'], this.coordenadasDes['longitud'] );
+      //console.log("direccion del destino " + destination);
+      //let destination = new google.maps.LatLng(this.carrito[0]['latitud'], this.carrito[0]['longitud']);
       let service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix(
         { 
@@ -55,15 +67,26 @@ export class RepartidorPage {
       }, (response,status)=>{
         if ( status == "OK"){
           console.log(response);
-          let distancia = response.rows[0].elements[0].distance.value / 1000;
-          distancia = Math.floor(distancia);
+          this.distancia = response.rows[0].elements[0].distance.value / 1000;
+          this.distancia = Math.floor(this.distancia);
   
           this.costEnvio = 30;
-          if(distancia - 2 > 0){
-            let kmextra = distancia - 2;
-            kmextra = kmextra * 3;
-            this.costEnvio = this.costEnvio + kmextra;
+          if(this.distancia - 2 > 0){
+            this.Nokmextra = this.distancia - 3;
+             this.kmextra = this.distancia - 3;
+             this.envio3km = this.costEnvio * 3;
+            this.kmextra = this.kmextra * 3;
+            this.costEnvio = this.costEnvio + this.kmextra;
+            this.envioTotal = this.kmextra + this.envio3km;
+          }else {
+            this.Nokmextra =  0;
+             this.envio3km = this.costEnvio * 3;
+            this.kmextra = 0;
+            this.costEnvio = this.costEnvio + this.kmextra;
+            this.envioTotal = this.kmextra + this.envio3km;
           }
+
+
           this.total = 0;
           this.subTotal = 0;
           this.idNegocio = this._carrito.idNegocio;
@@ -200,4 +223,116 @@ export class RepartidorPage {
         await alert.present();
     
     }
+
+
+    async editarDestino(){
+      const alert = await this.alertCtrl.create({
+        header: 'Editar Destino',
+        inputs: [
+          {
+            name: 'nomDes',
+            placeholder: '¿Quien Recibe?'
+            
+          },
+          {
+            name: 'telefono',
+            placeholder: 'Telefono'
+          }
+        ],
+        
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (data:string) => {
+              console.log('Confirm Cancel');
+              console.log('OK clicked. Data -> ' + data);
+            }
+          }, {
+            text: 'Aceptar',
+            handler: data => {
+              console.log(JSON.stringify(data)); //to see the object
+              this.nomDestino = data.nomDes
+              this.telDestino = data.telefono
+              console.log(this.nomDestino);
+              console.log(this.telDestino);
+            }
+          }
+        ]
+      });
+      await alert.present();
+  
+  }
+
+  ubicacionDestino(){
+    this.presentModal2();
+
+  }
+
+
+  async presentModal2() {
+    const modal = await this.modalController.create({
+      component: ClienteUbicPage,
+      cssClass: "ubicacion"
+    });
+    await modal.present();
+    const data = await modal.onDidDismiss();
+    console.log(data);
+    if(data.data['ubicacion']){
+     // this.coordenadas['lat'] = data.data['body']['lat'];
+      //this.coordenadas['lng'] = data.data['body']['lng'];
+      this.coordenadasDes['latitud'] = data.data['body']['lat'];
+      this.coordenadasDes['longitud'] = data.data['body']['lng'];
+      console.log("direccion del destino " + this.coordenadasDes['latitud'] + this.coordenadasDes['longitud'] );
+      this.calleDest = "";
+      this.calleSecundarioDest = "";
+      this.callDistancia();
+      this.loadMapaDest();
+    }
+  }
+
+
+  loadMapaDest(){
+  
+   let $mapa = document.getElementById("mapa3");
+
+     let mapa = new google.maps.Map($mapa,{
+      disableDefaultUI: true,
+      center: {
+        lat: this.coordenadasDes['latitud'],
+        lng: this.coordenadasDes['longitud']
+      },
+      zoom: 14,
+
+      });
+
+      let marker = new google.maps.Marker({
+        position: {
+          lat: this.coordenadasDes['latitud'],
+          lng: this.coordenadasDes['longitud']
+        },
+        map: mapa,
+        animation: google.maps.Animation.DROP
+      });
+
+      let ubicacion = new google.maps.LatLng(this.coordenadasDes['latitud'], this.coordenadasDes['longitud'] );
+
+      let geocoder = new google.maps.Geocoder();
+      geocoder.geocode({'latLng': ubicacion},(results,status)=>{
+        if(status == 'OK'){
+          console.log(results);  
+          this.calleDest = 
+          this.calleDest+ //Vacio
+          results[0].address_components[1].long_name+" "+   //Numero de casa
+          results[0].address_components[0].long_name;  //Calle
+          this.calleSecundarioDest =
+          this.calleSecundarioDest + //Secundario Vacio
+          results[0].address_components[2].long_name+", "+       //Colonia
+          results[0].address_components[3].long_name+", "+       //Ciudad
+          results[0].address_components[4].short_name;       //Estado
+        }
+      });
+
+  }
 }

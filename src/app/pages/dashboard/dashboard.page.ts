@@ -10,8 +10,7 @@ import { RepartoTipoComponent } from 'src/app/home-popover/reparto-tipo/reparto-
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
-  subcategorias: [{id_catNegocio: "", nombre: ""}];
-  categorias: [{id_catNegocio: "", nombre: "", descripcion: ""}];
+  subcategorias: [];
   id:any;
 
   slideOpts = {
@@ -114,32 +113,17 @@ export class DashboardPage implements OnInit {
   ngOnInit() {
     this.menu.enable(true);
 
-    console.log(this.categorias);
-    this.id = "";
-    let body = {
-      id: this.id,
-      funcion: "all"
-    };
-    console.log(body);
-    this.estore.dashboard(body, "categorias.php").subscribe(data=>{
-      console.log(data);
-      if(data['success']){
-        this.categorias = data['categorias'];
-        console.log(this.categorias);
-      }
-    });
-
     console.log(this.subcategorias);
-    this.id = "";
+    this.id = "1";
     let body2 = {
       id: this.id,
       funcion: "all"
     };
-    console.log(body);
+    console.log(body2);
     this.estore.dashboardSub(body2, "subcategorias.php").subscribe(data=>{
       console.log(data);
       if(data['success']){
-        this.subcategorias = data['categorias'];
+        this.subcategorias = data['subcategorias'];
         console.log(this.subcategorias);
       }
     });
