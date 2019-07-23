@@ -8,29 +8,37 @@
 </ion-header>
 <!-- <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>-->
 <!-- Barra de busqueda -->
-<ion-searchbar (keyup.enter)="buscarEstore($event)" placeholder="Búsqueda por producto o negocio" animated ></ion-searchbar>
+<ion-searchbar (keyup.enter)="buscarEstore($event)" placeholder="Búsqueda por producto o negocio" ></ion-searchbar>
 
 <ion-content>
-<!--<h4 class='titulo'>Negocios</h4>-->
 
-<ion-list >
-		<ion-item *ngFor="let item of items">
-    <!--  <ion-thumbnail slot="start" class="thumbnail">
+
+<!--<ion-list >-->
+    <div *ngIf="itemsflag" >
+    <p class = "tit_res">PRODUCTOS</p>
+  </div>
+		<ion-item *ngFor="let item of items" (click)='agregarProducto(item.id_producto)'>
+    <ion-thumbnail slot="start" class="thumbnail">
           <img src="test.jpg" onError= "this.src='/assets/img/default_productos.png'">
-      </ion-thumbnail>-->
+      </ion-thumbnail>
+      <div class="contenidoPlatillo">
       <ion-label>
           <h6 class=tituloPlatillo>{{item.nombre}}</h6>
           <p>{{item.descripcion}}</p>
-          <p>$ {{item.precio}} MXN</p>
       </ion-label>
+      <div class="footerPlatillo">
+        <p>${{item.precio}}.00 MXN</p>
+        <ion-button fill="clear" slot="end" (click)='agregarProducto(item.id_producto)'>Ver Detalle</ion-button>
+    </div>
+  </div>
     </ion-item>
-
-	</ion-list>
+  
+	<!--</ion-list>-->
 
 
 
   <ion-item *ngIf="!items || items.length === 0">
-      <p>No hay resultados de la busqueda</p>
+      <p class = "tit_res">No hay resultados de la busqueda</p>
 </ion-item>
 
 <!--<div class="data" *ngIf="productos" >

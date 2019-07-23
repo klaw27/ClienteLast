@@ -10,7 +10,10 @@ import { RepartoTipoComponent } from 'src/app/home-popover/reparto-tipo/reparto-
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
-  subcategorias: [];
+  suministros: [];
+  preparadas: [];
+  bebidas: [];
+  postres: [];
   id:any;
 
   slideOpts = {
@@ -23,97 +26,11 @@ export class DashboardPage implements OnInit {
     private navCtrl : NavController,public popoverCtrl: PopoverController,public alertCtrl: AlertController) {}
 
 
-
-    
-
-  negocios = {
-    comida: [{
-      nombre: 'Restaurantes',
-      icono: 'Resto.png'
-    },
-    
-    {
-      nombre: 'Tacos',
-      icono: 'Tacos.png'
-
-    },
-    {
-      nombre: 'Hamburguesas y Hotdogs',
-      icono: 'Hotdogs.png'
-
-    },
-    {
-      nombre: 'Pizza',
-      icono: 'Pizza.png'
-
-    },
-    {
-      nombre: 'Cafeterias',
-      icono: 'Cafe.png'
-    }
-  ],
-  bebidas: [
-    {
-      nombre: 'Vinos y Licores',
-      icono: 'Vino.png'
-    },
-    {
-      nombre: 'Depositos',
-      icono: 'Cerveza.png'
-    },
-    {
-      nombre: 'Preparados',
-      icono: 'Preparados.png'
-      
-    },
-    {
-      nombre: 'Purificadoras',
-      icono: 'Agua.png'
-    }
-  ],
-  postres: [
-    {
-      nombre: 'Crepería',
-      icono: 'Crepas.png'
-    },
-    {
-      nombre: 'Pastelerias',
-      icono: 'Pastelerias.png'
-    },
-    {
-      nombre: 'Panaderías',
-      icono: 'Pan.png'
-    },
-    {
-      nombre: 'Churrerías',
-      icono: 'Churros.png'
-    }
-  ],
-  suministros: [
-    {
-      nombre: 'Frutas y Verduras',
-      icono: 'Frutas y Verduras.png'
-    },
-    {
-      nombre: 'Carniceria',
-      icono: 'Carniceria.png'
-    },
-    {
-      nombre: 'Polleria',
-      icono: 'Polleria.png'
-    },
-    {
-      nombre: 'Pescados y Mariscos',
-      icono: 'Pescados y Mariscos.png'
-    }
-  ]
-  };
-
-
   ngOnInit() {
-    this.menu.enable(true);
 
-    console.log(this.subcategorias);
+    //suministros
+    this.menu.enable(true);
+    console.log(this.suministros);
     this.id = "1";
     let body2 = {
       id: this.id,
@@ -123,13 +40,63 @@ export class DashboardPage implements OnInit {
     this.estore.dashboardSub(body2, "subcategorias.php").subscribe(data=>{
       console.log(data);
       if(data['success']){
-        this.subcategorias = data['subcategorias'];
-        console.log(this.subcategorias);
+        this.suministros = data['subcategorias'];
+        console.log(this.suministros);
       }
     });
 
+    //Commida Preparada
+    this.menu.enable(true);
+    console.log(this.preparadas);
+    this.id = "2";
+    let body3 = {
+      id: this.id,
+      funcion: "all"
+    };
+    console.log(body3);
+    this.estore.dashboardSub(body3, "subcategorias.php").subscribe(data=>{
+      console.log(data);
+      if(data['success']){
+        this.preparadas = data['subcategorias'];
+        console.log(this.preparadas);
+      }
+    });
 
-  }
+        //Bebidas 
+        this.menu.enable(true);
+        console.log(this.bebidas);
+        this.id = "4";
+        let body4 = {
+          id: this.id,
+          funcion: "all"
+        };
+        console.log(body4);
+        this.estore.dashboardSub(body4, "subcategorias.php").subscribe(data=>{
+          console.log(data);
+          if(data['success']){
+            this.bebidas = data['subcategorias'];
+            console.log(this.bebidas);
+          }
+        });
+  
+          //Postres 
+          this.menu.enable(true);
+          console.log(this.postres);
+          this.id = "3";
+          let body5 = {
+            id: this.id,
+            funcion: "all"
+          };
+          console.log(body5);
+          this.estore.dashboardSub(body5, "subcategorias.php").subscribe(data=>{
+            console.log(data);
+            if(data['success']){
+              this.postres = data['subcategorias'];
+              console.log(this.postres);
+            }
+          });
+  
+      }
 
   goBuscar(){
     this.navCtrl.navigateForward("/buscar");
