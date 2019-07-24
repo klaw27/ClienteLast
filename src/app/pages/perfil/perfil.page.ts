@@ -165,4 +165,12 @@ export class PerfilPage implements OnInit {
     await actionSheet.present();
   }
 
+  goCarrito(){
+    this.navCtrl.navigateForward('/carrito');
+  }
+  
+  goBuscar(){
+    this.navCtrl.navigateForward("/buscar");
+  }
+
 }

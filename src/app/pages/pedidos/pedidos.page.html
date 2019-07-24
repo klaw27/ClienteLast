@@ -4,6 +4,10 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Mis Pedidos</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon class="iconbuscar" name='search' (click)="goBuscar()"></ion-icon>
+      <ion-icon class="iconcarrito" name='cart' (click)="goCarrito()"></ion-icon>
+   </ion-buttons>
   </ion-toolbar>
       <!-- Segmentacion de pantallas -->
 <ion-segment [(ngModel)]="segment">

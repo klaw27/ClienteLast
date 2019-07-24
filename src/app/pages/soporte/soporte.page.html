@@ -1,11 +1,15 @@
 <ion-header>
-    <ion-toolbar color="danger">
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-      <ion-title>Soporte Tecnico</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Soporte Tecnico</ion-title>
+    <ion-buttons slot="end">
+        <ion-icon class="iconbuscar" name='search' (click)="goBuscar()"></ion-icon>
+        <ion-icon class="iconcarrito" name='cart' (click)="goCarrito()"></ion-icon>
+     </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content padding>
     <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>
     <p class="text1">¿Estas teniendo problemas con tu app?</p>

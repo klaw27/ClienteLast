@@ -335,4 +335,13 @@ export class RepartidorPage {
       });
 
   }
+
+  
+goCarrito(){
+  this.navCtrl.navigateForward('/carrito');
+}
+
+goBuscar(){
+  this.navCtrl.navigateForward("/buscar");
+}
 }

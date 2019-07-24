@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,13 @@ export class CarritoService {
   idNegocio:any;  
 
 
-  constructor() { 
+  constructor(public navCtrl: NavController) { 
     this.cargar_productos();
+  }
+
+
+  editarProducto(id){
+    this.navCtrl.navigateForward('/producto/'+id+"/editar/"+this.idNegocio);
   }
 
   agregarProducto(id,item){
@@ -25,8 +31,8 @@ export class CarritoService {
     if(x>= [0]){    
       console.log("actualiza");
       //obtener los productos que ya hay
-      console.log("indice " + x);
       this.actualizarItem(id,item);
+     //this.editarProducto(id);
     }else{
       console.log("nuevo");
       this.items.push(item);
@@ -45,6 +51,9 @@ export class CarritoService {
     return this.items[item[0]];
   }
 
+  
+
+
   actualizarItem(id,newData){
       
     //actualizar
@@ -54,9 +63,6 @@ export class CarritoService {
       }
     });
     this.guardar_productos();
-
-
-
 
   }
 

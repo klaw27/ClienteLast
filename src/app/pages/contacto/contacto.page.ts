@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 declare var google;
 
@@ -9,7 +10,7 @@ declare var google;
 })
 export class ContactoPage implements OnInit {
 
-  constructor() { }
+  constructor(public navCtrl: NavController) { }
 
   ngOnInit() {
     this.loadmap();
@@ -51,4 +52,11 @@ export class ContactoPage implements OnInit {
     window.open("https://www.instagram.com/",'_system', 'location=yes');
     }
 
+    goCarrito(){
+      this.navCtrl.navigateForward('/carrito');
+    }
+    
+    goBuscar(){
+      this.navCtrl.navigateForward("/buscar");
+    }
 }

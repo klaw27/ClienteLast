@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
   }
 
   facebooklog(){
-    this.fb.login(['public_profile', 'email']).then((res: FacebookLoginResponse) => {
+    this.fb.login(['public_profile','user_friends', 'email']).then((res: FacebookLoginResponse) => {
       console.log('Logged into Facebook!', res);
       this.getData(res.authResponse.accessToken);
     }).

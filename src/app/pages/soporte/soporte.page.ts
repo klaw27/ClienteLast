@@ -18,7 +18,7 @@ export class SoportePage implements OnInit {
   consulta:any = '';
   telefono:any = '';
 
-  constructor(    public estore: EstoreService,
+  constructor( public estore: EstoreService,
     private router : Router,
     public toastController: ToastController,
     private emailComposer: EmailComposer,
@@ -92,6 +92,15 @@ export class SoportePage implements OnInit {
     };
 
     this.emailComposer.open(email);
+  }
+
+  
+  goCarrito(){
+    this.navCtrl.navigateForward('/carrito');
+  }
+  
+  goBuscar(){
+    this.navCtrl.navigateForward("/buscar");
   }
 
 }

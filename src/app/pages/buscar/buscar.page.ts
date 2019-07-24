@@ -84,7 +84,8 @@ export class BuscarPage implements OnInit {
       console.log(this.items);     
 
       this.items = this.items.filter((item) =>{
-        return (this.items.nombre.toLowerCase().indexOf(this.criterio.toLowerCase()) >-1);  
+        return (item.nombre.toLowerCase().indexOf(this.criterio.toLowerCase()) >-1);  
+        console.log(this.items); 
       })
          
     }

@@ -1,9 +1,19 @@
-<app-header>
-  </app-header>
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Solicita a tu Repartidor</ion-title>
+    <ion-buttons slot="end">
+        <ion-icon class="iconbuscar" name='search' (click)="goBuscar()"></ion-icon>
+        <ion-icon class="iconcarrito" name='cart' (click)="goCarrito()"></ion-icon>
+     </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content padding>
 
     <div class="data principal" *ngIf="carrito.length != 0">
-    <h4 class="tit">Solicita a tu Repartidor</h4>
+   <!--<h4 class="tit">Solicita a tu Repartidor</h4>--> 
 
     
     <div id="mapa3"></div>
@@ -86,6 +96,6 @@
               </ion-item>
           </ion-card-content>
         </ion-card>
-        <ion-button expand="full" (click)="Solicitar()">Solicitar Repartidor</ion-button>
+        <ion-button expand ="block" (click)="Solicitar()">Solicitar Repartidor</ion-button>
   </div>
 </ion-content>

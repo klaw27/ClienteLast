@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pedidos',
@@ -20,7 +21,7 @@ export class PedidosPage implements OnInit {
   Cancelado=[{nombre:"Zapatos",foto:"CANCELADO"}];
 
 
-  constructor() {
+  constructor(public navCtrl: NavController) {
     this.Pendientes();
    }
 
@@ -37,6 +38,14 @@ export class PedidosPage implements OnInit {
 
   Cancelados(){ 
     this.items = this.Cancelado;
+  }
+
+  goCarrito(){
+    this.navCtrl.navigateForward('/carrito');
+  }
+  
+  goBuscar(){
+    this.navCtrl.navigateForward("/buscar");
   }
 
 
