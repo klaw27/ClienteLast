@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tarjetas',
@@ -9,7 +9,8 @@ import { AlertController } from '@ionic/angular';
 })
 export class TarjetasPage implements OnInit {
 
-  constructor(public alertController: AlertController) {
+  constructor(public alertController: AlertController,
+    public navCtrl: NavController) {
     this.items = this.Lista;
    }
 
@@ -23,14 +24,25 @@ export class TarjetasPage implements OnInit {
   }
   async deleteCard() {
     const alert = await this.alertController.create({
-      header: 'Alerta',
-      message: '¿Esta seguro que desea eliminar la tarjeta?',
+      header: 'Confirme acción',
+      message: '¿Está seguro que desea eliminar la tarjeta?',
       buttons: ['Aceptar', 'Cancelar']
     });
 
     await alert.present();
   }
 
+  
+  goCarrito(){
+    this.navCtrl.navigateForward('/carrito');
+  }
+  
+  goBuscar(){
+    this.navCtrl.navigateForward("/buscar");
+  }
 
+  salir(){
+    this.navCtrl.navigateBack('/dashboard');
+  }
 
 }

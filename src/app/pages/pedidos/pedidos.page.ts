@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+//import { PedidosI } from 'src/app/models/pedidos.interface';
+//import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -7,6 +9,8 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./pedidos.page.scss'],
 })
 export class PedidosPage implements OnInit {
+
+  //todos:PedidosI[];
   segment: string ="Entregados";
 
   items:any;
@@ -22,10 +26,14 @@ export class PedidosPage implements OnInit {
 
 
   constructor(public navCtrl: NavController) {
+   // constructor(public navCtrl: NavController, private todoService:TodoService) {
     this.Pendientes();
    }
 
   ngOnInit() {
+    /*this.todoService.pedidosCliente("13").subscribe(res=>{
+      console.log("Pedidos " , res);
+    });*/
   }
 
   Pendientes(){ 
@@ -47,6 +55,8 @@ export class PedidosPage implements OnInit {
   goBuscar(){
     this.navCtrl.navigateForward("/buscar");
   }
+
+
 
 
 }

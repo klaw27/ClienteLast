@@ -22,6 +22,8 @@ import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, F
 
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { HomePopoverComponent } from './home-popover/home-popover.component';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
 
 export const firebaseConfig = {
     apiKey: "AIzaSyBBpfZ5-RiG2fGwpWFCSimR2CFtXXnTGJI",
@@ -47,7 +49,9 @@ export const firebaseConfig = {
     HttpClientModule,
     ComponentsModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    
   ],
   providers: [
     StatusBar,

@@ -46,13 +46,19 @@ export class AddCardPage implements OnInit {
 
   async addCard() {
     const alert = await this.alertController.create({
-      header: '!La tarjeta se agrego correctamente!'
-      //message: '!La tarjeta se agrego correctamente!',
-     // buttons: ['Aceptar', 'Cancelar']
+      header: 'Confirmación',
+      message: '¡La tarjeta se guardó correctamente!',
+     buttons: ['Aceptar']
     });
 
     await alert.present();
   }
 
-
+  goCarrito(){
+    this.navCtrl.navigateForward('/carrito');
+  }
+  
+  goBuscar(){
+    this.navCtrl.navigateForward("/buscar");
+  }
 }

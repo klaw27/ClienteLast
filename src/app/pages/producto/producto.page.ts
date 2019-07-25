@@ -12,7 +12,7 @@ import { CarritoService } from '../../services/carrito.service';
   styleUrls: ['./producto.page.scss'],
 })
 export class ProductoPage implements OnInit {
-
+  items = [];
   id:any;
   idNegocio:any;
   producto:any = {
@@ -53,18 +53,20 @@ export class ProductoPage implements OnInit {
       });
 
     }
-
+    //edita
     else{
       this.editar = true;
       this.producto =  this._carrito.getItem(this.id);
       //como se muestra en carrito
       this.cantidad = this.producto['cantidadCarrito'];
+
     }
 
     if(this.cantidad == 1){
       let remove = document.getElementById('remove');
       remove.setAttribute("disabled","true");
     }
+
 
   }
 
@@ -105,7 +107,8 @@ export class ProductoPage implements OnInit {
     this._carrito.actualizarItem(this.id,this.producto);
     this._carrito.idNegocio = this.idNegocio;
     this._carrito.guardar_idNegocio();
-    this.navCtrl.pop();
+  //  this.navCtrl.pop();
+    this.navCtrl.navigateForward('/carrito');
 
   }
 

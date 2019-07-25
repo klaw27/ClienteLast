@@ -80,7 +80,8 @@ export class MenuComponent {
   }
 
   pedidos(){
-    this.router.navigateByUrl(`/pedidos`);
+    //pasar id de cliente
+    this.router.navigateByUrl(`/pedidos/` + "13");
     this.cerrarMenu();
 
   }

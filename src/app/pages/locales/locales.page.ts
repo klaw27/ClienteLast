@@ -53,4 +53,9 @@ export class LocalesPage implements OnInit {
   }
 
 
+  
+  goBuscar(){
+    this.navCtrl.navigateForward("/buscar");
+  }
+
 }

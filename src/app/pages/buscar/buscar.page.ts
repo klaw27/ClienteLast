@@ -72,6 +72,22 @@ export class BuscarPage implements OnInit {
             console.log(this.productos);
           }
         });
+
+
+      /*  console.log(this.productos);
+        this.id = "0";
+        let body = {
+          id: this.id,
+          funcion: "p"
+        };
+        console.log(body);
+        this.estore.productos(body, "dashbusqueda.php").subscribe(data=>{
+          console.log(data);
+          if(data['success']){
+            this.productos = data['productos'];
+            console.log(this.productos);
+          }
+        });*/
   }
 
  buscarEstore(event){

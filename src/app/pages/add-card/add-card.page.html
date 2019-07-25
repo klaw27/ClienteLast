@@ -4,6 +4,10 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Agregar Tarjeta</ion-title>
+    <ion-buttons slot="end">
+        <ion-icon class="iconbuscar" name='search' (click)="goBuscar()"></ion-icon>
+        <ion-icon class="iconcarrito" name='cart' (click)="goCarrito()"></ion-icon>
+     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -73,7 +77,7 @@
                 <div class = "error-messages" *ngIf="myForm.get('cvv').errors && myForm.get('cvv').dirty">
                   <ng-container>
                       <p color="danger" ion-text *ngIf="myForm.get('cvv').hasError('required')">Campo requerido</p>
-                      <p color="danger" ion-text *ngIf="myForm.get('cvv').hasError('pattern')">Maximo 4 caracteres</p>
+                      <p color="danger" ion-text *ngIf="myForm.get('cvv').hasError('pattern')">Máximo 4 caracteres</p>
                   </ng-container>            
                 </div>
 

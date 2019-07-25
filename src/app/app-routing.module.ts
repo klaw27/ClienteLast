@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'contacto', loadChildren: './pages/contacto/contacto.module#ContactoPageModule' },
   { path: 'soporte', loadChildren: './pages/soporte/soporte.module#SoportePageModule' },
   { path: 'metodo-pago', loadChildren: './pages/metodo-pago/metodo-pago.module#MetodoPagoPageModule' },
-  { path: 'pedidos', loadChildren: './pages/pedidos/pedidos.module#PedidosPageModule' },
+  { path: 'pedidos/:id', loadChildren: './pages/pedidos/pedidos.module#PedidosPageModule' },
   { path: 'tarjetas', loadChildren: './tarjetas/tarjetas.module#TarjetasPageModule' },
   { path: 'add-card', loadChildren: './pages/add-card/add-card.module#AddCardPageModule' },
   { path: 'politica', loadChildren: './pages/politica/politica.module#PoliticaPageModule' },

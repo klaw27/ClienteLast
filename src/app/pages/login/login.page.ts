@@ -117,4 +117,11 @@ enter(e){
     this.iniciar();
   }
 }
+
+
+forgot(email){
+  console.log(email);
+
+}
+
 }

@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class EstoreService {
+
 
   //server:string = 'http://ec2-13-57-42-231.us-west-1.compute.amazonaws.com/clienteApi/';
   server:string = 'http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com/clienteApi/';
   //server:string = "http://localhost:8888/apiCliente/";
   serverData: string = "https://jsonplaceholder.typicode.com/users";
 
-  constructor( private http: HttpClient) { }
+  constructor( private http: HttpClient) { 
+
+
+  }
+
 
   registrarUsuario(body, file){
     return this.http.post(this.server+file,JSON.stringify(body));
