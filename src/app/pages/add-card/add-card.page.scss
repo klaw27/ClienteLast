@@ -1,7 +1,9 @@
 .error-messages {
-    font-size: 0.4cm;
+    font-size: 10px;
     color: red;
     text-align: left;
+    
+    margin-left: 17px;
   }
 
   .etiquetas{
@@ -13,7 +15,7 @@
   .backTarjeta{
     background-color: #f3f3f3;
     width: 100%;
-    height: 40%;
+    height: 35%;
     display: inline-block;
 }
 .contenTarjeta{
@@ -98,7 +100,7 @@
 
 
 .btn{
-  margin-top: 15px;
+  margin-top: 25px;
 }
 .iconcarrito{
     width: 25px;
@@ -110,4 +112,18 @@
     width: 25px;
     height: 25px;
     margin-right: 10px;
+}
+
+.fecha{
+    margin-left: 17px;
+}
+
+.venci{
+    width: 55px;
+    margin-left: 15px;
+}
+
+.tab{
+ 
+    margin-left: 15px;
 }

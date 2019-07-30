@@ -38,7 +38,7 @@
         </div>
      </div>
     
-    <P>DATOS DE LA TARJETA</P>
+     <P>DATOS DE LA TARJETA</P>
   <!-- <form [formGroup]="myForm" (ngSubmit)="saveData()" novalidate> 
         <ion-item>
             <ion-label position="stacked">Nombre del titular:</ion-label>
@@ -86,44 +86,77 @@
   </div>
   </form>--> 
 
-  <form method="POST" id="customer-form">
+  <ion-item>
+      <ion-label position="stacked">Nombre del Cliente:</ion-label>
+      <ion-input disabled type="text" size="20" autocomplete="on" name="client_name" (keyup)="getClient($event)"[(ngModel)]='usuario.nombre + " " + usuario.apellidoPat + " " +  usuario.apellidoMat'> </ion-input>
+    </ion-item>
+
+    <ion-item>
+ 
+      <ion-label position="stacked">Correo Electr&oacute;nico:</ion-label>
+      <ion-input disabled type="text" size="20" autocomplete="on" name="cliente_email"  (keyup)="getEmail($event)" [(ngModel)]='usuario.email'> </ion-input>
+    </ion-item>
+ 
+
+  
+
+  <form method="POST" id="customer-form" [formGroup]="myForm" novalidate>
     <input type="hidden" name="token_id" id="token_id"/>
-  <fieldset>
-      <legend>Datos del cliente</legend>
+
+   
+      <ion-item>
+      <ion-label position="stacked">Nombre del titular:</ion-label>
+      <ion-input formControlName="titular" type="text" autocomplete="off"   data-openpay-card="holder_name" ></ion-input>
+      </ion-item>
+      <div class = "error-messages" *ngIf="myForm.get('titular').errors && myForm.get('titular').dirty">
+        <ng-container>
+            <p color="danger" ion-text *ngIf="myForm.get('titular').hasError('required')">Campo requerido</p>
+        </ng-container>            
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Número de tarjeta:</ion-label>
+      <ion-input  formControlName="numberCard" autocomplete="off" data-openpay-card="card_number" type="number" placeholder="XXXX-XXXX-XXXX-XXXX"></ion-input>
+      </ion-item>
+      <div class = "error-messages" *ngIf="myForm.get('numberCard').errors && myForm.get('numberCard').dirty">
+        <ng-container>
+            <p color="danger" ion-text *ngIf="myForm.get('numberCard').hasError('required')">Campo requerido</p>
+            <p color="danger" ion-text *ngIf="myForm.get('numberCard').hasError('pattern')">Debe capturar de 15 a 16 caracteres</p>
+        </ng-container>            
+      </div>
+   
+      <ion-item>
+      <ion-label position="stacked">Código de seguridad (CVV2):</ion-label>
+      <ion-input formControlName="cvv" type="number" size="4" autocomplete="off"  data-openpay-card="cvv2" type="number" placeholder="CVV2" ></ion-input>
+    </ion-item>
+    <div class = "error-messages" *ngIf="myForm.get('cvv').errors && myForm.get('cvv').dirty">
+        <ng-container>
+            <p color="danger" ion-text *ngIf="myForm.get('cvv').hasError('required')">Campo requerido</p>
+            <p color="danger" ion-text *ngIf="myForm.get('cvv').hasError('pattern')">Máximo 4 caracteres</p>
+        </ng-container>            
+      </div>
+
+
     <p>
-      <label>Nombre</label>
-      <input type="text" size="20" autocomplete="on" name="client_name" (keyup)="getClient($event)"/>
+      <ion-label position="stacked" class = "fecha">Fecha de vencimiento (MM/YY):</ion-label>
+      <input formControlName="vencimiento"  type="number" size="2" data-openpay-card="expiration_month" class = "venci"/> 
+      <ion-label class = "tab">/</ion-label>
+      <input formControlName="vencimiento"  type="number" size="2" data-openpay-card="expiration_year" class = "venci"/>
     </p>
-    <p>
-      <label>Correo Electr&oacute;nico</label>
-      <input type="text" size="20" autocomplete="on" name="cliente_email"  (keyup)="getEmail($event)"/>
-    </p>
-    </fieldset>
-    <fieldset>
-      <legend>Datos de la tarjeta</legend>
-    <p>
-      <label>Nombre</label>
-      <input type="text" size="20" autocomplete="off"
-        data-openpay-card="holder_name" />
-    </p>
-    <p>
-      <label>N&uacute;mero</label>
-      <input type="text" size="20" autocomplete="off"
-        data-openpay-card="card_number" />
-    </p>
-    <p>
-      <label>CVV2</label>
-      <input type="text" size="4" autocomplete="off"
-        data-openpay-card="cvv2" />
-    </p>
-    <p>
-      <label>Fecha de expiraci&oacute;n (MM/YY)</label>
-      <input type="text" size="2" data-openpay-card="expiration_month" /> /
-      <input type="text" size="2" data-openpay-card="expiration_year" />
-    </p>
-    </fieldset>
+    <div class = "error-messages" *ngIf="myForm.get('vencimiento').errors && myForm.get('vencimiento').dirty">
+        <ng-container>
+            <p color="danger" ion-text *ngIf="myForm.get('vencimiento').hasError('required')">Campo requerido</p>
+            <p color="danger" ion-text *ngIf="myForm.get('vencimiento').hasError('pattern')">Máximo 2 caracteres</p>
+       </ng-container>            
+      </div>
+  
+ 
    <!--  <input type="submit" id="save-button" value="Pagar"/>-->
-   <ion-button (click)="pagar()" expand ="block" color ="primary" >Guardar</ion-button>
+   <div class ="btn">
+   <ion-button [disabled]="myForm.invalid" (click)="pagar()" expand ="block" color ="primary" >Guardar</ion-button>
+  </div>
+
+
 </form>
 
 

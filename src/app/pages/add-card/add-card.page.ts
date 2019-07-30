@@ -3,8 +3,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { NavController, AlertController, ToastController  } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
 
 declare var OpenPay: any;
 
@@ -15,6 +15,23 @@ declare var OpenPay: any;
   styleUrls: ['./add-card.page.scss'],
 })
 export class AddCardPage implements OnInit {
+
+
+  usuario:any = {
+    nombre : undefined,
+    email :undefined, 
+    razonSocial : undefined,
+    formaPago : undefined, 
+    telefono : undefined,
+    apellidoMat : undefined,
+    apellidoPat: undefined,
+    calle: undefined,
+    colonia: undefined,
+    numeroCalle: undefined,
+    fotografia: undefined
+  };
+
+
  
 //class
 
@@ -46,9 +63,9 @@ export class AddCardPage implements OnInit {
     public toastCtrl: ToastController 
     ){
       this.myForm = this.fb.group({
-        numberCard: ['', [Validators.required, Validators.pattern(/^[a-z0-9_-]{16}$/)]],
+        numberCard: ['', [Validators.required, Validators.pattern(/^[a-z0-9_-]{15,16}$/)]],
         titular: ['', [Validators.required]],
-        vencimiento: ['', [Validators.required]],
+        vencimiento: ['', [Validators.required, Validators.pattern(/^[a-z0-9_-]{2}$/)]], 
         cvv: ['', [Validators.required, Validators.pattern(/^[a-z0-9_-]{3,4}$/)]]
         //url: ['', [Validators.pattern(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/)]],
         //password: ['', [Validators.pattern(/^[a-z0-9_-]{6,18}$/)]],
@@ -59,6 +76,9 @@ export class AddCardPage implements OnInit {
 
      
   ngOnInit() {
+
+    this.usuario = {...JSON.parse(localStorage.getItem('user'))};
+ 
     //datos de openpay
     OpenPay.setId('mwvt7x3ehfnlgluepwng');
     OpenPay.setApiKey('pk_1a559d9438714db7b1b88ae6b5756358');
@@ -74,25 +94,14 @@ export class AddCardPage implements OnInit {
 
 }
 
-  iniciar(){
 
-   
-
+  iniciar(){   
 let account = false; 
-
    this.customerData= {
       name: this.clientName,
       email: this.clientEmail,
       requires_account: account
-  
     }
-
-
- 
-
-    this.cliente = JSON.stringify(this.customerData);
-
-
   }
 
 
@@ -104,19 +113,29 @@ let account = false;
       console.log(response);
       console.log(this.token_id + " se enviara formulario " + "Cliente: " + this.clientName + "Email: " + this.clientEmail);
       console.log(this.customerData);
-     
+     // this.presentarToast("La tarjeta se agrego correctamente");
 
        this.postDatos();
 
     }, (response)=>{
       //error en el formulario
       var desc = response.data.description != undefined ? response.data.description : response.message;
-      alert("ERROR [" + response.status + "] " + desc);
+      this.presentarToast("ERROR [" + response.status + "] " + desc);
+     // alert("ERROR [" + response.status + "] " + desc);
       console.log("ERROR [" + response.status + "] " + desc);
       console.log("El boton se bloquea");
     });
   }
 
+
+  async presentarToast(mensaje) {
+    const toast = await this.toastCtrl.create({
+      message: mensaje,
+      position: 'bottom',
+      duration: 2000
+    });
+    toast.present();
+  }
 
   postDatos(){
   
@@ -131,14 +150,13 @@ let account = false;
     
    // this.http.post("http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com/clienteApi/save_customer_card.php",JSON.stringify(this.customerData)).subscribe(data => {
    // this.http.post("https://sandbox-api.openpay.mx:443//v1/mwvt7x3ehfnlgluepwng/customers",JSON.stringify(this.customerData)).subscribe(data => {
-   this.http.post("http://localhost/api/Openpay/save_customer_card.php",JSON.stringify(this.customerData),{ headers:headers}).subscribe(data => {
+   this.http.post("http://localhost/api/Openpay/save_customer_card.php",JSON.stringify(this.customerData),{ headers:headers}).subscribe(
+     data => {
       console.log("Cliente Creado");
-      debugger;
       console.log(data);
      }, error => {
       console.log(error);
     }); 
-
 
    /* return this.http.post("http://localhost/api/Openpay/save_customer_card.php",JSON.stringify(this.customerData),{ headers:headers})
     .pipe(
@@ -154,7 +172,7 @@ let account = false;
     );*/
 
     //CREAR TARJETA
-    this.cardData= {
+    /*this.cardData= {
       token_id: this.token_id,
       device_session_id: this.deviceSessionId
     }
@@ -166,7 +184,7 @@ let account = false;
         }, 
      error => {
       console.log(error);
-    }); 
+    }); */
     
 
 }
