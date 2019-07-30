@@ -78,4 +78,6 @@ export class EstoreService {
       return this.http.post(this.server+file,JSON.stringify(body)); 
       }
 
+
+      //url + archivo.php , body
 }

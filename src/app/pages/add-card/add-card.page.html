@@ -39,7 +39,7 @@
      </div>
     
     <P>DATOS DE LA TARJETA</P>
-    <form [formGroup]="myForm" (ngSubmit)="saveData()" novalidate> 
+  <!-- <form [formGroup]="myForm" (ngSubmit)="saveData()" novalidate> 
         <ion-item>
             <ion-label position="stacked">Nombre del titular:</ion-label>
             <ion-input formControlName="titular" type="text"></ion-input>
@@ -84,6 +84,48 @@
   <div class ="btn">
       <ion-button expand ="block" color ="primary" [disabled]="myForm.invalid" (click)="saveData()">Guardar</ion-button>
   </div>
-  </form>
-            
+  </form>--> 
+
+  <form method="POST" id="customer-form">
+    <input type="hidden" name="token_id" id="token_id"/>
+  <fieldset>
+      <legend>Datos del cliente</legend>
+    <p>
+      <label>Nombre</label>
+      <input type="text" size="20" autocomplete="on" name="client_name" (keyup)="getClient($event)"/>
+    </p>
+    <p>
+      <label>Correo Electr&oacute;nico</label>
+      <input type="text" size="20" autocomplete="on" name="cliente_email"  (keyup)="getEmail($event)"/>
+    </p>
+    </fieldset>
+    <fieldset>
+      <legend>Datos de la tarjeta</legend>
+    <p>
+      <label>Nombre</label>
+      <input type="text" size="20" autocomplete="off"
+        data-openpay-card="holder_name" />
+    </p>
+    <p>
+      <label>N&uacute;mero</label>
+      <input type="text" size="20" autocomplete="off"
+        data-openpay-card="card_number" />
+    </p>
+    <p>
+      <label>CVV2</label>
+      <input type="text" size="4" autocomplete="off"
+        data-openpay-card="cvv2" />
+    </p>
+    <p>
+      <label>Fecha de expiraci&oacute;n (MM/YY)</label>
+      <input type="text" size="2" data-openpay-card="expiration_month" /> /
+      <input type="text" size="2" data-openpay-card="expiration_year" />
+    </p>
+    </fieldset>
+   <!--  <input type="submit" id="save-button" value="Pagar"/>-->
+   <ion-button (click)="pagar()" expand ="block" color ="primary" >Guardar</ion-button>
+</form>
+
+
+
  </ion-content>

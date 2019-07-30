@@ -25,7 +25,15 @@
 
 
 <ion-content padding>
-    <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>
+    <ion-item *ngFor="let ped of peds | async" [class.done]="ped.done">
+      <ion-thumbnail slot="start" class="thumbnail">
+          <img src="/assets/img/toks.png" > </ion-thumbnail>
+     {{ ped | json}}
+    </ion-item>
+</ion-content>
+
+ 
+  <!--  <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>
  <ion-list >
 		<ion-item *ngFor="let item of items">
         <ion-thumbnail slot="start" class="thumbnail">
@@ -37,17 +45,7 @@
           <p>Horario: {{item.foto}} - {{item.foto}}</p>
       </ion-label>
     </ion-item>
-	</ion-list>
-</ion-content>
+	</ion-list>--> 
 
-
-<!--<ion-content padding>
-  <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>
-<ion-list >
-  <ion-item *ngFor="let todo of todos">
-  {{todo.pedido}}
-  </ion-item>
-</ion-list>
-</ion-content>-->
 
 

@@ -4,41 +4,17 @@ import {Observable } from "rxjs";
 import {map} from "rxjs/operators";
 import {PedidosI} from "../models/pedidos.interface";
 import { Action } from 'rxjs/internal/scheduler/Action';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
+  constructor(public AfDb: AngularFireDatabase) {  }
 
-   // private todosColletion: AngularFirestoreCollection <PedidosI>;
-   // private todos: Observable <PedidosI[]>;
+public getPedidos(){
+  return this.AfDb.list('pedidos/');
 
-  constructor( db:AngularFirestore) { 
-  /*  this.todosColletion = db.collection<PedidosI>("todos");
-    this.todos = this.todosColletion.snapshotChanges().pipe(map(
-      actions =>{
-        return actions.map(a =>{
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return {id, ...data};
-        });
-      }
-    ));*/
-   }
-
-
-  //Metodos para pedidos
-
-  /*pedidoDetalle(){
-    return this.todos;
-  }
-  pedidosCliente(id:string){
-    return this.todosColletion.doc<PedidosI>(id).valueChanges();
-  }
-
-  pedidosCancelar(todo: PedidosI, id:string){
-    return this.todosColletion.doc(id).update(todo);
-  }
-*/
+}
 
 }

@@ -17,12 +17,14 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabaseModule, AngularFireDatabase,AngularFireList  } from '@angular/fire/database';
 import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { HomePopoverComponent } from './home-popover/home-popover.component';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
+//import { AngularFirestore } from 'angularfire2/firestore';
+import { environment} from "../environments/environment"
 
 
 export const firebaseConfig = {
@@ -48,9 +50,12 @@ export const firebaseConfig = {
     ReactiveFormsModule,
     HttpClientModule,
     ComponentsModule,
+    //eliminar si causa error
+    //AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
+    //AngularFirestore,
     
   ],
   providers: [

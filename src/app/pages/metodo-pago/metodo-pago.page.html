@@ -42,6 +42,8 @@
       <ion-icon class="card" name="card"></ion-icon>
       <ion-label class ="etiqueta"> Pago en línea  <p>Mis tarjetas registradas </p></ion-label>
       <ion-icon name="arrow-dropright-circle" slot="end" routerLink="/tarjetas"></ion-icon>
+      
+
       <ion-icon name="information-circle" slot="end" (click)="PagoOnlineInfo($event)"></ion-icon>
     </ion-item>
   <!--  <ion-label class ="mycard"> Mis tarjetas registradas </ion-label>-->
@@ -50,6 +52,7 @@
 
   </div>
 </ion-list>
+  <!--  <ion-button fill = "clear" routerLink="/add-card">Agregar tarjeta de crédito y débito</ion-button>-->
   <ion-button fill = "clear" routerLink="/add-card">Agregar tarjeta de crédito y débito</ion-button>
 <!--  <ion-fab vertical="bottom" class="fab" horizontal="start" slot="fixed">
     <ion-fab-button class="faBoton" size="large" (click)="goCarrito()" translucent>
