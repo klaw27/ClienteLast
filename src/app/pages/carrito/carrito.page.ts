@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, NavController, ModalController } from '@ionic/angular';
+import { MenuController, NavController, ModalController, AlertController } from '@ionic/angular';
 import { CarritoService } from '../../services/carrito.service';
 import { ClienteUbicPage } from '../cliente-ubic/cliente-ubic.page';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -26,6 +26,7 @@ export class CarritoPage  {
   calle = "";
   calleSecundario = "";
   metPago="efectivo";
+  idEliminar:any;
 
 
   constructor(public menu: MenuController,
@@ -35,6 +36,7 @@ export class CarritoPage  {
     public modalController: ModalController,
     private activatedRoute: ActivatedRoute,
     private geolocation: Geolocation,
+    public alertController: AlertController,
     private AfDb: AngularFireDatabase) { }
 
   ionViewWillEnter() {
@@ -132,6 +134,7 @@ export class CarritoPage  {
   }
 
   editarProducto(id){
+
     this.navCtrl.navigateForward('/producto/'+id+"/editar/"+this.idNegocio);
   }
 
@@ -212,8 +215,38 @@ export class CarritoPage  {
   
   eliminar(id){
     console.log(id);
-  this._carrito.eliminarItem(id);
+    this.idEliminar = id;
+    this.alertEliminar();
   //this.navCtrl.pop();
+  }
+
+    
+  async alertEliminar() {
+    const alert = await this.alertController.create({
+      header: 'Confirme accion',
+      message: '¿Esta seguro que desea eliminar el producto?',
+      buttons: [
+        {
+          text: 'Aceptar',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm aceptar');
+            this._carrito.eliminarItem(this.idEliminar);
+            this.ionViewWillEnter();
+          }
+        },
+        {
+          text: 'Cancelar',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          this.navCtrl.navigateForward("/carrito");
+          }
+        },
+      ]
+    });
+
+    await alert.present();
   }
 
 }

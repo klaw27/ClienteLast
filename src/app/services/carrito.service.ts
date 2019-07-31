@@ -38,7 +38,8 @@ export class CarritoService {
       this.items.push(item);
       this.guardar_productos();
     }
-
+    console.log("productos actuales");
+    console.log(this.items);
 
   }
 

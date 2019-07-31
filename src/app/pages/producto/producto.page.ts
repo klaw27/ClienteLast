@@ -35,10 +35,10 @@ export class ProductoPage implements OnInit {
 
   ngOnInit() {
 
-
     let funcion = this.activatedRoute.snapshot.paramMap.get('funcion');
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.idNegocio = this.activatedRoute.snapshot.paramMap.get('negocio');
+
     if( funcion == "agregar"){
       this.editar = false;
       let body = {
@@ -55,9 +55,11 @@ export class ProductoPage implements OnInit {
     }
     //edita
     else{
+ 
       this.editar = true;
+      console.log("id del producto a editar " + this.id);
       this.producto =  this._carrito.getItem(this.id);
-      //como se muestra en carrito
+      console.log(this.producto);
       this.cantidad = this.producto['cantidadCarrito'];
 
     }
