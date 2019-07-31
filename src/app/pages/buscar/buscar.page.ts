@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { EstoreService } from '../../services/estore.service';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-buscar',
@@ -10,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BuscarPage implements OnInit {
  itemsflag: [];
+ itemsflagNeg: [];
  // prod: [];
 
 
@@ -21,6 +23,15 @@ export class BuscarPage implements OnInit {
     precio: ''
   };
 
+  itemsNeg:any = {
+    id_negocio:'',
+    nombre: '',
+    callenumero: '',
+    colonia: '',
+    horaapertura: '',
+    horacierre: ''
+  };
+
   lista=[{id_producto:"",nombre:"Tortas",descripcion:"tortas.png",cantidad:"tortas.png",precio:"200"},
   {id_producto:"",nombre:"Carnitas",descripcion:"tortas.png",cantidad:"tortas.png",precio:"200"},
   {id_producto:"",nombre:"Tortas `Las tortugas`",descripcion:"tortas.png",cantidad:"tortas.png",precio:"200"},
@@ -29,7 +40,7 @@ export class BuscarPage implements OnInit {
   criterio :any;
   indexCount = 0;
   errorCount: any =null;
-
+  idNegocio:any;
   id:any;
   //productos: [];
   productos:any = [{
@@ -39,10 +50,20 @@ export class BuscarPage implements OnInit {
     tiempopreparacion: '',
     precio: ''
   }];
+  negocios:any = [{
+    id_negocio:'',
+    nombre: '',
+    callenumero: '',
+    colonia: '',
+    horaapertura: '',
+    horacierre: ''
+  }];
 
 
   constructor(public alertCtrl: AlertController,public estore : EstoreService,
-    private activatedRoute: ActivatedRoute,public navCtrl: NavController) { 
+    private activatedRoute: ActivatedRoute,public navCtrl: NavController,
+    public alertController: AlertController,
+    public http: HttpClient) { 
       //this.ionViewDidLoad();
      // this.iniBusqueda();
       }
@@ -52,27 +73,51 @@ export class BuscarPage implements OnInit {
   iniBusqueda(){
     //this.items = this.lista;
     this.items = this.productos;
+    this.itemsNeg = this.negocios;
     this.itemsflag = this.productos;
+    this.itemsflagNeg = this.negocios;
 }
 
   ngOnInit() {  
 
        //productos
         console.log(this.productos);
-        this.id = "77";
+        this.id = "0";
         let body = {
           id: this.id,
-          funcion: "all"
+          funcion: "p"
         };
         console.log(body);
-        this.estore.productos(body, "productos.php").subscribe(data=>{
-          console.log(data);
-          if(data['success']){
+
+        //obtener productos
+        this.http.post("http://localhost/api/dashbusqueda.php",body).subscribe(data => {
+           console.log(data);
+           if(data['success']){
             this.productos = data['productos'];
             console.log(this.productos);
           }
-        });
-
+          }, error => {
+           console.log(error);
+         }); 
+     
+         //Obtener negocios
+         console.log(this.negocios);
+         this.id = "0";
+          body = {
+           id: this.id,
+           funcion: "all"
+         };
+         console.log(body);
+ 
+         this.http.post("http://localhost/api/dashbusqueda.php",body).subscribe(data => {
+            console.log(data);
+            if(data['success']){
+             this.negocios = data['negocios'];
+             console.log(this.negocios);
+           }
+           }, error => {
+            console.log(error);
+          });
 
       /*  console.log(this.productos);
         this.id = "0";
@@ -103,20 +148,90 @@ export class BuscarPage implements OnInit {
         return (item.nombre.toLowerCase().indexOf(this.criterio.toLowerCase()) >-1);  
         console.log(this.items); 
       })
+
+      if(this.items.length === 0){
+        this.itemsflag = null; 
+      }
+      
+      this.itemsNeg = this.itemsNeg.filter((item) =>{
+        return (item.nombre.toLowerCase().indexOf(this.criterio.toLowerCase()) >-1);  
+        console.log(this.itemsNeg); 
+      })
+
+      if(this.itemsNeg.length === 0){
+        this.itemsflagNeg = null; 
+      }
+
          
     }
     else{     
       this.indexCount = 1;
       console.log ("no capturo nada");
      this.items = null;
-     
-    this.itemsflag = null;
+     this.itemsNeg = null;
+    this.itemsflag = null; 
+    this.itemsflagNeg = null;
     }
   }
   
+
   agregarProducto(id){
-    this.navCtrl.navigateForward('/producto/'+id+"/agregar"+"/"+this.id);
+   
+    //Funcion editar
+    console.log("id del producto: " + id);
+    if ( localStorage.getItem('productos') ){
+      this.items = JSON.parse( localStorage.getItem('productos') );
+      this.idNegocio = JSON.parse( localStorage.getItem('idNegocio') );
+    }
+    
+    let x = this.items.map((data,indice)=>{
+      if(data['id_producto']==id){
+        return indice;
+      }
+    });
+    
+    
+    if(x>= [0]){    
+      console.log("el producto ya existe en carrito")
+      this.alertEditar();
+      this.navCtrl.navigateForward('/producto/'+id+"/editar"+"/"+this.id);
+    }else{
+      console.log("No existe en carrito");
+      this.navCtrl.navigateForward('/producto/'+id+"/agregar"+"/"+this.id);
+    }
+    
+      }
+
+  menu(id) {
+    this.navCtrl.navigateForward('/local-menu/' + id);
   }
 
+
+  
+  async alertEditar() {
+    const alert = await this.alertController.create({
+      header: 'Informacion',
+      message: 'El producto ya existe en el carrito ¿Desea modificar la cantidad?',
+      buttons: [
+        {
+          text: 'Aceptar',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm aceptar');
+          }
+        },
+        {
+          text: 'Cancelar',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          this.navCtrl.navigateForward("/buscar");
+          }
+        },
+      ]
+    });
+
+    await alert.present();
+  }
 
 }

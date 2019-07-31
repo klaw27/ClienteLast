@@ -16,7 +16,6 @@ declare var OpenPay: any;
 })
 export class AddCardPage implements OnInit {
 
-
   usuario:any = {
     nombre : undefined,
     email :undefined, 
@@ -59,7 +58,7 @@ export class AddCardPage implements OnInit {
   constructor(public alertController: AlertController, private router : Router,
     public navCtrl: NavController,
     public fb: FormBuilder,
-    private http: HttpClient,
+    public http: HttpClient,
     public toastCtrl: ToastController 
     ){
       this.myForm = this.fb.group({
@@ -78,6 +77,9 @@ export class AddCardPage implements OnInit {
   ngOnInit() {
 
     this.usuario = {...JSON.parse(localStorage.getItem('user'))};
+    this.clientName = this.usuario['nombre'];
+    this.clientEmail= this.usuario['email'];
+    console.log(this.clientEmail + " " + this.clientName);
  
     //datos de openpay
     OpenPay.setId('mwvt7x3ehfnlgluepwng');
@@ -89,9 +91,6 @@ export class AddCardPage implements OnInit {
 
     //OpenPay.getSandboxMode(); */
   
-
-
-
 }
 
 
@@ -147,29 +146,15 @@ let account = false;
    
         
     //CREAR CLIENTE
-    
-   // this.http.post("http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com/clienteApi/save_customer_card.php",JSON.stringify(this.customerData)).subscribe(data => {
-   // this.http.post("https://sandbox-api.openpay.mx:443//v1/mwvt7x3ehfnlgluepwng/customers",JSON.stringify(this.customerData)).subscribe(data => {
-   this.http.post("http://localhost/api/Openpay/save_customer_card.php",JSON.stringify(this.customerData),{ headers:headers}).subscribe(
+    this.http.post("http://localhost/api/Openpay/save_customer_card.php",JSON.stringify(this.customerData),{ headers:headers}).subscribe(
      data => {
       console.log("Cliente Creado");
-      console.log(data);
+      console.log(data['cliente']);
      }, error => {
       console.log(error);
     }); 
 
-   /* return this.http.post("http://localhost/api/Openpay/save_customer_card.php",JSON.stringify(this.customerData),{ headers:headers})
-    .pipe(
-      tap((data:any)=>{
-        debugger;
-        console.log(data);
-       
-      }),
-      catchError((err) =>{
-        throw "detaille error: " + err.name;
-        console.log(err);
-      })
-    );*/
+
 
     //CREAR TARJETA
     /*this.cardData= {
