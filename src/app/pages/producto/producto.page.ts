@@ -12,6 +12,7 @@ import { CarritoService } from '../../services/carrito.service';
   styleUrls: ['./producto.page.scss'],
 })
 export class ProductoPage implements OnInit {
+  carrito = [];
   items = [];
   id:any;
   idNegocio:any;
@@ -55,13 +56,16 @@ export class ProductoPage implements OnInit {
     }
     //edita
     else{
+
  
+      this.carrito = this._carrito.items;
+      console.log(this.carrito);
       this.editar = true;
       console.log("id del producto a editar " + this.id);
       this.producto =  this._carrito.getItem(this.id);
-      console.log(this.producto);
+      console.log(this._carrito.getItem(this.id));
       this.cantidad = this.producto['cantidadCarrito'];
-
+      console.log(this.producto['cantidadCarrito']);
     }
 
     if(this.cantidad == 1){

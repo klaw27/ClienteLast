@@ -44,12 +44,24 @@ export class CarritoService {
   }
 
   getItem(id){
-    let item = this.items.map((data,indice)=>{
-      if(data['id_producto']==id){
-        return indice;
+
+    let indicex;
+    console.log("get item");
+    console.log(this.items);
+
+      let item = this.items.map((data,indice)=>{
+      if(data.id_producto == id){
+        //
+        console.log("se encontro producto"); 
+        console.log(indice);
+        indicex = indice;
+         return indice;
       }
     });
-    return this.items[item[0]];
+     // return this.items[item[0]];
+     this.guardar_productos();
+     return this.items[item[indicex]];
+ 
   }
 
   
@@ -59,7 +71,7 @@ export class CarritoService {
       
     //actualizar
     let item = this.items.map((data,indice)=>{
-      if(data['id_producto']==id){
+      if(data.id_producto == id){
         this.items[indice] = newData;
       }
     });
@@ -69,7 +81,7 @@ export class CarritoService {
 
   eliminarItem(id){
     let item = this.items.map((data,indice)=>{
-      if(data['id_producto']==id){
+      if(data.id_producto == id){
         this.items.splice(indice,1);
       }
     });

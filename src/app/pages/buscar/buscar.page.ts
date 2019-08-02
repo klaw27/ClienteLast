@@ -183,24 +183,40 @@ export class BuscarPage implements OnInit {
       this.items = JSON.parse( localStorage.getItem('productos') );
       this.idNegocio = JSON.parse( localStorage.getItem('idNegocio') );
     }
-    
-    let x = this.items.map((data,indice)=>{
-      if(data['id_producto']==id){
-        return indice;
+
+  
+    let indicex;
+    console.log("get item");
+    console.log(this.items);
+
+      let item = this.items.map((data,indice)=>{
+      if(data.id_producto == id){
+        //
+        console.log("se encontro producto"); 
+        ///this.alertEditar();
+        console.log(indice);
+        indicex = indice;
+         //return indice;
       }
     });
+     // return this.items[item[0]];
+     //return this.items[item[indicex]];
     
-    
-    if(x>= [0]){    
+     if(indicex >=0){
       console.log("el producto ya existe en carrito")
-      this.alertEditar();
-      this.navCtrl.navigateForward('/producto/'+id+"/editar"+"/"+this.id);
-    }else{
+        this.alertEditar();
+        this.navCtrl.navigateForward('/producto/'+id+"/editar"+"/"+this.id);
+        return this.items[item[indicex]];
+     }else {
       console.log("No existe en carrito");
       this.navCtrl.navigateForward('/producto/'+id+"/agregar"+"/"+this.id);
-    }
-    
+     }
+
+
       }
+
+
+
 
   menu(id) {
     this.navCtrl.navigateForward('/local-menu/' + id);

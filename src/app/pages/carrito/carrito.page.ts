@@ -37,12 +37,17 @@ export class CarritoPage  {
     private activatedRoute: ActivatedRoute,
     private geolocation: Geolocation,
     public alertController: AlertController,
-    private AfDb: AngularFireDatabase) { }
+    private AfDb: AngularFireDatabase) { 
+
+    }
 
   ionViewWillEnter() {
+    
     this.carrito = this._carrito.items;
+    console.log ("productos del carrito: ");
+    console.log (this.carrito);
     this.ubicacionActual();
-   
+ 
 
   }
 
@@ -134,7 +139,6 @@ export class CarritoPage  {
   }
 
   editarProducto(id){
-
     this.navCtrl.navigateForward('/producto/'+id+"/editar/"+this.idNegocio);
   }
 

@@ -48,7 +48,7 @@ export class RepartidorPage {
     private AfDb: AngularFireDatabase) { }
 
     ionViewWillEnter() {
-      this.carrito = this._carrito.items;
+      //this.carrito = this._carrito.items;
       this.ubicacionActual();
     }
 
@@ -338,6 +338,7 @@ export class RepartidorPage {
 
   
 goCarrito(){
+
   this.navCtrl.navigateForward('/carrito');
 }
 
