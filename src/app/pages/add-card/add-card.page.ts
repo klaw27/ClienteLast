@@ -3,10 +3,18 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { NavController, AlertController, ToastController  } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
+import { catchError, map, tap } from 'rxjs/operators';
+
 
 declare var OpenPay: any;
+
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':'application/json'
+  })
+};
 
 
 @Component({
@@ -33,10 +41,11 @@ export class AddCardPage implements OnInit {
 
  
 //class
-
+ clienteOpen:any ='';
+ customerOpenid:any ='';
   clientName:any ='';
   clientEmail:any ='';
-  customerData= {  }
+  Customer= {  }
   cardData= {  }
   cliente:any="";
   deviceSessionId:any="";
@@ -75,12 +84,13 @@ export class AddCardPage implements OnInit {
 
      
   ngOnInit() {
-
+    this.customerOpenid = {...JSON.parse(localStorage.getItem('userOpen'))};
     this.usuario = {...JSON.parse(localStorage.getItem('user'))};
     this.clientName = this.usuario['nombre'];
     this.clientEmail= this.usuario['email'];
-    console.log(this.clientEmail + " " + this.clientName);
- 
+    console.log(this.clientEmail + " " + this.clientName + " id de openpay: ");
+    console.log(this.customerOpenid);
+    console.log( this.customerOpenid.id);
     //datos de openpay
     OpenPay.setId('mwvt7x3ehfnlgluepwng');
     OpenPay.setApiKey('pk_1a559d9438714db7b1b88ae6b5756358');
@@ -96,7 +106,7 @@ export class AddCardPage implements OnInit {
 
   iniciar(){   
 let account = false; 
-   this.customerData= {
+this.Customer= {
       name: this.clientName,
       email: this.clientEmail,
       requires_account: account
@@ -111,73 +121,59 @@ let account = false;
       this.token_id= response.data.id;
       console.log(response);
       console.log(this.token_id + " se enviara formulario " + "Cliente: " + this.clientName + "Email: " + this.clientEmail);
-      console.log(this.customerData);
+      console.log(this.Customer);
      // this.presentarToast("La tarjeta se agrego correctamente");
-
        this.postDatos();
-
     }, (response)=>{
       //error en el formulario
       var desc = response.data.description != undefined ? response.data.description : response.message;
       this.presentarToast("ERROR [" + response.status + "] " + desc);
-     // alert("ERROR [" + response.status + "] " + desc);
       console.log("ERROR [" + response.status + "] " + desc);
       console.log("El boton se bloquea");
     });
   }
 
 
-  async presentarToast(mensaje) {
-    const toast = await this.toastCtrl.create({
-      message: mensaje,
-      position: 'bottom',
-      duration: 2000
-    });
-    toast.present();
-  }
-
   postDatos(){
-  
     var headers = new HttpHeaders();
     headers.append('Access-Control-Allow-Origin' , '*');
     headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
     headers.append('Accept','application/json');
     headers.append('content-type','application/json');
-   
-        
-    //CREAR CLIENTE
-    this.http.post("http://localhost/api/Openpay/save_customer_card.php",JSON.stringify(this.customerData),{ headers:headers}).subscribe(
-     data => {
-      console.log("Cliente Creado");
-      console.log(data['cliente']);
-     }, error => {
-      console.log(error);
-    }); 
-
-
 
     //CREAR TARJETA
-    /*this.cardData= {
+    this.cardData= {
+      id: this.customerOpenid.id,
       token_id: this.token_id,
       device_session_id: this.deviceSessionId
     }
 
-    return this.http.post("http://localhost/api/Openpay/save_card.php",JSON.stringify(this.cardData),{ headers:headers}).subscribe(
+
+   return this.http.post("http://localhost/api/Openpay/save_card.php",JSON.stringify(this.cardData),{headers:headers}).subscribe(
       data => {
           console.log("Tarjeta agregada al cliente");
           console.log(data);
+          this.saveData();
         }, 
      error => {
       console.log(error);
-    }); */
-    
+    }); 
+}
 
+
+async presentarToast(mensaje) {
+  const toast = await this.toastCtrl.create({
+    message: mensaje,
+    position: 'bottom',
+    duration: 2000
+  });
+  toast.present();
 }
 
 
 
   saveData(){
-    console.log(JSON.stringify(this.myForm.value));
+    //console.log(JSON.stringify(this.myForm.value));
     this.addCard();
     this.router.navigateByUrl(`/tarjetas`);
 

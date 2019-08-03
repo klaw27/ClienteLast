@@ -3,6 +3,16 @@ import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { EstoreService } from '../../services/estore.service';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
+declare var OpenPay: any;
+
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':'application/json'
+  })
+};
 
 @Component({
   selector: 'app-registro',
@@ -10,7 +20,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements OnInit {
-
+  clienteOpen:any ='';
+  Customer= {  };
   nombre:string = '';
   numero:string = '';
   correo:string = '';
@@ -23,11 +34,13 @@ export class RegistroPage implements OnInit {
   passType = 'password';
   icono2 = "eye";
   passType2 = 'password';
+  deviceSessionId:any="";
 
   constructor(public toastController: ToastController,
     public estore: EstoreService,
     private router : Router,
-    public alertController: AlertController) { }
+    public alertController: AlertController,
+    public http: HttpClient) { }
 
   ngOnInit() {
   }
@@ -41,6 +54,15 @@ export class RegistroPage implements OnInit {
       this.icono2 = this.icono2 == 'eye' ? 'eye-off' : 'eye';
       this.passType2 = this.passType2 == 'password' ? 'text' : 'password';
     }
+
+ 
+    //datos de openpay
+    OpenPay.setId('mwvt7x3ehfnlgluepwng');
+    OpenPay.setApiKey('pk_1a559d9438714db7b1b88ae6b5756358');
+   //para sistema antifraude
+   this.deviceSessionId = OpenPay.deviceData.setup();
+    console.log(this.deviceSessionId);
+    OpenPay.setSandboxMode(true);
     
   }
 
@@ -136,6 +158,8 @@ export class RegistroPage implements OnInit {
         }
         else {
           localStorage.setItem('user',JSON.stringify(data['user']));
+          //registrar cliente en OpenPay
+          this.addCustomerOpen();
           this.router.navigateByUrl(`/dashboard`);
         }
       });
@@ -146,5 +170,28 @@ export class RegistroPage implements OnInit {
     }
     
   }
+
+  addCustomerOpen(){
+    let account = false; 
+    this.Customer= {
+      name: this.nombre,
+      email: this.correo,
+      requires_account: account
+    }
+
+    let customer =  JSON.stringify(this.Customer);
+    //CREAR CLIENTE
+        this.http.post("https://localhost:5010/api/customer/add",customer,httpOptions).subscribe((response) => {
+          console.log("Cliente Nuevo");
+          this.clienteOpen = response;
+          console.log(this.clienteOpen.id);
+          localStorage.setItem('userOpen',JSON.stringify(this.clienteOpen));
+
+        }, 
+        error => {
+         console.log(error);
+       });
+      }
+  
 
 }
