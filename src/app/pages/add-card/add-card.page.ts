@@ -104,7 +104,7 @@ export class AddCardPage implements OnInit {
 }
 
 
-  iniciar(){   
+iniciar(){   
 let account = false; 
 this.Customer= {
       name: this.clientName,
@@ -149,11 +149,12 @@ this.Customer= {
     }
 
 
-   return this.http.post("http://localhost/api/Openpay/save_card.php",JSON.stringify(this.cardData),{headers:headers}).subscribe(
-      data => {
+   //return this.http.post("http://localhost/api/Openpay/save_card.php",JSON.stringify(this.cardData),{headers:headers}).subscribe(
+    return this.http.post("https://localhost:5010/api/card/add",JSON.stringify(this.cardData),httpOptions).subscribe(
+       data => {
           console.log("Tarjeta agregada al cliente");
           console.log(data);
-          this.saveData();
+          this.addCard();
         }, 
      error => {
       console.log(error);
@@ -171,19 +172,18 @@ async presentarToast(mensaje) {
 }
 
 
-
-  saveData(){
-    //console.log(JSON.stringify(this.myForm.value));
-    this.addCard();
-    this.router.navigateByUrl(`/tarjetas`);
-
-  }
-
   async addCard() {
     const alert = await this.alertController.create({
-      header: 'Confirmación',
+      header: 'Operacion exitosa',
       message: '¡La tarjeta se guardó correctamente!',
-     buttons: ['Aceptar']
+     buttons: [
+      {
+        text: 'Aceptar',
+        handler: data => {
+          this.router.navigateByUrl(`/tarjetas`);
+        }
+      }
+    ]
     });
 
     await alert.present();

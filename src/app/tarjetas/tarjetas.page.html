@@ -15,15 +15,25 @@
     <img src="/assets/img/EstoCuadro.png" alt="logo estor" class='logoPrinipal'>
     <h3>Mis tarjetas registradas</h3>
     <ion-list >
-      <ion-item *ngFor="let item of items">
+      <ion-item *ngFor="let tarjeta of tarjetas" id="{{tarjeta.id}}">
           <ion-thumbnail slot="start" class="thumbnail">
               <img src="/assets/img/card.jpg"  class="card">
           </ion-thumbnail>
         <ion-label>
-            <h6 class=tituloLocal>{{item.numero}}</h6>
-            <p>Estatus: {{item.estatus}}</p>
-            <p>Expira: {{item.expira}} </p>
-        </ion-label><ion-icon name ="trash" slot = "end" (click)= "deleteCard()"></ion-icon>
+            <h6 class=tituloLocal>{{tarjeta.card_number}}</h6>
+            <p>{{tarjeta.brand}}</p>
+            <p>Expira: {{tarjeta.expiration_month}}/{{tarjeta.expiration_year}}</p>
+        </ion-label>
+        <!--<ion-input type="text" [(ngModel)]='id_card'>{{tarjeta.id}}</ion-input>-->
+        <ion-icon name ="trash" slot = "end" (click)= "deleteCardConfirm(tarjeta.id)"></ion-icon>
       </ion-item>
     </ion-list>
+
+    <div class="nada principal" *ngIf="tarjetas.length ==0">
+ 
+      <ion-label class="tituloVacio">
+        Aún no tienes tarjetas registradas
+      </ion-label>
+
+  </div>
 </ion-content>
