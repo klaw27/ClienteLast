@@ -70,15 +70,26 @@
               </div>
               <ion-item class="metPago">
                 <ion-label>Metodo de Pago</ion-label>
-                <ion-select value="efectivo" [(ngModel)]="metPago">
+                <!--<ion-select value="efectivo" [(ngModel)]="metPago" (ionChange)="mostrarTarjetas($event)">-->
+                <ion-select value="efectivo" [(ngModel)]="metPago" (ionChange)="getMetPago()">
                   <ion-select-option selected value="efectivo">Efectivo</ion-select-option>
                   <ion-select-option value="tarjeta">Terminal</ion-select-option>                  
-                  <ion-select-option value="Pago en linea">Pago en linea</ion-select-option>
+                  <ion-select-option value="Pagolinea">Pago en linea</ion-select-option>
                 </ion-select>
               </ion-item>
+
+              <div class="cards" *ngIf="flagCard === 1">
+              <ion-item class="customerCards"  >
+                  <ion-label>Tarjetas registradas</ion-label>
+                <ion-select value="cardsList" [(ngModel)]="tarjetaSelect" (ionChange)="getCardSelect()" >
+                  <ion-select-option *ngFor="let tarjeta of tarjetas" selected value="{{tarjeta.id}}">{{tarjeta.card_number}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              </div>
+
           </ion-card-content>
         </ion-card>
-        <ion-button expand="full" (click)="pedido()">Confirmar Pedido</ion-button>
+        <ion-button expand="full" (click)="realizarPago()">Confirmar Pedido</ion-button>
   </div>
 
   <div class="nada principal" *ngIf="carrito.length == 0">

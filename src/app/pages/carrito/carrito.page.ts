@@ -7,8 +7,17 @@ import { LoadingPage } from '../loading/loading.page';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { EstoreService } from '../../services/estore.service';
 import { ActivatedRoute } from '@angular/router';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 declare var google;
+declare var OpenPay: any;
+
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':'application/json'
+  })
+};
 
 @Component({
   selector: 'app-carrito',
@@ -25,9 +34,15 @@ export class CarritoPage  {
   coordenadas={};
   calle = "";
   calleSecundario = "";
-  metPago="efectivo";
+  metPago="";
   idEliminar:any;
-
+  flagCard:any;
+  customerOpenid:any ='';
+  tarjetas: any;
+  customerCargo:any ='';
+  ChargeRequest:any ='';
+  tarjetaSelect:any ='';
+  deviceSessionId:any="";
 
   constructor(public menu: MenuController,
     public navCtrl: NavController,
@@ -37,7 +52,8 @@ export class CarritoPage  {
     private activatedRoute: ActivatedRoute,
     private geolocation: Geolocation,
     public alertController: AlertController,
-    private AfDb: AngularFireDatabase) { 
+    private AfDb: AngularFireDatabase,
+    public http: HttpClient) { 
 
     }
 
@@ -47,7 +63,9 @@ export class CarritoPage  {
     console.log ("productos del carrito: ");
     console.log (this.carrito);
     this.ubicacionActual();
- 
+    this.deviceSessionId = OpenPay.deviceData.setup();
+   console.log(this.deviceSessionId);
+    //this.mostrarTarjetas();
 
   }
 
@@ -133,6 +151,38 @@ export class CarritoPage  {
 
   }
 
+  
+  getMetPago(){
+
+    console.log(this.metPago);
+    if (this.metPago == "Pagolinea"){
+      this.flagCard=1;
+      this.mostrarTarjetas();
+    }else{
+      this.flagCard=0;
+    }
+  }
+
+  getCardSelect(){
+    console.log(this.tarjetaSelect);
+      }
+
+  mostrarTarjetas() {
+    //Obtener tarjetas con id de cliente
+    this.customerOpenid = {...JSON.parse(localStorage.getItem('userOpen'))};
+    let customer_id =  JSON.stringify(this.customerOpenid.id);
+    console.log(this.customerOpenid.id);
+    return this.http.post("https://localhost:5010/api/card/get",customer_id,httpOptions).subscribe(
+      data => {
+         console.log("Tarjetas guardadas del cliente");
+         this.tarjetas = data;
+         console.log(this.tarjetas);
+       }, 
+    error => {
+     console.log(error);
+   }); 
+
+  }
 
   toogleMenu(){
     this.menu.toggle();
@@ -165,8 +215,46 @@ export class CarritoPage  {
 
   }
 
-  async pedido(){
+  realizarPago(){
+    console.log(this.metPago);
+    if (this.metPago == "Pagolinea"){
+      this.flagCard=1;
+      this.AddCargo();
+    }else{
+      this.flagCard=0;
+      this.pedido();
+    }
+  }
 
+
+  
+  async AddCargo(){
+    //let customer_id =  JSON.stringify(this.customerCargo.id);
+    console.log(this.customerCargo);
+    this.ChargeRequest={
+      Method: "card",
+      SourceId: this.tarjetaSelect,
+      Amount:this.total,
+      Description: "Pago de servicio - ElEstore",
+      DeviceSessionId: this.deviceSessionId,
+      CustomerId: this.customerOpenid.id
+    }
+    console.log(this.ChargeRequest);
+
+    return this.http.post("https://localhost:5010/api/charge/add",JSON.stringify(this.ChargeRequest),httpOptions).subscribe(
+      data => {
+         console.log("Pago realizado con exito");
+         //this.tarjetas = data;
+         console.log(data);
+       }, 
+    error => {
+     console.log(error);
+   }); 
+
+  }
+
+
+  async pedido(){
     
    console.log(this._carrito);
     let usuario = {...JSON.parse(localStorage.getItem('user'))};
@@ -199,6 +287,7 @@ export class CarritoPage  {
     await modal.present();
   }
 
+  
   async presentModal() {
     const modal = await this.modalController.create({
       component: ClienteUbicPage,
