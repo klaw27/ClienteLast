@@ -3,6 +3,7 @@ import { AlertController, NavController } from '@ionic/angular';
 import { EstoreService } from '../../services/estore.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-buscar',
@@ -12,6 +13,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 export class BuscarPage implements OnInit {
  itemsflag: [];
  itemsflagNeg: [];
+ fotografiaProd:any;
  // prod: [];
 
 
@@ -20,7 +22,8 @@ export class BuscarPage implements OnInit {
     nombre: '',
     descripcion: '',
     tiempopreparacion: '',
-    precio: ''
+    precio: '',
+    fotografia:""
   };
 
   itemsNeg:any = {
@@ -29,13 +32,9 @@ export class BuscarPage implements OnInit {
     callenumero: '',
     colonia: '',
     horaapertura: '',
-    horacierre: ''
+    horacierre: '',    
+    fotografia:""
   };
-
-  lista=[{id_producto:"",nombre:"Tortas",descripcion:"tortas.png",cantidad:"tortas.png",precio:"200"},
-  {id_producto:"",nombre:"Carnitas",descripcion:"tortas.png",cantidad:"tortas.png",precio:"200"},
-  {id_producto:"",nombre:"Tortas `Las tortugas`",descripcion:"tortas.png",cantidad:"tortas.png",precio:"200"},
-  {id_producto:"", nombre:"Cerveza",descripcion:"tortas.png",cantidad:"tortas.png",precio:"200"}];
 
   criterio :any;
   indexCount = 0;
@@ -48,7 +47,8 @@ export class BuscarPage implements OnInit {
     nombre: '',
     descripcion: '',
     tiempopreparacion: '',
-    precio: ''
+    precio: '',    
+    fotografia:''
   }];
   negocios:any = [{
     id_negocio:'',
@@ -56,14 +56,16 @@ export class BuscarPage implements OnInit {
     callenumero: '',
     colonia: '',
     horaapertura: '',
-    horacierre: ''
+    horacierre: '',    
+    fotografia:''
   }];
 
 
   constructor(public alertCtrl: AlertController,public estore : EstoreService,
     private activatedRoute: ActivatedRoute,public navCtrl: NavController,
     public alertController: AlertController,
-    public http: HttpClient) { 
+    public http: HttpClient,
+    private _sanitizer: DomSanitizer) { 
       //this.ionViewDidLoad();
      // this.iniBusqueda();
       }
@@ -76,6 +78,13 @@ export class BuscarPage implements OnInit {
     this.itemsNeg = this.negocios;
     this.itemsflag = this.productos;
     this.itemsflagNeg = this.negocios;
+    
+    console.log (this.items.id_producto);
+    //console.log("Base64 Image: ",imageData);
+   // this.fotografiaProd = this._sanitizer.bypassSecurityTrustUrl("data:Image/*;base64,"+imageData);
+   // this.fotografiaProd = this._sanitizer.bypassSecurityTrustResourceUrl(this.items.fotografia);
+   
+   // this.fotografiaProd = this._sanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64,"+this.items.fotografia);
 }
 
   ngOnInit() {  
@@ -118,21 +127,6 @@ export class BuscarPage implements OnInit {
            }, error => {
             console.log(error);
           });
-
-      /*  console.log(this.productos);
-        this.id = "0";
-        let body = {
-          id: this.id,
-          funcion: "p"
-        };
-        console.log(body);
-        this.estore.productos(body, "dashbusqueda.php").subscribe(data=>{
-          console.log(data);
-          if(data['success']){
-            this.productos = data['productos'];
-            console.log(this.productos);
-          }
-        });*/
   }
 
  buscarEstore(event){
@@ -143,10 +137,9 @@ export class BuscarPage implements OnInit {
     if(this.criterio && this.criterio.trim() != ""){
       this.iniBusqueda();
       console.log(this.items);     
-
+  
       this.items = this.items.filter((item) =>{
         return (item.nombre.toLowerCase().indexOf(this.criterio.toLowerCase()) >-1);  
-        console.log(this.items); 
       })
 
       if(this.items.length === 0){
@@ -155,7 +148,6 @@ export class BuscarPage implements OnInit {
       
       this.itemsNeg = this.itemsNeg.filter((item) =>{
         return (item.nombre.toLowerCase().indexOf(this.criterio.toLowerCase()) >-1);  
-        console.log(this.itemsNeg); 
       })
 
       if(this.itemsNeg.length === 0){

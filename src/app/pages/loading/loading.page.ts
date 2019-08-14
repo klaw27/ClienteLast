@@ -8,20 +8,20 @@ import { ModalController } from '@ionic/angular';
 })
 export class LoadingPage implements OnInit {
 
-  contador = 60;
+  contador = 0;
   intervalo:any;
 
   constructor(public modalController: ModalController) { }
 
   ngOnInit() {
 
-    // this.intervalo = setInterval(()=>{
-    //   this.contador = this.contador - 1;
-    //   if(this.contador <= 0){
-    //     clearInterval(this.intervalo);
-    //     this.modalController.dismiss();      
-    //   }
-    // },1000);
-          
+     this.intervalo = setInterval(()=>{
+      // this.contador = this.contador - 1;
+       if(this.contador <= 0){
+         clearInterval(this.intervalo);
+         this.modalController.dismiss();      
+       }
+     },5000);
+    
   }
 }

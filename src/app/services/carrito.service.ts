@@ -90,6 +90,13 @@ export class CarritoService {
 
   }
 
+  
+  deteleCarrito(){ 
+        this.items = [];
+        this.guardar_productos();
+
+  }
+
   guardar_productos(){
     localStorage.setItem('productos', JSON.stringify(this.items));
   }

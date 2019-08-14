@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef,ViewChild  } from '@angular/core';
 import { MenuController, NavController, ModalController, AlertController } from '@ionic/angular';
 import { CarritoService } from '../../services/carrito.service';
 import { ClienteUbicPage } from '../cliente-ubic/cliente-ubic.page';
@@ -6,8 +6,11 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingPage } from '../loading/loading.page';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { EstoreService } from '../../services/estore.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { LoadingController} from "@ionic/angular";
+import { SPINNERS } from '@ionic/core/dist/types/components/spinner/spinner-configs';
+import {IonSelect} from "@ionic/angular";
 
 declare var google;
 declare var OpenPay: any;
@@ -19,12 +22,18 @@ const httpOptions = {
   })
 };
 
+
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.page.html',
   styleUrls: ['./carrito.page.scss']
+  
 })
+
+
 export class CarritoPage  {
+  
+  @ViewChild('mySelect') selectRef: IonSelect;
 
   carrito = [];
   idNegocio: any;
@@ -42,6 +51,7 @@ export class CarritoPage  {
   customerCargo:any ='';
   ChargeRequest:any ='';
   tarjetaSelect:any ='';
+  cardCobro:any ='';
   deviceSessionId:any="";
 
   constructor(public menu: MenuController,
@@ -53,7 +63,8 @@ export class CarritoPage  {
     private geolocation: Geolocation,
     public alertController: AlertController,
     private AfDb: AngularFireDatabase,
-    public http: HttpClient) { 
+    public http: HttpClient,
+    private loadingCtrl:LoadingController,private router : Router) { 
 
     }
 
@@ -163,9 +174,7 @@ export class CarritoPage  {
     }
   }
 
-  getCardSelect(){
-    console.log(this.tarjetaSelect);
-      }
+
 
   mostrarTarjetas() {
     //Obtener tarjetas con id de cliente
@@ -226,9 +235,85 @@ export class CarritoPage  {
     }
   }
 
+  async RealizandoCobro() {
+    if (this.metPago == "Pagolinea"){
+      this.getCardSelect();
+      if(this.cardCobro != ""){
+        let loading = await this.loadingCtrl.create({
+          message:"Tu pago se esta procesando...",
+          duration:5000,
+          showBackdrop:false,
+          spinner: "lines"
+        });
+          loading.present();  
+          setTimeout(()=>{
+            loading.dismiss();
+            this.AddCargo();
+          },5000)
+      }else{
+          this.validationCard();
+      }  
+    }else {
+        this.flagCard=0;
+        this.pedido();
+    }
+  }
 
+  async PedidoProcesado() {
+          let loading = await this.loadingCtrl.create({
+          message:"Guardando Pedido...",
+          duration:3000,
+          showBackdrop:false,
+          spinner: "lines"
+        });
+          loading.present();  
+          setTimeout(()=>{
+            loading.dismiss();
+            this.alertPedidoSave(); 
+          },3000)
+  }
+
+
+  getCardSelect(){
+    // console.log("tarjeta seleccionada: " + this.tarjetaSelect);
+      if (this.tarjetaSelect != "" && this.tarjetaSelect != null  ){
+       this.cardCobro= this.tarjetaSelect;
+       console.log("tarjeta seleccionada: " + this.tarjetaSelect);
+     }else{
+       console.log("no se selecciono ninguna tarjeta")
+       this.cardCobro="";
+     }
+     }
+
+  async validationCard() {
+    this.getCardSelect();
+    const alert = await this.alertController.create({
+      header: 'Informacion',
+      message: 'Para continuar debe seleccionar o agregar una tarjeta ',
+      buttons: [
+        {
+          text: 'Agregar nueva tarjeta',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('agregar');
+           this.navCtrl.navigateForward("/add-card");
+          }
+        },
+        {
+          text: 'Seleccionar Tarjeta',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('seleccionar');
+            this.selectRef.open();
+          }
+        },
+      ]
+    });
+
+    await alert.present();
+  }
   
-  async AddCargo(){
+  AddCargo(){
     //let customer_id =  JSON.stringify(this.customerCargo.id);
     console.log(this.customerCargo);
     this.ChargeRequest={
@@ -244,8 +329,8 @@ export class CarritoPage  {
     return this.http.post("https://localhost:5010/api/charge/add",JSON.stringify(this.ChargeRequest),httpOptions).subscribe(
       data => {
          console.log("Pago realizado con exito");
-         //this.tarjetas = data;
          console.log(data);
+         this.pedido();
        }, 
     error => {
      console.log(error);
@@ -279,22 +364,29 @@ export class CarritoPage  {
     }
     console.log(body);
     this.AfDb.database.ref("pedidos/"+this._carrito.idNegocio+"/"+hora).set(body);
-    const modal = await this.modalController.create({
+   /* const modal = await this.modalController.create({
       component: LoadingPage,
       cssClass: "loading",
       backdropDismiss: false,
-    });
-    await modal.present();
+    });*/
+      
+
+    this.PedidoProcesado();
+      //await modal.present();  
+ 
+    //this.navCtrl.navigateForward("/dashboard");
+    
   }
 
   
   async presentModal() {
     const modal = await this.modalController.create({
       component: ClienteUbicPage,
-      cssClass: "ubicacion"
+      cssClass: "ubicacion",
     });
     await modal.present();
-    const data = await modal.onDidDismiss();
+   // duration:5000
+    const data = await modal.onDidDismiss();         
     console.log(data);
     if(data.data['ubicacion']){
       this.coordenadas['lat'] = data.data['body']['lat'];
@@ -304,8 +396,10 @@ export class CarritoPage  {
       this.callDistancia();
       this.loadMapa();
     }
+
   }
-  
+
+
   eliminar(id){
     console.log(id);
     this.idEliminar = id;
@@ -313,6 +407,36 @@ export class CarritoPage  {
   //this.navCtrl.pop();
   }
 
+  async alertPedidoSave() {
+    this._carrito.deteleCarrito();
+    this.carrito  =  this._carrito.items;  
+    this.navCtrl.navigateForward("/dashboard");
+    const alert = await this.alertController.create({
+      header: 'Operacion Exitosa',
+      message: 'Hemos recibido tu pedido y sera entregado lo antes posible. ¡Gracias por confiar en ElEstore!',
+      buttons: [
+        {
+          text: 'Ver pedido',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm aceptar');
+           // this.navCtrl.navigateForward("/pedidos"+ "13");
+            
+        this.router.navigateByUrl(`/pedidos/` + "13");
+             }
+        },{
+          text: 'Cancelar',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          this.navCtrl.navigateForward("/dashboard");
+          }
+        },
+      ]
+    });
+
+    await alert.present();
+  }
     
   async alertEliminar() {
     const alert = await this.alertController.create({

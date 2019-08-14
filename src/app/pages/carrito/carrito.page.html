@@ -80,16 +80,17 @@
 
               <div class="cards" *ngIf="flagCard === 1">
               <ion-item class="customerCards"  >
-                  <ion-label>Tarjetas registradas</ion-label>
-                <ion-select value="cardsList" [(ngModel)]="tarjetaSelect" (ionChange)="getCardSelect()" >
-                  <ion-select-option *ngFor="let tarjeta of tarjetas" selected value="{{tarjeta.id}}">{{tarjeta.card_number}}</ion-select-option>
+                  <ion-label>Tarjetas Registradas</ion-label>
+               <!-- <ion-select value="cardsList" [(ngModel)]="tarjetaSelect" (ionChange)="getCardSelect()" >-->
+                    <ion-select  #mySelect value="cardsList" [(ngModel)]="tarjetaSelect" (ionChange)="getCardSelect()" >
+                  <ion-select-option *ngFor="let tarjeta of tarjetas" value="{{tarjeta.id}}">{{tarjeta.card_number}}</ion-select-option>
                 </ion-select>
               </ion-item>
               </div>
 
           </ion-card-content>
         </ion-card>
-        <ion-button expand="full" (click)="realizarPago()">Confirmar Pedido</ion-button>
+        <ion-button expand="full" (click)="RealizandoCobro()">Confirmar Pedido</ion-button>
   </div>
 
   <div class="nada principal" *ngIf="carrito.length == 0">

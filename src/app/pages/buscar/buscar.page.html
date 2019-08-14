@@ -19,7 +19,8 @@
   </div>
 		<ion-item *ngFor="let item of items" (click)='agregarProducto(item.id_producto)'>
     <ion-thumbnail slot="start" class="thumbnail">
-          <img src="test.jpg" onError= "this.src='/assets/img/default_productos.png'">
+          <img  [src]="fotografiaProd"  onError= "this.src='/assets/img/default_productos.png'">
+          <!--<img src="test.jpg" [src]="fotografiaProd"  onError= "this.src='/assets/img/default_productos.png'">-->
       </ion-thumbnail>
       <div class="contenidoPlatillo">
       <ion-label>
