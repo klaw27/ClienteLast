@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer } from '@angular/core';
 import { EstoreService } from 'src/app/services/estore.service';
 import { Router } from '@angular/router';
-import { ToastController, NavController } from '@ionic/angular';
+import { ToastController, NavController, AlertController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
@@ -17,11 +17,13 @@ export class SoportePage implements OnInit {
   correo:any = '';
   consulta:any = '';
   telefono:any = '';
+  email:any = '';
 
   constructor( public estore: EstoreService,
     private router : Router,
     public toastController: ToastController,
     private emailComposer: EmailComposer,
+    public alertController: AlertController,
     private renderer: Renderer,public navCtrl: NavController) { }
 
   ngOnInit() {
@@ -44,31 +46,15 @@ export class SoportePage implements OnInit {
       this.presentToast('Formato de correo invalido');
     } //SI SE CAPTURO TODA LA INFORMACION REALIZA EL LOGIN
     else{
-      let body= {
+      this.email= {
         nombre: this.nombre,
         correo: this.correo,
         consulta: this.consulta,
         telefono: this.telefono
             } 
-      let email = {
-        to: 'klaw_moica7@hotmail.com',
-        subject: "Consulta de: " + this.correo,
-        body: "Nombre: "+ this.nombre + " Consulta: " + this.consulta,
-        isHtml: true
-      };
-      this.emailComposer.open(email);
+      console.log(this.email);
 
-      this.estore.soporte(body, 'soporte.php').subscribe((data)=>{
-        if(data['success'] != false){
-          localStorage.setItem('user',JSON.stringify(data['user']));
-          this.router.navigateByUrl(`/dashboard`);
-          
-        }
-        else{
-          this.presentToast(data['msg']);
-        }
-  
-      });
+      this.enviarCorreo();
       
     } 
   }
@@ -83,17 +69,15 @@ export class SoportePage implements OnInit {
   }
 
   enviarCorreo() {
-    let email = {
-      to: 'klaw_moica7@hotmail.com',
-      cc: 'ssss@dddddd.cc',
-      subject: 'Hola',
-      body: 'Que piensas?',
-      isHtml: true
-    };
-
-    this.emailComposer.open(email);
+    this.estore.soporte(this.email,'soporte.php').subscribe(data => {
+        this.alertEmailSend();  
+       }, 
+    error => {
+     console.log(error);
+   });
   }
 
+  
   
   goCarrito(){
     this.navCtrl.navigateForward('/carrito');
@@ -101,6 +85,25 @@ export class SoportePage implements OnInit {
   
   goBuscar(){
     this.navCtrl.navigateForward("/buscar");
+  }
+
+  async alertEmailSend() {
+    const alert = await this.alertController.create({
+      header: 'Operacion Exitosa',
+      message: 'Hemos recibido tu consulta, te contactaremos lo antes posible. ¡Gracias por confiar en ElEstore!',
+      buttons: [
+        {
+          text: 'Aceptar',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm aceptar');
+            this.navCtrl.navigateForward("/dashboard");
+             }
+        },
+      ]
+    });
+
+    await alert.present();
   }
 
 }

@@ -59,7 +59,7 @@ export class EstoreService {
 
 
   soporte(body,file){
-    return this.http.post(this.server+file,JSON.stringify(body));    
+    return this.http.post("http://localhost/api/"+file,JSON.stringify(body));    
   }
 
   obtenerDatos(){
