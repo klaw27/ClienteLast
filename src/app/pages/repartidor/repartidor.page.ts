@@ -1,14 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuController, NavController, ModalController, AlertController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MenuController, NavController, ModalController, AlertController, ToastController, LoadingController } from '@ionic/angular';
 import { CarritoService } from '../../services/carrito.service';
 import { ClienteUbicPage } from '../cliente-ubic/cliente-ubic.page';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingPage } from '../loading/loading.page';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { EstoreService } from '../../services/estore.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import {IonSelect} from "@ionic/angular";
 
 declare var google;
+declare var OpenPay: any;
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':'application/json'
+  })
+};
 
 @Component({
   selector: 'app-repartidor',
@@ -16,6 +25,7 @@ declare var google;
   styleUrls: ['./repartidor.page.scss'],
 })
 export class RepartidorPage {
+  @ViewChild('mySelect') selectRef: IonSelect;
 
   carrito = [];
   idNegocio: any;
@@ -36,6 +46,35 @@ export class RepartidorPage {
   Nokmextra=0;
   envio3km=0;
   envioTotal=0;
+  clientName:any ='';
+  clientTel:any ='';
+  usuario:any = {
+    nombre : undefined,
+    email :undefined, 
+    razonSocial : undefined,
+    formaPago : undefined, 
+    telefono : undefined,
+    apellidoMat : undefined,
+    apellidoPat: undefined,
+    calle: undefined,
+    colonia: undefined,
+    numeroCalle: undefined,
+    fotografia: undefined
+  };
+  dest_nombre:any ='';
+  dest_tel:any ='';
+  instrucciones:any ='';
+  tarjetaSelect:any ='';
+  cardCobro:any ='';
+  customerOpenid:any ='';
+  tarjetas: any;
+  flagCard:any;  
+  quienPaga:any;
+  flagMetodos:any;
+  deviceSessionId:any="";
+  customerCargo:any ='';
+  ChargeRequest:any ='';
+
 
   constructor(public menu: MenuController,
     public navCtrl: NavController,
@@ -45,11 +84,27 @@ export class RepartidorPage {
     private activatedRoute: ActivatedRoute,
     private geolocation: Geolocation,
     public alertCtrl: AlertController,
+    public toastController: ToastController,
+    public http: HttpClient,
+    private loadingCtrl:LoadingController,
+    private router : Router,
     private AfDb: AngularFireDatabase) { }
+
+
+    ngOnInit() {
+      this.usuario = {...JSON.parse(localStorage.getItem('user'))};
+      this.clientName = this.usuario['nombre'];
+      this.clientTel= this.usuario['telefono'];
+      console.log(this.usuario['nombre']);
+      console.log(this.usuario['telefono']);
+    }
 
     ionViewWillEnter() {
       //this.carrito = this._carrito.items;
       this.ubicacionActual();
+      this.deviceSessionId = OpenPay.deviceData.setup();
+     console.log(this.deviceSessionId);
+
     }
 
     callDistancia(){
@@ -153,10 +208,7 @@ export class RepartidorPage {
       this.menu.toggle();
     }
   
-    editarProducto(id){
-      this.navCtrl.navigateForward('/producto/'+id+"/editar/"+this.idNegocio);
-    }
-  
+    
     salir(){
       this.navCtrl.navigateBack('/dashboard');
     }
@@ -198,13 +250,7 @@ export class RepartidorPage {
       }
     }
     
-    eliminar(id){
-      console.log(id);
-    this._carrito.eliminarItem(id);
-    //this.navCtrl.pop();
-    }
-
-
+ 
     async Solicitar(){
         const alert = await this.alertCtrl.create({
           header: 'Confirmacion de Solicitud',
@@ -224,46 +270,233 @@ export class RepartidorPage {
     
     }
 
+    getCardSelect(){
+      // console.log("tarjeta seleccionada: " + this.tarjetaSelect);
+        if (this.tarjetaSelect != "" && this.tarjetaSelect != null  ){
+         this.cardCobro= this.tarjetaSelect;
+         console.log("tarjeta seleccionada: " + this.tarjetaSelect);
+       }else{
+         console.log("no se selecciono ninguna tarjeta")
+         this.cardCobro="";
+       }
+       }
 
-    async editarDestino(){
+    validarDestino(){
+      if(this.dest_nombre == '' && this.dest_tel == '' && this.instrucciones == ''&& this.envioTotal == 0) {
+        this.presentToast('Todos los campos son obligatorios');
+        }else if (this.dest_nombre == ''){
+        this.presentToast('Debe capturar el nombre del destino');
+        }else if (this.dest_tel == ''){
+          this.presentToast('Debe capturar el telefono del destino');
+        }else if (this.instrucciones == ''){
+          this.presentToast('Debe capturar las instrucciones del pedido');
+        }else if (this.envioTotal == 0){
+          this.presentToast('Debe capturar la direccion de destino');
+        }else{
+          this.RealizandoCobro();
+        }
+
+    }
+
+    getMetPago(){
+
+      console.log(this.metPago);
+      if (this.metPago == "Pagolinea"){
+        this.flagCard=1;
+        this.mostrarTarjetas();
+      }else{
+        this.flagCard=0;
+      }
+    }
+
+    async RealizandoCobro() {
+      if (this.metPago == "Pagolinea"){
+        this.getCardSelect();
+        if(this.cardCobro != ""){
+          let loading = await this.loadingCtrl.create({
+            message:"Tu pago se esta procesando...",
+            duration:5000,
+            showBackdrop:false,
+            spinner: "lines"
+          });
+            loading.present();  
+            setTimeout(()=>{
+              loading.dismiss();
+              this.AddCargo();
+            },5000)
+        }else{
+            this.validationCard();
+        }  
+      }else {
+          this.flagCard=0;
+          this.pedido();
+      }
+    }
+    
+    async pedido(){
+    
+     /* console.log(this._carrito);
+       let usuario = {...JSON.parse(localStorage.getItem('user'))};
+       console.log(usuario);
+       let hora = Date.now();
+       let body = {
+             hora: hora,
+             productos: this._carrito.items,
+             total: this.total,
+             envio: this.costEnvio,
+             subtotal: this.subTotal,
+             ubicacionCliente: this.coordenadas,
+             status: 1,
+             metPago: this.metPago,
+             cliente: {
+               id_cliente: usuario['id_cliente'],
+               apellidoPat: usuario['apellidoPat'],
+               apellidoMat: usuario['apellidoMat'],
+               nombre: usuario['nombre'],
+               telefono: usuario['telefono'],
+             }
+       }
+       console.log(body);
+       this.AfDb.database.ref("pedidos/"+this._carrito.idNegocio+"/"+hora).set(body);*/
+       this.PedidoProcesado();
+     }
+
+     async PedidoProcesado() {
+      let loading = await this.loadingCtrl.create({
+      message:"Solicitando Repartidor...",
+      duration:3000,
+      showBackdrop:false,
+      spinner: "lines"
+    });
+      loading.present();  
+      setTimeout(()=>{
+        loading.dismiss();
+        this.alertPedidoSave(); 
+      },3000)
+}
+
+async alertPedidoSave() {
+  this._carrito.deteleCarrito();
+  this.carrito  =  this._carrito.items;  
+  this.navCtrl.navigateForward("/dashboard");
+  const alert = await this.alertCtrl.create({
+    header: 'Operacion Exitosa',
+    message: 'Hemos recibido tu solicitud de reparto. ¡Gracias por confiar en ElEstore!',
+    buttons: [
+      {
+        text: 'Ver pedido',
+        cssClass: 'secondary',
+        handler: () => {
+          console.log('Confirm aceptar');
+         // this.navCtrl.navigateForward("/pedidos"+ "13");
+          
+      this.router.navigateByUrl(`/pedidos/` + "13");
+           }
+      },{
+        text: 'Cancelar',
+        cssClass: 'secondary',
+        handler: () => {
+          console.log('Confirm Cancel');
+        this.navCtrl.navigateForward("/dashboard");
+        }
+      },
+    ]
+  });
+
+  await alert.present();
+}
+
+    async validationCard() {
+      this.getCardSelect();
       const alert = await this.alertCtrl.create({
-        header: 'Editar Destino',
-        inputs: [
-          {
-            name: 'nomDes',
-            placeholder: '¿Quien Recibe?'
-            
-          },
-          {
-            name: 'telefono',
-            placeholder: 'Telefono'
-          }
-        ],
-        
+        header: 'Informacion',
+        message: 'Para continuar debe seleccionar o agregar una tarjeta ',
         buttons: [
           {
-            text: 'Cancelar',
-            role: 'cancel',
+            text: 'Agregar nueva tarjeta',
             cssClass: 'secondary',
-            handler: (data:string) => {
-              console.log('Confirm Cancel');
-              console.log('OK clicked. Data -> ' + data);
+            handler: () => {
+              console.log('agregar');
+             this.navCtrl.navigateForward("/add-card");
             }
-          }, {
-            text: 'Aceptar',
-            handler: data => {
-              console.log(JSON.stringify(data)); //to see the object
-              this.nomDestino = data.nomDes
-              this.telDestino = data.telefono
-              console.log(this.nomDestino);
-              console.log(this.telDestino);
+          },
+          {
+            text: 'Seleccionar Tarjeta',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('seleccionar');
+              this.selectRef.open();
             }
-          }
+          },
         ]
       });
-      await alert.present();
   
-  }
+      await alert.present();
+    }
+
+    AddCargo(){
+      //let customer_id =  JSON.stringify(this.customerCargo.id);
+      console.log(this.customerCargo);
+      this.ChargeRequest={
+        Method: "card",
+        SourceId: this.tarjetaSelect,
+        Amount:this.total,
+        Description: "Pago de servicio - ElEstore",
+        DeviceSessionId: this.deviceSessionId,
+        CustomerId: this.customerOpenid.id
+      }
+      console.log(this.ChargeRequest);
+  
+      return this.http.post("https://localhost:5010/api/charge/add",JSON.stringify(this.ChargeRequest),httpOptions).subscribe(
+        data => {
+           console.log("Pago realizado con exito");
+           console.log(data);
+           this.pedido();
+         }, 
+      error => {
+       console.log(error);
+     }); 
+  
+    }
+
+    pagoCliente(){
+
+      console.log(this.metPago);
+      if (this.quienPaga == "cliente"){
+        this.flagMetodos=1;
+       //this.mostrarTarjetas();
+      }else{
+        this.flagMetodos=0;
+      }
+    }
+
+    mostrarTarjetas() {
+      //Obtener tarjetas con id de cliente
+      this.customerOpenid = {...JSON.parse(localStorage.getItem('userOpen'))};
+      let customer_id =  JSON.stringify(this.customerOpenid.id);
+      console.log(this.customerOpenid.id);
+      return this.http.post("https://localhost:5010/api/card/get",customer_id,httpOptions).subscribe(
+        data => {
+           console.log("Tarjetas guardadas del cliente");
+           this.tarjetas = data;
+           console.log(this.tarjetas);
+         }, 
+      error => {
+       console.log(error);
+     }); 
+    }
+
+    async presentToast(mensaje:string) {
+      const toast = await this.toastController.create({
+        message: "Error: " + mensaje,
+        position: 'bottom',
+        duration: 2000
+      });
+      toast.present();
+    }
+  
+
+
 
   ubicacionDestino(){
     this.presentModal2();

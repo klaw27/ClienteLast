@@ -25,8 +25,8 @@
           <div class="dirOpcion">
             <ion-label class="calle" >
               <h6 class="titori">ORIGEN:</h6>
-              <h6 class="titCalle">Claudia Mojica</h6>
-              <h6 class="titCalle">4772636534</h6> 
+             <ion-input class="titdest" disabled  [(ngModel)]='usuario.nombre + " " + usuario.apellidoPat + " " +  usuario.apellidoMat'></ion-input> 
+             <ion-input class="titdest" disabled  [(ngModel)]='usuario.telefono'></ion-input> 
               <h6 class="titCalle">{{calle}}</h6>
               <p class="calleSec">{{calleSecundario}}</p>
             </ion-label> 
@@ -48,10 +48,15 @@
         <div class="ubicacion">
             <div class="dirOpcion">
               <ion-label class="calle">
-                <h6 class="titori">DESTINO: <a (click)="editarDestino()" *ngIf="nomDestino==''">(EDITAR)</a> 
-                  <ion-icon slot="end" class="iconoEdit" name="open" (click)="editarDestino()"></ion-icon></h6>
-                <h6 class="titCalle">{{nomDestino}}</h6>
-                <h6 class="titCalle">{{telDestino}}</h6>
+                <h6 class="titori">DESTINO: </h6>
+                <ion-item>
+                <ion-input class="titdest" type="text" placeholder="Nombre destino" [(ngModel)]='dest_nombre'></ion-input> 
+              </ion-item>
+                <ion-item>
+                  <ion-input class="titdest" type="number" placeholder="Telefono destino"[(ngModel)]='dest_tel'></ion-input> 
+                </ion-item>  
+                 <!-- <h6 class="titCalle">{{nomDestino}}</h6>
+                <h6 class="titCalle">{{telDestino}}</h6>-->
                 <h6 class="titCalle">{{calleDest}}</h6>
                 <p class="calleSec">{{calleSecundarioDest}}</p>
               </ion-label>
@@ -67,7 +72,9 @@
 
           <ion-card-content>         
               <h6 class="titori">Resumen del pedido:</h6>
-                  Instrucciones: <ion-input class="input" placeholder="Captura tus indicaciones aqui..." type="text"></ion-input>
+                  Instrucciones: 
+                  <ion-item><ion-textarea rows="4" [(ngModel)]='instrucciones' class="input" placeholder="Captura tus indicaciones aqui..." type="text"></ion-textarea>
+                  </ion-item>
               <div class="costo">
                   <div>
                       <span>Distancia Total (Kilometros)</span>
@@ -87,15 +94,39 @@
                   <span>${{envioTotal.toFixed(2)}}</span>
                 </div>
               </div>
+
               <ion-item class="metPago">
                 <ion-label>¿Quien Paga?</ion-label>
-                <ion-select value="efectivo" [(ngModel)]="metPago">
-                  <ion-select-option selected value="efectivo">Cliente</ion-select-option>
-                  <ion-select-option value="tarjeta">Repartidor</ion-select-option>           
+                <ion-select value="repartidor" [(ngModel)]="quienPaga" (ionChange)="pagoCliente()">
+                  <ion-select-option selected value="repartidor">Repartidor</ion-select-option>
+                  <ion-select-option value="cliente">Cliente</ion-select-option>           
                 </ion-select>
               </ion-item>
+
+              <div class="cards" *ngIf="flagMetodos === 1">
+                <ion-item class="metPago">
+                    <ion-label>Metodo de Pago</ion-label>
+                    <!--<ion-select value="efectivo" [(ngModel)]="metPago" (ionChange)="mostrarTarjetas($event)">-->
+                    <ion-select value="efectivo" [(ngModel)]="metPago" (ionChange)="getMetPago()">
+                      <ion-select-option selected value="efectivo">Efectivo</ion-select-option>
+                      <ion-select-option value="tarjeta">Terminal</ion-select-option>                  
+                      <ion-select-option value="Pagolinea">Pago en linea</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+              </div>
+
+                  <div class="cards" *ngIf="flagCard === 1">
+                      <ion-item class="metPago"  >
+                          <ion-label>Tarjetas Registradas</ion-label>
+                       <!-- <ion-select value="cardsList" [(ngModel)]="tarjetaSelect" (ionChange)="getCardSelect()" >-->
+                            <ion-select  #mySelect value="cardsList" [(ngModel)]="tarjetaSelect" (ionChange)="getCardSelect()" >
+                          <ion-select-option *ngFor="let tarjeta of tarjetas" value="{{tarjeta.id}}">{{tarjeta.card_number}}</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                   </div>
+            
           </ion-card-content>
         </ion-card>
-        <ion-button expand ="block" (click)="Solicitar()">Solicitar Repartidor</ion-button>
+        <ion-button expand ="block" (click)="validarDestino()">Solicitar Repartidor</ion-button>
   </div>
 </ion-content>

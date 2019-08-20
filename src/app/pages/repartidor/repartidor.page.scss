@@ -24,11 +24,18 @@
 .titCalle{
     font-size: 13px;
     color: black;
-    //margin-left: 15px;
+    margin-left: 8px;
+}
+.titdest{
+    font-size: 13px;
+    color: black;
+    //margin-left: 8px;
+    height: 20px;
 }
 
 .calleSec{
     font-size:  13px;
+    margin-left: 8px;
    // margin-left: 15px;
 
 }
@@ -143,6 +150,13 @@ p{
     color: black;
    // margin-left: 15px;
     font-weight: bold;
+}
+
+.input{
+    font-size: 11px;
+    color: black;
+   // margin-left: 15px;
+  //  font-weight: bold;
 }
 
 a{

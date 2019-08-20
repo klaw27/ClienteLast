@@ -48,11 +48,12 @@ export class CarritoPage  {
   flagCard:any;
   customerOpenid:any ='';
   tarjetas: any;
-  customerCargo:any ='';
-  ChargeRequest:any ='';
+
   tarjetaSelect:any ='';
   cardCobro:any ='';
   deviceSessionId:any="";
+  customerCargo:any ='';
+  ChargeRequest:any ='';
 
   constructor(public menu: MenuController,
     public navCtrl: NavController,
