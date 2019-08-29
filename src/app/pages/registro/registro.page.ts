@@ -116,7 +116,7 @@ export class RegistroPage implements OnInit {
     let regEpr = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     //let regEpr2 = /^[a-zA-Z0-9-]*$/;
     let regEpr2 =/^[a-z0-9_-]{8,16}$/;
-    let regEpr3 = /^[0-9-]/;
+    let regEpr3 = /^[a-z0-9_-]{10}$/;
 
     if(this.nombre == '' && this.numero == '' && this.correo == '' && this.password == '' ) 
     this.presentToast('Todos los campos son obligatorios');
@@ -137,7 +137,7 @@ export class RegistroPage implements OnInit {
     }else if( !this.password.match(regEpr2)) {
       this.presentToast('El password debe de ser de 8 a 16 caracteres ');
     }else if( !this.numero.match(regEpr3)) {
-      this.presentToast("El telefono solo debe contener numeros");
+      this.presentToast("El telefono solo debe contener 10 digitos");
     }else if (this.politica == false){
       this.presentToast("Debe aceptar la politica de privacidad");
     }else if(this.password == this.passVerficada){

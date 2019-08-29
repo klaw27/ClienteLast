@@ -81,7 +81,7 @@ export class BuscarPage implements OnInit {
     
     console.log (this.items.id_producto);
     //console.log("Base64 Image: ",imageData);
-   // this.fotografiaProd = this._sanitizer.bypassSecurityTrustUrl("data:Image/*;base64,"+imageData);
+   //this.fotografiaProd = this._sanitizer.bypassSecurityTrustUrl("data:Image/*;base64,"+this.items.fotografia);
    // this.fotografiaProd = this._sanitizer.bypassSecurityTrustResourceUrl(this.items.fotografia);
    
    // this.fotografiaProd = this._sanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64,"+this.items.fotografia);

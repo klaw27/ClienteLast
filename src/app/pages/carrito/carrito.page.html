@@ -68,26 +68,43 @@
                   <span>${{total.toFixed(2)}}</span>
                 </div>
               </div>
-              <ion-item class="metPago">
+              <ion-item class="metPago" *ngIf="flagTotal === 0">
+                  <ion-label>Metodo de Pago</ion-label>
+                  <ion-select value=null placeholder ="Seleccionar..." [(ngModel)]="metPago" (ionChange)="getMetPago()" >
+                    <ion-select-option value="tarjeta">Terminal</ion-select-option>                  
+                    <ion-select-option value="Pagolinea">Pago en linea</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+              <ion-item class="metPago" *ngIf="flagTotal === 1">
                 <ion-label>Metodo de Pago</ion-label>
-                <!--<ion-select value="efectivo" [(ngModel)]="metPago" (ionChange)="mostrarTarjetas($event)">-->
-                <ion-select value="efectivo" [(ngModel)]="metPago" (ionChange)="getMetPago()">
-                  <ion-select-option selected value="efectivo">Efectivo</ion-select-option>
+                <ion-select value=null placeholder ="Seleccionar..." [(ngModel)]="metPago" (ionChange)="getMetPago()" >
+                  <ion-select-option value="efectivo" >Efectivo</ion-select-option>
                   <ion-select-option value="tarjeta">Terminal</ion-select-option>                  
                   <ion-select-option value="Pagolinea">Pago en linea</ion-select-option>
                 </ion-select>
               </ion-item>
 
+              
               <div class="cards" *ngIf="flagCard === 1">
               <ion-item class="customerCards"  >
                   <ion-label>Tarjetas Registradas</ion-label>
-               <!-- <ion-select value="cardsList" [(ngModel)]="tarjetaSelect" (ionChange)="getCardSelect()" >-->
                     <ion-select  #mySelect value="cardsList" [(ngModel)]="tarjetaSelect" (ionChange)="getCardSelect()" >
                   <ion-select-option *ngFor="let tarjeta of tarjetas" value="{{tarjeta.id}}">{{tarjeta.card_number}}</ion-select-option>
                 </ion-select>
               </ion-item>
-              </div>
 
+              </div>
+              
+              <ion-label class="infopago" *ngIf="flagTerminal === 1">
+                  <ion-icon class="alert" name="information-circle"></ion-icon>
+                  Nuestros repartidores llevaran una terminal móvil. ¡Recuerda tener a la mano tu IFE y tarjeta bancaria!
+              </ion-label>
+              
+              <ion-label class="infopago" *ngIf="flagEfectivo === 1">
+                  <ion-icon class="alert" name="information-circle"></ion-icon>
+                  Paga al repartidor cuando te entregue tu mercancía. Monto máximo $350.00
+              </ion-label>
           </ion-card-content>
         </ion-card>
         <ion-button expand="full" (click)="RealizandoCobro()">Confirmar Pedido</ion-button>

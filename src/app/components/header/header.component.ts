@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
+import { CarritoService } from 'src/app/services/carrito.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,18 @@ import { MenuController, NavController } from '@ionic/angular';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  noCarrito = 0;
+  items:any;
 
-  constructor(public menu: MenuController,private navCtrl : NavController) { }
+  constructor(public menu: MenuController,private navCtrl : NavController,
+    public _carrito: CarritoService) { 
+      this.noCarrito = this._carrito.items.length;
+
+    }
 
   ngOnInit() {
+    this.items = this._carrito.items;
+    this.noCarrito = this._carrito.items.length;
   }
 
   toogleMenu(){

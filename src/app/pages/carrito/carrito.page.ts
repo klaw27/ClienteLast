@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef,ViewChild  } from '@angular/core';
-import { MenuController, NavController, ModalController, AlertController } from '@ionic/angular';
+import { MenuController, NavController, ModalController, AlertController, ToastController } from '@ionic/angular';
 import { CarritoService } from '../../services/carrito.service';
 import { ClienteUbicPage } from '../cliente-ubic/cliente-ubic.page';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -14,6 +14,7 @@ import {IonSelect} from "@ionic/angular";
 
 declare var google;
 declare var OpenPay: any;
+
 
 
 const httpOptions = {
@@ -46,9 +47,12 @@ export class CarritoPage  {
   metPago="";
   idEliminar:any;
   flagCard:any;
+  flagTerminal:any;
+  flagEfectivo:any;
+  flagTotal:any;
   customerOpenid:any ='';
   tarjetas: any;
-
+  noCarrito:any;
   tarjetaSelect:any ='';
   cardCobro:any ='';
   deviceSessionId:any="";
@@ -65,12 +69,13 @@ export class CarritoPage  {
     public alertController: AlertController,
     private AfDb: AngularFireDatabase,
     public http: HttpClient,
+    public toastCtrl: ToastController ,
     private loadingCtrl:LoadingController,private router : Router) { 
 
     }
 
   ionViewWillEnter() {
-    
+    this.metPago = null;
     this.carrito = this._carrito.items;
     console.log ("productos del carrito: ");
     console.log (this.carrito);
@@ -111,9 +116,17 @@ export class CarritoPage  {
           this.subTotal = this.subTotal + data['precioCarrito'];
         });
         this.total = this.subTotal + this.costEnvio;
+        if ( this.total <350){
 
-        
+          this.flagTotal=1;
+          console.log("se acepta efectivo " + this.total + "bandera " +  this.flagTotal)
+        }else{
+          
+          this.flagTotal=0;
+          console.log("NO efectivo " + this.total + "bandera " +  this.flagTotal)
+        }
       }
+
       console.log(response);
     });
 
@@ -165,14 +178,34 @@ export class CarritoPage  {
 
   
   getMetPago(){
+   
 
-    console.log(this.metPago);
+    console.log("metodo de pago" + this.metPago);
+    if (this.metPago == null){
+      this.flagCard=0;
+      this.flagEfectivo=0;
+      this.flagTerminal=0;
+    }
+    
     if (this.metPago == "Pagolinea"){
       this.flagCard=1;
       this.mostrarTarjetas();
     }else{
       this.flagCard=0;
     }
+    if (this.metPago == "tarjeta"){
+      this.flagTerminal=1;
+      this.mostrarTarjetas();
+    }else{
+      this.flagTerminal=0;
+    }
+    if (this.metPago == "efectivo"){
+      this.flagEfectivo=1;
+      this.mostrarTarjetas();
+    }else{
+      this.flagEfectivo=0;
+    }
+
   }
 
 
@@ -203,6 +236,7 @@ export class CarritoPage  {
   }
 
   salir(){
+    this.noCarrito = this._carrito.items.length;
     this.navCtrl.navigateBack('/dashboard');
   }
 
@@ -237,6 +271,8 @@ export class CarritoPage  {
   }
 
   async RealizandoCobro() {
+
+    
     if (this.metPago == "Pagolinea"){
       this.getCardSelect();
       if(this.cardCobro != ""){
@@ -254,7 +290,7 @@ export class CarritoPage  {
       }else{
           this.validationCard();
       }  
-    }else {
+    }else{
         this.flagCard=0;
         this.pedido();
     }
@@ -342,6 +378,8 @@ export class CarritoPage  {
 
   async pedido(){
     
+    if(this.metPago != null){
+     
    console.log(this._carrito);
     let usuario = {...JSON.parse(localStorage.getItem('user'))};
     console.log(usuario);
@@ -376,9 +414,20 @@ export class CarritoPage  {
       //await modal.present();  
  
     //this.navCtrl.navigateForward("/dashboard");
-    
+  }else{
+    console.log("debes seleccionar un metodo de pago");
+    this.presentarToast("Debes seleccionar un metodo de pago");
+  }
   }
 
+  async presentarToast(mensaje) {
+    const toast = await this.toastCtrl.create({
+      message: mensaje,
+      position: 'bottom',
+      duration: 2000
+    });
+    toast.present();
+  }
   
   async presentModal() {
     const modal = await this.modalController.create({
@@ -426,7 +475,7 @@ export class CarritoPage  {
         this.router.navigateByUrl(`/pedidos/` + "13");
              }
         },{
-          text: 'Cancelar',
+          text: 'Regresar',
           cssClass: 'secondary',
           handler: () => {
             console.log('Confirm Cancel');

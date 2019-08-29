@@ -1,4 +1,18 @@
-<app-header></app-header>
+<ion-header>
+    <ion-toolbar color="danger">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Detalles del Producto</ion-title>
+      <ion-buttons slot="end">
+          <ion-icon class="iconbuscar" name='search' (click)="goBuscar()"></ion-icon>
+          <ion-icon class="iconcarrito" name='cart' (click)="goCarrito()"></ion-icon>
+       </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+
 
 <ion-content>
 

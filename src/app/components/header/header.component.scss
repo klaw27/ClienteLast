@@ -20,3 +20,26 @@ img {
     
 margin-right: 5px;
 }
+
+#cart-badge {
+    position: absolute;
+    top: 10px;
+    right: 13px;
+
+    //position: absolute;
+    color: white;
+    z-index: 1000;
+    font-size: 9px;
+   // background-color:#da3e38;
+   //background-color:#db160f;
+   background-color:red;
+   // padding-left: 4px;
+  //  padding-right: 4px;
+
+  width: 13px;
+  height: 13px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius:50%;
+   // background: #5cb85c;
+ }

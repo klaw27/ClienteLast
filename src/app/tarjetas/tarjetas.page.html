@@ -29,11 +29,13 @@
       </ion-item>
     </ion-list>
 
-    <div class="nada principal" *ngIf="tarjetas.length ==0">
- 
+    <ion-item>
+        <ion-icon class="alert" name="alert"></ion-icon>
+      <div class="nada principal" *ngIf="tarjetas.length ==0">
       <ion-label class="tituloVacio">
         Aún no tienes tarjetas registradas
       </ion-label>
-
-  </div>
+      </div>
+  </ion-item>
+  <ion-button  class="agregar"  fill = "clear" routerLink="/add-card">Agregar tarjeta de crédito y débito</ion-button>
 </ion-content>

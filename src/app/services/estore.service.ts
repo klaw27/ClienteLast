@@ -10,8 +10,8 @@ export class EstoreService {
 
 
   //server:string = 'http://ec2-13-57-42-231.us-west-1.compute.amazonaws.com/clienteApi/';
-  server:string = 'http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com/clienteApi/';
-  //server:string = "http://localhost:8888/apiCliente/";
+  server:string = 'http://ec2-52-53-127-58.us-west-1.compute.amazonaws.com/clienteApi/';
+    //server:string = "http://localhost:8888/apiCliente/";
   serverData: string = "https://jsonplaceholder.typicode.com/users";
 
   constructor( private http: HttpClient) { 
@@ -62,11 +62,7 @@ export class EstoreService {
     return this.http.post("http://localhost/api/"+file,JSON.stringify(body));    
   }
 
-  obtenerDatos(){
-    return this.http.get("https://jsonplaceholder.typicode.com/users");
-    }
-
-    dashboard(body,file){
+      dashboard(body,file){
       return this.http.post(this.server+file,JSON.stringify(body));    
     }
 

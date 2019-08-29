@@ -3,7 +3,8 @@ import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { EstoreService } from '../../services/estore.service';
 import { CarritoService } from '../../services/carrito.service';
-
+import { CarritoPage } from '../carrito/carrito.page';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { CarritoService } from '../../services/carrito.service';
   styleUrls: ['./producto.page.scss'],
 })
 export class ProductoPage implements OnInit {
+  noCarrito = 0;
   carrito = [];
   items = [];
   id:any;
@@ -31,7 +33,8 @@ export class ProductoPage implements OnInit {
     public navCtrl: NavController,
     private activatedRoute: ActivatedRoute,
     public estore : EstoreService,
-    public _carrito: CarritoService
+    public _carrito: CarritoService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -101,6 +104,8 @@ export class ProductoPage implements OnInit {
     this._carrito.agregarProducto(this.id,this.producto);
     this._carrito.idNegocio = this.idNegocio;
     this._carrito.guardar_idNegocio();
+    this.noCarrito = this._carrito.items.length;
+   // this.navCtrl.setRoot(this.navCtrl.getActive().component);
     this.navCtrl.navigateForward('/carrito');
     //this.navCtrl.pop();
 }
@@ -114,7 +119,10 @@ export class ProductoPage implements OnInit {
     this._carrito.idNegocio = this.idNegocio;
     this._carrito.guardar_idNegocio();
   //  this.navCtrl.pop();
-    this.navCtrl.navigateForward('/carrito');
+   // this.navCtrl.navigateForward('/carrito');
+   // this.navCtrl.push("CarritoPage");
+   this.router.navigate(['/carrito']);
+   // this.navCtrl.navigateRoot('/carrito');
 
   }
 
@@ -124,7 +132,13 @@ export class ProductoPage implements OnInit {
   }
 
 
-
+  goCarrito(){
+    this.navCtrl.navigateForward('/carrito');
+  }
+  
+  goBuscar(){
+    this.navCtrl.navigateForward("/buscar");
+  }
   
 
 }

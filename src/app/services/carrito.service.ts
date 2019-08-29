@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -76,7 +77,6 @@ export class CarritoService {
       }
     });
     this.guardar_productos();
-
   }
 
   eliminarItem(id){

@@ -3,6 +3,7 @@ import { MenuController, NavController, PopoverController, AlertController } fro
 import { Router } from '@angular/router';
 import { EstoreService } from 'src/app/services/estore.service';
 import { RepartoTipoComponent } from 'src/app/home-popover/reparto-tipo/reparto-tipo.component';
+import { CarritoService } from 'src/app/services/carrito.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,7 @@ export class DashboardPage implements OnInit {
   bebidas: [];
   postres: [];
   id:any;
-
+  noCarrito = 0;
   slideOpts = {
     effect: 'flip',
     slidesPerView: 3.3,
@@ -23,11 +24,14 @@ export class DashboardPage implements OnInit {
   };
  
   constructor(public menu: MenuController,public estore : EstoreService,
-    private navCtrl : NavController,public popoverCtrl: PopoverController,public alertCtrl: AlertController) {}
+    private navCtrl : NavController,public popoverCtrl: PopoverController,public alertCtrl: AlertController,
+    public _carrito: CarritoService) {
+      this.noCarrito = this._carrito.items.length;
+    }
 
 
   ngOnInit() {
-
+    this.noCarrito = this._carrito.items.length;
     //suministros
     this.menu.enable(true);
     console.log(this.suministros);
