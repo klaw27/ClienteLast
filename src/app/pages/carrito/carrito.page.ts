@@ -475,10 +475,10 @@ export class CarritoPage  {
   }
 
   async alertPedidoSave() {
-   // this._carrito.deteleCarrito();
-    //this.carrito  =  this._carrito.items;  
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.carrito = this._carrito.items.filter(v=>v.FK_idNegocio==this.id);
+    this._carrito.deteleCarrito(this.id);
+    this.carrito  =  this._carrito.items;  
+    //this.id = this.activatedRoute.snapshot.paramMap.get('id');
+  //  this.carrito = this._carrito.items.filter(v=>v.FK_idNegocio==this.id);
     this.navCtrl.navigateForward("/dashboard");
     const alert = await this.alertController.create({
       header: 'Operacion Exitosa',
