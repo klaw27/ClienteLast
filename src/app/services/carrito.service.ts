@@ -94,19 +94,10 @@ export class CarritoService {
   }
 
   
-  deteleCarrito(id){ 
-        //this.items = [];
-        console.log("id a eliminar " +id) ;
-        for(var i=0; i<this.items.length; i++){
-        if(this.items[i].FK_idNegocio === id){
-          this.items.splice(i,1);
-          this.guardar_productos();
-        //this.items.splice(this.items.indexOf(dato => dato.FK_idNegocio === id),1);
-        console.log("productos restantes en carrito ") ;
-        console.log(this.items) ;
-        }
-      }
-
+  deteleCarrito(id){            
+    this.items = this.items.filter(item=>item.FK_idNegocio!=id);     
+    this.guardar_productos();
+   
   }
 
   guardar_productos(){
