@@ -20,9 +20,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase,AngularFireList  } from '@angular/fire/database';
 import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { EmailComposer } from '@ionic-native/email-composer/ngx';
+//import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { HomePopoverComponent } from './home-popover/home-popover.component';
-import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestoreModule, AngularFirestore } from "@angular/fire/firestore";
 //import { AngularFirestore } from 'angularfire2/firestore';
 import { environment} from "../environments/environment"
 
@@ -66,7 +66,7 @@ export const firebaseConfig = {
     Camera,
     Geolocation,
     AngularFireDatabase,
-    EmailComposer,
+   // EmailComposer,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     
   ],

@@ -3,7 +3,7 @@ import { EstoreService } from 'src/app/services/estore.service';
 import { Router } from '@angular/router';
 import { ToastController, NavController, AlertController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
-import { EmailComposer } from '@ionic-native/email-composer/ngx';
+//import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 @Component({
   selector: 'app-soporte',
@@ -22,7 +22,7 @@ export class SoportePage implements OnInit {
   constructor( public estore: EstoreService,
     private router : Router,
     public toastController: ToastController,
-    private emailComposer: EmailComposer,
+   // private emailComposer: EmailComposer,
     public alertController: AlertController,
     private renderer: Renderer,public navCtrl: NavController) { }
 
