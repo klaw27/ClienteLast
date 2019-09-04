@@ -25,7 +25,9 @@ const routes: Routes = [
   { path: 'tarjetas', loadChildren: './tarjetas/tarjetas.module#TarjetasPageModule' },
   { path: 'add-card', loadChildren: './pages/add-card/add-card.module#AddCardPageModule' },
   { path: 'politica', loadChildren: './pages/politica/politica.module#PoliticaPageModule' },
-  { path: 'repartidor', loadChildren: './pages/repartidor/repartidor.module#RepartidorPageModule' }
+  { path: 'repartidor', loadChildren: './pages/repartidor/repartidor.module#RepartidorPageModule' },  { path: 'pre-cart', loadChildren: './pages/pre-cart/pre-cart.module#PreCartPageModule' },
+
+
  ];
 
 @NgModule({

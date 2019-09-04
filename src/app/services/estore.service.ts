@@ -10,7 +10,7 @@ export class EstoreService {
 
 
   //server:string = 'http://ec2-13-57-42-231.us-west-1.compute.amazonaws.com/clienteApi/';
-  server:string = 'http://ec2-52-53-127-58.us-west-1.compute.amazonaws.com/clienteApi/';
+  server:string = 'http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com/clienteApi/';
     //server:string = "http://localhost:8888/apiCliente/";
   serverData: string = "https://jsonplaceholder.typicode.com/users";
 
@@ -49,12 +49,18 @@ export class EstoreService {
     return this.http.post(this.server+file,JSON.stringify(body));
   }
 
+  // productos(body,file){
+  //   return this.http.post(this.server+file,JSON.stringify(body));
+  // }
   productos(body,file){
-    return this.http.post(this.server+file,JSON.stringify(body));
+    return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
   }
 
+  // producto(body,file){
+  //   return this.http.post(this.server+file,JSON.stringify(body));
+  // }
   producto(body,file){
-    return this.http.post(this.server+file,JSON.stringify(body));
+    return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
   }
 
 

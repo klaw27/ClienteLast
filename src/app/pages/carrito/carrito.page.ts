@@ -75,6 +75,8 @@ export class CarritoPage  {
     }
 
   ionViewWillEnter() {
+    this.noCarrito = this._carrito.items.length;  
+    console.log("numero de productos en carrito INICIO" + this.noCarrito);
     this.metPago = null;
     this.carrito = this._carrito.items;
     console.log ("productos del carrito: ");
@@ -86,9 +88,14 @@ export class CarritoPage  {
 
   }
 
+
+
   callDistancia(){
-    let origin = new google.maps.LatLng(this.coordenadas['lat'], this.coordenadas['lng'] );
-    let destination = new google.maps.LatLng(this.carrito[0]['latitud'], this.carrito[0]['longitud']);
+    // let origin = new google.maps.LatLng(this.coordenadas['lat'], this.coordenadas['lng'] );
+    // let destination = new google.maps.LatLng(this.carrito[0]['latitud'], this.carrito[0]['longitud']);
+    let destination= new google.maps.LatLng(this.coordenadas['lat'], this.coordenadas['lng'] );
+    let origin  = new google.maps.LatLng(this.carrito[0]['latitud'], this.carrito[0]['longitud']);
+    
     let service = new google.maps.DistanceMatrixService();
     service.getDistanceMatrix(
       { 
@@ -132,6 +139,7 @@ export class CarritoPage  {
 
 
   }
+
 
   loadMapa(){
 
@@ -236,7 +244,9 @@ export class CarritoPage  {
   }
 
   salir(){
-    this.noCarrito = this._carrito.items.length;
+    this.noCarrito = this._carrito.items.length;  
+    console.log("numero de productos en carrito " + this.noCarrito);
+    this.ionViewWillEnter();
     this.navCtrl.navigateBack('/dashboard');
   }
 

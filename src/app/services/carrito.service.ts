@@ -8,6 +8,7 @@ import { NavController } from '@ionic/angular';
 export class CarritoService {
 
   items = [];
+  productosPorNegocio = [];
 
   idNegocio:any;  
 
@@ -31,11 +32,13 @@ export class CarritoService {
 
     if(x>= [0]){    
       console.log("actualiza");
+      
       //obtener los productos que ya hay
       this.actualizarItem(id,item);
      //this.editarProducto(id);
     }else{
       console.log("nuevo");
+
       this.items.push(item);
       this.guardar_productos();
     }

@@ -22,7 +22,8 @@ export class ProductoPage implements OnInit {
     nombre: '',
     tiempopreparacion: '',
     descripcion: '',
-    precio: ''
+    precio: '',
+    FK_idNegocio: ''
   };
   cantidad:any = 1;
   editar:any = false;
@@ -106,6 +107,7 @@ export class ProductoPage implements OnInit {
     this._carrito.guardar_idNegocio();
     this.noCarrito = this._carrito.items.length;
    // this.navCtrl.setRoot(this.navCtrl.getActive().component);
+   
     this.navCtrl.navigateForward('/carrito');
     //this.navCtrl.pop();
 }

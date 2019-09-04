@@ -41,7 +41,9 @@
                   <ion-thumbnail slot="start" class="thumbnail">
                     <img src="/assets/img/enchiladas.jpg" onError= "this.src='/assets/img/default_productos.png'">
                   </ion-thumbnail>
-                  <div class="contenidoPlatillo" (click)="editarProducto(producto.id_producto)">
+                  <!-- <div class="contenidoPlatillo" (click)="editarProducto(producto.id_producto)"> -->
+                      <div class="contenidoPlatillo" (click)="editarProducto(producto.id_producto)">
+                  
                     <ion-label>
                       <h6 class=tituloPlatillo>{{producto.nombre}}</h6>
                       <p>{{producto.descripcion}}</p>

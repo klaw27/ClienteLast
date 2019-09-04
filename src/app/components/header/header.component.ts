@@ -28,7 +28,9 @@ export class HeaderComponent implements OnInit {
 
 
   goCarrito(){
-    this.navCtrl.navigateForward('/carrito');
+    
+    this.navCtrl.navigateForward('/pre-cart');
+    //this.navCtrl.navigateForward('/carrito');
   }
 
   goBuscar(){
