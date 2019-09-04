@@ -58,6 +58,7 @@ export class CarritoPage  {
   deviceSessionId:any="";
   customerCargo:any ='';
   ChargeRequest:any ='';
+  id:any;
 
   constructor(public menu: MenuController,
     public navCtrl: NavController,
@@ -75,10 +76,12 @@ export class CarritoPage  {
     }
 
   ionViewWillEnter() {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.noCarrito = this._carrito.items.length;  
     console.log("numero de productos en carrito INICIO" + this.noCarrito);
     this.metPago = null;
-    this.carrito = this._carrito.items;
+    //this.carrito = this._carrito.items;
+    this.carrito = this._carrito.items.filter(v=>v.FK_idNegocio==this.id);
     console.log ("productos del carrito: ");
     console.log (this.carrito);
     this.ubicacionActual();
@@ -396,7 +399,8 @@ export class CarritoPage  {
     let hora = Date.now();
     let body = {
           hora: hora,
-          productos: this._carrito.items,
+          //productos: this._carrito.items,
+          productos: this.carrito,     
           total: this.total,
           envio: this.costEnvio,
           subtotal: this.subTotal,
@@ -412,7 +416,10 @@ export class CarritoPage  {
           }
     }
     console.log(body);
-    this.AfDb.database.ref("pedidos/"+this._carrito.idNegocio+"/"+hora).set(body);
+    // this.AfDb.database.ref("pedidos/"+this._carrito.idNegocio+"/"+hora).set(body);
+    
+    this.AfDb.database.ref("pedidos/"+this.id+"/"+hora).set(body);
+    
    /* const modal = await this.modalController.create({
       component: LoadingPage,
       cssClass: "loading",
@@ -468,8 +475,10 @@ export class CarritoPage  {
   }
 
   async alertPedidoSave() {
-    this._carrito.deteleCarrito();
-    this.carrito  =  this._carrito.items;  
+   // this._carrito.deteleCarrito();
+    //this.carrito  =  this._carrito.items;  
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.carrito = this._carrito.items.filter(v=>v.FK_idNegocio==this.id);
     this.navCtrl.navigateForward("/dashboard");
     const alert = await this.alertController.create({
       header: 'Operacion Exitosa',

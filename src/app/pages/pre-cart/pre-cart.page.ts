@@ -10,7 +10,7 @@ import { NavController } from '@ionic/angular';
 })
 export class PreCartPage implements OnInit {
   
-  public ocultar1: boolean = false;
+  public ocultar1: boolean = true;
 
   carrito:any = {
          id_producto:'',
@@ -45,8 +45,13 @@ this.ocultar1 = !this.ocultar1;
 
 
 
-goCarrito(){
+goCarrito(id){
  // this.navCtrl.navigateForward('/pre-cart');
-  this.navCtrl.navigateForward('/carrito');
+  this.navCtrl.navigateForward('/carrito/'+ id);
 }
+
+salir(){
+  this.navCtrl.navigateBack('/dashboard');
+}
+
 }

@@ -1,6 +1,9 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>pre-cart</ion-title>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start" >
+      <ion-back-button (click)='salir()'></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mi Carrito</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,14 +11,17 @@
     <!-- <div class="data principal" *ngIf="carrito.length != 0" *ngFor="let producto of carrito">  -->
         <div class="data principal" *ngFor="let item of groupArr">    
 
-            <h6 class=tituloPlatillo (click)="accion1()" >Titulo del Negocio: {{item.FK_idNegocio}}</h6>
-            
+        <div class="contenidoLocal" >
+         <h6 class=tituloPlatillo (click)="accion1()" >Negocio: {{item.FK_idNegocio}}</h6>
+         
+         <ion-button (click)="goCarrito(item.FK_idNegocio)"> Ver Detalles </ion-button> 
+         <!-- <ion-thumbnail slot="start" class="thumbnail">
+          <img src="tests.png" onError= "this.src='/assets/img/default_negocio.png'" (click)='menu(local.id_negocio)' >
+        </ion-thumbnail> -->
+        </div>
+        
             <ion-label>
                 <ion-card *ngIf="ocultar1" >
-                              <!-- <ion-ripple-effect></ion-ripple-effect>  -->
-                        <!-- <ion-thumbnail slot="start" class="thumbnail">
-                            <img src="/assets/img/enchiladas.jpg" onError= "this.src='/assets/img/default_negocio.png'">
-                         </ion-thumbnail>           -->
                          <ul class="my-nav">
                          <div class="contenidoPlatillo" *ngFor="let value of item.groupItem" (click)="editarProducto(producto.id_producto)">
                   
@@ -24,7 +30,6 @@
                       </div>  
                     </ul>     
          
-                <ion-button (click)="goCarrito()"> Pagar </ion-button> 
                </ion-card>
               </ion-label>
       </div>

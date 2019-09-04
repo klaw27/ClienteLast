@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: 'registro', loadChildren: './pages/registro/registro.module#RegistroPageModule' },
   { path: 'sesion', loadChildren: './pages/sesion/sesion.module#SesionPageModule' },
   { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule' },
-  { path: 'carrito', loadChildren: './pages/carrito/carrito.module#CarritoPageModule' },
+  { path: 'carrito/:id', loadChildren: './pages/carrito/carrito.module#CarritoPageModule' },
   { path: 'perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
   { path: 'locales/:id', loadChildren: './pages/locales/locales.module#LocalesPageModule' },
   { path: 'local-menu/:id', loadChildren: './pages/local-menu/local-menu.module#LocalMenuPageModule' },
@@ -25,7 +25,8 @@ const routes: Routes = [
   { path: 'tarjetas', loadChildren: './tarjetas/tarjetas.module#TarjetasPageModule' },
   { path: 'add-card', loadChildren: './pages/add-card/add-card.module#AddCardPageModule' },
   { path: 'politica', loadChildren: './pages/politica/politica.module#PoliticaPageModule' },
-  { path: 'repartidor', loadChildren: './pages/repartidor/repartidor.module#RepartidorPageModule' },  { path: 'pre-cart', loadChildren: './pages/pre-cart/pre-cart.module#PreCartPageModule' },
+  { path: 'repartidor', loadChildren: './pages/repartidor/repartidor.module#RepartidorPageModule' },
+  { path: 'pre-cart', loadChildren: './pages/pre-cart/pre-cart.module#PreCartPageModule' },
 
 
  ];

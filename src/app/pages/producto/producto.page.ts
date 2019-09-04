@@ -108,7 +108,7 @@ export class ProductoPage implements OnInit {
     this.noCarrito = this._carrito.items.length;
    // this.navCtrl.setRoot(this.navCtrl.getActive().component);
    
-    this.navCtrl.navigateForward('/carrito');
+    this.navCtrl.navigateForward('/carrito/' +this.idNegocio);
     //this.navCtrl.pop();
 }
 
@@ -123,7 +123,7 @@ export class ProductoPage implements OnInit {
   //  this.navCtrl.pop();
    // this.navCtrl.navigateForward('/carrito');
    // this.navCtrl.push("CarritoPage");
-   this.router.navigate(['/carrito']);
+   this.router.navigate(['/carrito/'+this.idNegocio]);
    // this.navCtrl.navigateRoot('/carrito');
 
   }
@@ -135,7 +135,7 @@ export class ProductoPage implements OnInit {
 
 
   goCarrito(){
-    this.navCtrl.navigateForward('/carrito');
+    this.navCtrl.navigateForward('/carrito/'+this.idNegocio);
   }
   
   goBuscar(){
