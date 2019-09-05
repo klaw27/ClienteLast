@@ -2,6 +2,7 @@
 </app-header>
 <ion-content >
 
+  
     <!--<ion-searchbar class="busqueda" (click)="goBuscar()" placeholder="Búsqueda por producto o negocio"></ion-searchbar>
 -->
     <div class="principal">
@@ -46,6 +47,7 @@
                 <p class='titulo'>{{suministro.nombre}}</p>
               </ion-slide>
           </ion-slides>
+
  
     </div>
     
@@ -57,13 +59,13 @@
     </ion-fab>
 -->
     <ion-fab  vertical="bottom" class="fab" horizontal="end" slot="fixed">
-        
-        <ion-fab-button class="faBoton" size="large" (click)="TipoReparto($event)" translucent color="success">
+        <ion-fab-button class="faBoton" size="large" (click)="TipoReparto($event)" translucent color="light">
         <!--<ion-fab-button class="faBoton" size="large" (click)="goUbicacion()" translucent color="success">-->
-          <ion-icon  class="iconoFab" name='bicycle'></ion-icon>
+          <!-- <ion-icon  class="iconoFab" name='bicycle'></ion-icon> -->
+          <img src='/assets/img/rep.png' class='iconoFab'> 
         </ion-fab-button>
     </ion-fab>
 
-
+   
 
 </ion-content>

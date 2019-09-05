@@ -376,7 +376,7 @@ export class RepartidorPage {
 }
 
 async alertPedidoSave() {
-  this._carrito.deteleCarrito();
+  //this._carrito.deteleCarrito();
   this.carrito  =  this._carrito.items;  
   this.navCtrl.navigateForward("/dashboard");
   const alert = await this.alertCtrl.create({
