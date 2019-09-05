@@ -9,6 +9,8 @@
 
 .tituloPlatillo{
     font-size: 16px;
+    margin-left: 18px;
+    font-weight: bold;
 }
 
 p{
@@ -33,3 +35,23 @@ p{
     padding: 0 30px;
                        
 }
+
+.btnBuy{
+    text-align:right;
+    margin-top: 13px;
+    margin-left: 40px;
+}
+
+.precio{
+    margin-bottom: 3px;
+    margin-left: 8px;
+    margin-top: 10px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-gap: 10px;
+   // background-color: #fff;
+   // color: #444;
+  }

@@ -9,7 +9,7 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./pre-cart.page.scss'],
 })
 export class PreCartPage implements OnInit {
-  
+
   public ocultar1: boolean = true;
 
   carrito:any = {
@@ -22,6 +22,7 @@ export class PreCartPage implements OnInit {
         FK_idNegocio: ''
     };
   groupArr:  any;
+  visible = false; 
 
   constructor(public _carrito: CarritoService,private navCtrl : NavController) { }
 
@@ -39,10 +40,17 @@ export class PreCartPage implements OnInit {
   }
 
 
+toggle() { 
+  this.visible = !this.visible; 
+} 
+
 accion1(){
 this.ocultar1 = !this.ocultar1;
 }
 
+menu(id) {
+  this.navCtrl.navigateForward('/local-menu/' + id);
+}
 
 
 goCarrito(id){
