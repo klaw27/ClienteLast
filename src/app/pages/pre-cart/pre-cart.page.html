@@ -9,30 +9,32 @@
 
 <ion-content>
     <!-- <div class="data principal" *ngIf="carrito.length != 0" *ngFor="let producto of carrito">  -->
-        <div class="data principal" *ngFor="let item of groupArr">    
+        <div class="data principal" *ngFor="let item of groupArr">
 
         <div class="contenidoLocal" >
-         <h6 class=tituloPlatillo (click)="accion1()" >Negocio: {{item.FK_idNegocio}}
-            <ion-icon name="arrow-dropup" (click)="toggle()" *ngIf="!visible"></ion-icon> 
-            <ion-icon name="arrow-dropdown" (click)="toggle()" *ngIf="visible"></ion-icon> 
-         </h6>
-         
-         
+         <h6 class=tituloPlatillo >Negocio: {{item.FK_idNegocio}}
+             <!-- <ion-icon name="arrow-dropdown" (click)="toggle(item.FK_idNegocio)" ></ion-icon>
+             <ion-icon name="arrow-dropup" (click)="toggle2(item.FK_idNegocio)" ></ion-icon> -->
+              
+             <ion-icon name="arrow-dropdown" (click)="toggle(item.FK_idNegocio)" *ngIf="mostrar"></ion-icon>
+             <ion-icon name="arrow-dropup" (click)="toggle2(item.FK_idNegocio)" *ngIf="cerrar"></ion-icon> 
+          </h6>
+
         </div>
-  
-                <ion-card *ngIf="ocultar1" >
+                <ion-card *ngIf="ocultar1 ===item.FK_idNegocio">
+                    <!-- <ion-card *ngIf="ocultar1"> -->
                     <ion-item class="contenidoPlatillo" *ngFor="let value of item.groupItem" (click)="editarProducto(producto.id_producto)">
                     <ion-thumbnail slot="start" class="thumbnail">
-                        <img src="tests.png" onError= "this.src='/assets/img/default_negocio.png'" (click)="editarProducto(producto.id_producto)" >
+                        <img src="/assets/img/default_negocio.png" onError= "this.src='/assets/img/default_negocio.png'" (click)="editarProducto(producto.id_producto)" >
                       </ion-thumbnail>
                       <div class="contenidoPlatillo" (click)='menu(item.FK_idNegocio)'>
                           <ion-label>
-                            <h6 class="tituloLocal">{{value.nombre}}</h6>
+                            <h6 class="tituloName">{{value.nombre}}</h6>
                             <h6 class="tituloLocal">{{value.descripcion}}</h6>
-                            <p> Cantidad: {{value.cantidadCarrito}} X ${{value.precioCarrito}} MXN</p>
+                            <p> Cantidad: {{value.cantidadCarrito}} X ${{value.precio}} MXN</p>
                           </ion-label>
         <!-- <div class="contenidoPlatillo" *ngFor="let value of item.groupItem" (click)="editarProducto(producto.id_producto)">-->
-                      </div>      
+                      </div>
                   </ion-item>
                   <div class="wrapper">
                     <div class="precio"  style="float: left; width: 220px;" >
@@ -44,7 +46,7 @@
                    </div>
                 </div>
                </ion-card>
-              
+
       </div>
 
 
@@ -53,7 +55,7 @@
         <ion-label class="tituloVacio">
           Aún no hay productos en el carrito
         </ion-label>
-  
+
     </div>
-  
+
 </ion-content>
