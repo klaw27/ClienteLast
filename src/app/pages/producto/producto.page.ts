@@ -128,9 +128,13 @@ export class ProductoPage implements OnInit {
 
   }
 
-  eliminar(){
+  eliminar(idNegocio){
     this._carrito.eliminarItem(this.id);
-    this.navCtrl.pop();
+    //this.navCtrl.pop();
+    //filtrar y obtener id  
+    this.navCtrl.navigateForward('/carrito/'+idNegocio);
+    
+    
   }
 
 

@@ -53,7 +53,6 @@ export class PreCartPage implements OnInit {
   //console.log(this.total); 
  console.log(this.ArrayTotal); 
 
-
   }
 
 
