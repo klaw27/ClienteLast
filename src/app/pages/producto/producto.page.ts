@@ -99,7 +99,7 @@ export class ProductoPage implements OnInit {
   }
 
 
-  agregar(){
+  agregar(idNegocio){
     this.producto['cantidadCarrito'] =  this.cantidad;
     this.producto['precioCarrito'] = this.cantidad * this.producto.precio;
     this._carrito.agregarProducto(this.id,this.producto);
@@ -108,11 +108,11 @@ export class ProductoPage implements OnInit {
     this.noCarrito = this._carrito.items.length;
    // this.navCtrl.setRoot(this.navCtrl.getActive().component);
    
-    this.navCtrl.navigateForward('/carrito/' +this.idNegocio);
+    this.navCtrl.navigateForward('/carrito/' +idNegocio);
     //this.navCtrl.pop();
 }
 
-  actualizar(){
+  actualizar(idNegocio){
     console.log(this.producto['cantidadCarrito']);
     this.producto['cantidadCarrito'] = this.cantidad;
     //this.producto['cantidadCarrito'] = this.producto['cantidadCarrito']  + this.cantidad;
@@ -123,7 +123,7 @@ export class ProductoPage implements OnInit {
   //  this.navCtrl.pop();
    // this.navCtrl.navigateForward('/carrito');
    // this.navCtrl.push("CarritoPage");
-   this.router.navigate(['/carrito/'+this.idNegocio]);
+   this.router.navigate(['/carrito/'+idNegocio]);
    // this.navCtrl.navigateRoot('/carrito');
 
   }

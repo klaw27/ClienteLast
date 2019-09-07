@@ -55,8 +55,8 @@
   </div>
 
   <div class="agregar">
-    <ion-button *ngIf="!editar" color="estore" (click)="agregar()" class="addBoton" expand="full">Agregar {{cantidad}} al carrito</ion-button>
-    <ion-button *ngIf="editar" color="estore" (click)="actualizar()" class="addBoton" expand="full">Actualizar el carrito</ion-button>
+    <ion-button *ngIf="!editar" color="estore" (click)="agregar(producto.FK_idNegocio)" class="addBoton" expand="full">Agregar {{cantidad}} al carrito</ion-button>
+    <ion-button *ngIf="editar" color="estore" (click)="actualizar(producto.FK_idNegocio)" class="addBoton" expand="full">Actualizar el carrito</ion-button>
   </div>
 
 

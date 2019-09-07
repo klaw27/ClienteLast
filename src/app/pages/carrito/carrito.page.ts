@@ -137,10 +137,10 @@ export class CarritoPage  {
         }
       }
 
+ 
       console.log(response);
     });
-
-
+ 
   }
 
 
@@ -269,7 +269,6 @@ export class CarritoPage  {
       this.callDistancia();
       this.loadMapa();
     });
-
   }
 
   realizarPago(){

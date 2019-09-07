@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { NavController } from '@ionic/angular';
 
+declare var google;
 
 @Component({
   selector: 'app-pre-cart',
@@ -10,15 +11,14 @@ import { NavController } from '@ionic/angular';
 })
 export class PreCartPage implements OnInit {
 
- 
-
   carrito:any = {
          id_producto:'',
         nombre: '',
        descripcion: '',
          tiempopreparacion: '',
          precio: '',
-         fotografia:"",
+         fotografia:"",      
+         precioCarrito:"",
         FK_idNegocio: ''
     };
   groupArr:  any;
@@ -26,8 +26,12 @@ export class PreCartPage implements OnInit {
   mostrar = true; 
   cerrar= false; ;
   ocultar1= true;
-  iconAbrir:any;
-  iconCerrar:any;
+  icono = "arrow-dropdown";
+  coordenadas={};
+  total: any = [];
+  ArrayTotal:any;
+  // name="arrow-dropdown"
+  // name="arrow-dropup"
 
   constructor(public _carrito: CarritoService,private navCtrl : NavController) { }
 
@@ -37,37 +41,40 @@ export class PreCartPage implements OnInit {
       this.groupArr = this.carrito.reduce((r,{FK_idNegocio})=>
       {
         if(!r.some(o=>o.FK_idNegocio==FK_idNegocio)){
-          r.push({FK_idNegocio,groupItem:this.carrito.filter(v=>v.FK_idNegocio==FK_idNegocio)
-      });
-    }
+          r.push({FK_idNegocio,groupItem:this.carrito.filter(v=>v.FK_idNegocio==FK_idNegocio)});
+          this.suma(FK_idNegocio);
+          //console.log(this.total); 
+        }
+        this.ArrayTotal = r;
     return r;
-    },[]);
-    //let total = this.groupArr.
-    console.log(this.groupArr);
+    },[]);  
+    
+ // this.suma(this.groupArr.FK_idNegocio);
+  //console.log(this.total); 
+ console.log(this.ArrayTotal); 
+
+
   }
 
 
-toggle(idCard) { 
-  this.ocultar1 = idCard;
-  this.mostrar = false; 
-  this.cerrar = true;
-  
+
+suma(id){
+ // suma(){
+   
+ this.ArrayTotal = this.carrito.filter(v=>v.FK_idNegocio==id)
+  var tot = 0;
+  this.ArrayTotal.forEach(function (obj) { tot += parseInt(obj.precioCarrito)});
+  this.total.push(tot);
+}
  
-}
-
-toggle2(idCard) { 
-  this.ocultar1 = false;
-  this.mostrar = true; 
-  this.cerrar = false;
-}
-
-
 menu(id) {
   this.navCtrl.navigateForward('/local-menu/' + id);
 }
 
 
-
+editarProducto(id){
+  this.navCtrl.navigateForward('/producto/'+id+"/editar/"+this.carrito.FK_idNegocio);
+}
 
 goCarrito(id){
  // this.navCtrl.navigateForward('/pre-cart');
@@ -77,5 +84,6 @@ goCarrito(id){
 salir(){
   this.navCtrl.navigateBack('/dashboard');
 }
+
 
 }
