@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Sep 11 21:13:09 CDT 2019
+#Wed Sep 11 21:55:39 CDT 2019
 1391.set=ASSET
 1034.base=C\:\\Users\\Administrator\\Desktop\\ClienteFinal\\ClienteLast\\platforms\\android\\app\\build\\intermediates\\assets\\debug
 881.path=www/assets/img/suministros/appcomida200x200-13.png
