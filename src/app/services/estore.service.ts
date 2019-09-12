@@ -49,23 +49,26 @@ export class EstoreService {
     return this.http.post(this.server+file,JSON.stringify(body));
   }
 
+ productos(body,file){
+    return this.http.post(this.server+file,JSON.stringify(body));
+  }
   // productos(body,file){
-  //   return this.http.post(this.server+file,JSON.stringify(body));
+  //   return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
   // }
-  productos(body,file){
-    return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
-  }
 
-  // producto(body,file){
-  //   return this.http.post(this.server+file,JSON.stringify(body));
-  // }
   producto(body,file){
-    return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
-  }
+    return this.http.post(this.server+file,JSON.stringify(body));
+   }
+  // producto(body,file){
+  //   return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
+  // }
 
 
+  // soporte(body,file){
+  //   return this.http.post("http://localhost/api/"+file,JSON.stringify(body));    
+  // }
   soporte(body,file){
-    return this.http.post("http://localhost/api/"+file,JSON.stringify(body));    
+    return this.http.post(this.server+file,JSON.stringify(body));    
   }
 
       dashboard(body,file){
