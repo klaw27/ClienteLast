@@ -14,7 +14,7 @@ export class EstoreService {
     //server:string = "http://localhost:8888/apiCliente/";
   serverData: string = "https://jsonplaceholder.typicode.com/users";
 
-  constructor( private http: HttpClient) { 
+  constructor( private http: HttpClient) {
 
 
   }
@@ -49,38 +49,38 @@ export class EstoreService {
     return this.http.post(this.server+file,JSON.stringify(body));
   }
 
- productos(body,file){
-    return this.http.post(this.server+file,JSON.stringify(body));
-  }
-  // productos(body,file){
-  //   return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
-  // }
-
-  producto(body,file){
-    return this.http.post(this.server+file,JSON.stringify(body));
+//  productos(body,file){
+//     return this.http.post(this.server+file,JSON.stringify(body));
+//   }
+   productos(body,file){
+     return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
    }
+
   // producto(body,file){
-  //   return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
-  // }
+  //   return this.http.post(this.server+file,JSON.stringify(body));
+  //  }
+   producto(body,file){
+     return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
+   }
 
 
   // soporte(body,file){
-  //   return this.http.post("http://localhost/api/"+file,JSON.stringify(body));    
+  //   return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
   // }
   soporte(body,file){
-    return this.http.post(this.server+file,JSON.stringify(body));    
+    return this.http.post(this.server+file,JSON.stringify(body));
   }
 
       dashboard(body,file){
-      return this.http.post(this.server+file,JSON.stringify(body));    
+      return this.http.post(this.server+file,JSON.stringify(body));
     }
 
     dashboardSub(body,file){
-      return this.http.post(this.server+file,JSON.stringify(body));    
+      return this.http.post(this.server+file,JSON.stringify(body));
     }
 
     toolbarbusqueda(body,file){
-      return this.http.post(this.server+file,JSON.stringify(body)); 
+      return this.http.post(this.server+file,JSON.stringify(body));
       }
 
 

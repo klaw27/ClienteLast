@@ -23,7 +23,7 @@ export class BuscarPage implements OnInit {
     descripcion: '',
     tiempopreparacion: '',
     precio: '',
-    fotografia:""
+    //fotografia:""
   };
 
   itemsNeg:any = {
@@ -33,7 +33,7 @@ export class BuscarPage implements OnInit {
     colonia: '',
     horaapertura: '',
     horacierre: '',    
-    fotografia:""
+    //fotografia:""
   };
 
   criterio :any;
@@ -48,7 +48,7 @@ export class BuscarPage implements OnInit {
     descripcion: '',
     tiempopreparacion: '',
     precio: '',    
-    fotografia:''
+   // fotografia:''
   }];
   negocios:any = [{
     id_negocio:'',
@@ -57,7 +57,7 @@ export class BuscarPage implements OnInit {
     colonia: '',
     horaapertura: '',
     horacierre: '',    
-    fotografia:''
+    //fotografia:''
   }];
 
 
@@ -99,7 +99,7 @@ export class BuscarPage implements OnInit {
         console.log(body);
 
         //obtener productos
-        this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com/clienteApi/dashbusqueda.php",body).subscribe(data => {
+        this.http.post("http://localhost/api/dashbusqueda.php",body).subscribe(data => {
            console.log(data);
            if(data['success']){
             this.productos = data['productos'];
@@ -118,15 +118,16 @@ export class BuscarPage implements OnInit {
          };
          console.log(body);
  
-         this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com/clienteApi/dashbusqueda.php",body).subscribe(data => {
+         this.http.post("http://localhost/api/dashbusqueda.php",body).subscribe(data => {
             console.log(data);
-            if(data['success']){
+           if(data['success']){
              this.negocios = data['negocios'];
              console.log(this.negocios);
            }
            }, error => {
             console.log(error);
           });
+
   }
 
  buscarEstore(event){

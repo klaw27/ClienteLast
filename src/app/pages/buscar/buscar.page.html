@@ -14,14 +14,14 @@
 
 
 <!--<ion-list >-->
-    <div *ngIf="itemsflag" >
+    <div *ngIf="itemsflag">
     <p class = "tit_res">Productos</p>
   </div>
 		<ion-item *ngFor="let item of items" (click)='agregarProducto(item.id_producto)'>
     <ion-thumbnail slot="start" class="thumbnail">
           <!-- <img  src= "{{item.fotografia}}"> -->
            <!--<img  [src]="fotografiaProd" >-->
-      <img src="test.jpg" [src]="fotografiaProd"  onError= "this.src='/assets/img/default_productos.png'">
+      <img src="test.jpg" onError= "this.src='/assets/img/default_productos.png'"  (click)='agregarProducto(item.id_producto)'>
       </ion-thumbnail>
       <div class="contenidoPlatillo">
       <ion-label>
@@ -35,7 +35,7 @@
   </div>
 </ion-item>
 
-  <div *ngIf="itemsflagNeg" >
+  <div *ngIf="itemsflagNeg">
     <p class = "tit_res">Negocios</p>
   </div>
   <ion-item *ngFor="let item of itemsNeg" (click)='menu(local.id_negocio)'>
