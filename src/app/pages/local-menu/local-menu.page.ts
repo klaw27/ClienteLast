@@ -35,7 +35,7 @@ export class LocalMenuPage implements OnInit {
     }
 
   ngOnInit() {
-    console.log(this.productos);
+  //  console.log(this.productos);
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     let body = {
       id: this.id,
@@ -61,12 +61,12 @@ export class LocalMenuPage implements OnInit {
    
     //Funcion editar
     console.log("id del producto: " + id);
-    /*if ( localStorage.getItem('productos') ){
+    if ( localStorage.getItem('productos') ){
       this.items = JSON.parse( localStorage.getItem('productos') );
       this.idNegocio = JSON.parse( localStorage.getItem('idNegocio') );
     }
 
-  
+  /*
     let indicex;
     console.log("get item");
     console.log(this.items);

@@ -34,15 +34,15 @@ export class DashboardPage implements OnInit {
     this.noCarrito = this._carrito.items.length;
     //suministros
     this.menu.enable(true);
-    console.log(this.suministros);
+   // console.log(this.suministros);
     this.id = "1";
     let body2 = {
       id: this.id,
       funcion: "all"
     };
-    console.log(body2);
+   // console.log(body2);
     this.estore.dashboardSub(body2, "subcategorias.php").subscribe(data=>{
-      console.log(data);
+     // console.log(data);
       if(data['success']){
         this.suministros = data['subcategorias'];
         console.log(this.suministros);
@@ -51,15 +51,15 @@ export class DashboardPage implements OnInit {
 
     //Commida Preparada
     this.menu.enable(true);
-    console.log(this.preparadas);
+   // console.log(this.preparadas);
     this.id = "2";
     let body3 = {
       id: this.id,
       funcion: "all"
     };
-    console.log(body3);
+   // console.log(body3);
     this.estore.dashboardSub(body3, "subcategorias.php").subscribe(data=>{
-      console.log(data);
+     // console.log(data);
       if(data['success']){
         this.preparadas = data['subcategorias'];
         console.log(this.preparadas);
@@ -68,15 +68,15 @@ export class DashboardPage implements OnInit {
 
         //Bebidas 
         this.menu.enable(true);
-        console.log(this.bebidas);
+       // console.log(this.bebidas);
         this.id = "4";
         let body4 = {
           id: this.id,
           funcion: "all"
         };
-        console.log(body4);
+        //console.log(body4);
         this.estore.dashboardSub(body4, "subcategorias.php").subscribe(data=>{
-          console.log(data);
+          //console.log(data);
           if(data['success']){
             this.bebidas = data['subcategorias'];
             console.log(this.bebidas);
@@ -85,15 +85,15 @@ export class DashboardPage implements OnInit {
   
           //Postres 
           this.menu.enable(true);
-          console.log(this.postres);
+          //console.log(this.postres);
           this.id = "3";
           let body5 = {
             id: this.id,
             funcion: "all"
           };
-          console.log(body5);
+          //console.log(body5);
           this.estore.dashboardSub(body5, "subcategorias.php").subscribe(data=>{
-            console.log(data);
+            //console.log(data);
             if(data['success']){
               this.postres = data['subcategorias'];
               console.log(this.postres);
