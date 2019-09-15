@@ -19,14 +19,16 @@ export class LoginPage implements OnInit {
   correo:any = '';
   icono = "eye";
   passType = 'password';
+  items = [];
+  idNegocio:any;
 
   constructor(private fb: Facebook,
     private http: HttpClient,
     private googlePlus: GooglePlus,
     public toastController: ToastController,
-    public estore: EstoreService,  
+    public estore: EstoreService,
     private router : Router,
-    public menu : MenuController) { 
+    public menu : MenuController) {
     }
 
     ionViewWillEnter(){
@@ -63,7 +65,7 @@ export class LoginPage implements OnInit {
   cambiarIcono(){
     this.icono = this.icono == 'eye' ? 'eye-off' : 'eye';
     this.passType = this.passType == 'password' ? 'text' : 'password';
-  
+
 }
 
 iniciar(){
@@ -74,7 +76,7 @@ iniciar(){
 
   let regEpr = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-  if(this.correo == '' && this.password == '' ) 
+  if(this.correo == '' && this.password == '' )
   this.presentarToast('Capture su usuario y contraseña');
   else if (this.password == ''){
   this.presentarToast('Capture su contraseña');
@@ -88,13 +90,24 @@ iniciar(){
     if(data['success'] != false){
       localStorage.setItem('user',JSON.stringify(data['user']));
       this.router.navigateByUrl(`/dashboard`);
+      //  localStorage.setItem('productos', JSON.stringify(this.items));
+      //  localStorage.setItem('idNegocio', JSON.stringify(this.idNegocio));
+
+       if ( localStorage.getItem('productos') ){
+         this.items = JSON.parse( localStorage.getItem('productos') );
+         this.idNegocio = JSON.parse( localStorage.getItem('idNegocio') );
+       }else{
+        this.items= [];
+        this.idNegocio=null;
+       }
+
     }
     else{
       this.presentarToast(data['msg']);
     }
 
   });
-} 
+}
 
 
 }

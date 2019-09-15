@@ -60,26 +60,18 @@ export class LocalMenuPage implements OnInit {
   agregarProducto(id){
    
     //Funcion editar
-    console.log("id del producto: " + id);
+    //console.log("id del producto: " + id);
     if ( localStorage.getItem('productos') ){
       this.items = JSON.parse( localStorage.getItem('productos') );
       this.idNegocio = JSON.parse( localStorage.getItem('idNegocio') );
-    }
+      console.log("hay productos ");
 
-  /*
-    let indicex;
-    console.log("get item");
-    console.log(this.items);
-
+      let indicex;
       let item = this.items.map((data,indice)=>{
       if(data.id_producto == id){
-        //
-        console.log("se encontro producto"); 
-        console.log(indice);
         indicex = indice;
       }
     });
-
     
      if(indicex >=0){
       console.log("el producto ya existe en carrito")
@@ -87,10 +79,15 @@ export class LocalMenuPage implements OnInit {
         this.navCtrl.navigateForward('/producto/'+id+"/editar"+"/"+this.id);
         return this.items[item[indicex]];
      }else {
-      console.log("No existe en carrito");*/
+      console.log("No existe en carrito");
       this.navCtrl.navigateForward('/producto/'+id+"/agregar"+"/"+this.id);
-     //}
+     }
 
+
+    }else{
+      console.log("NO HAY productos ");
+      this.navCtrl.navigateForward('/producto/'+id+"/agregar"+"/"+this.id);
+      }
 
       }
 

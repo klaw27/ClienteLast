@@ -180,8 +180,10 @@ export class CarritoPage  {
           this.calleSecundario =
           this.calleSecundario + //Secundario Vacio
           results[0].address_components[2].long_name+", "+       //Colonia
-          results[0].address_components[3].long_name+", "+       //Ciudad
-          results[0].address_components[4].short_name;       //Estado
+          results[0].address_components[3].long_name+", ";      //Ciudad
+          
+         // results[0].address_components[4].long_name;       //Estado
+         // results[0].address_components[4].short_name;       //Estado
         }
       });
 
