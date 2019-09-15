@@ -1601,18 +1601,15 @@ var EstoreService = /** @class */ (function () {
     EstoreService.prototype.productos = function (body, file) {
         return this.http.post(this.server + file, JSON.stringify(body));
     };
-    // productos(body,file){
-    //   return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
-    // }
+    //  productos(body,file){
+    //    return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
+    //  }
     EstoreService.prototype.producto = function (body, file) {
         return this.http.post(this.server + file, JSON.stringify(body));
     };
-    // producto(body,file){
-    //   return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
-    // }
-    // soporte(body,file){
-    //   return this.http.post("http://localhost/api/"+file,JSON.stringify(body));    
-    // }
+    //  producto(body,file){
+    //    return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
+    //  }
     EstoreService.prototype.soporte = function (body, file) {
         return this.http.post(this.server + file, JSON.stringify(body));
     };

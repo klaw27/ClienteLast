@@ -61,7 +61,7 @@ export class LocalMenuPage implements OnInit {
    
     //Funcion editar
     console.log("id del producto: " + id);
-    if ( localStorage.getItem('productos') ){
+    /*if ( localStorage.getItem('productos') ){
       this.items = JSON.parse( localStorage.getItem('productos') );
       this.idNegocio = JSON.parse( localStorage.getItem('idNegocio') );
     }
@@ -75,14 +75,11 @@ export class LocalMenuPage implements OnInit {
       if(data.id_producto == id){
         //
         console.log("se encontro producto"); 
-        ///this.alertEditar();
         console.log(indice);
         indicex = indice;
-         //return indice;
       }
     });
-     // return this.items[item[0]];
-     //return this.items[item[indicex]];
+
     
      if(indicex >=0){
       console.log("el producto ya existe en carrito")
@@ -90,9 +87,9 @@ export class LocalMenuPage implements OnInit {
         this.navCtrl.navigateForward('/producto/'+id+"/editar"+"/"+this.id);
         return this.items[item[indicex]];
      }else {
-      console.log("No existe en carrito");
+      console.log("No existe en carrito");*/
       this.navCtrl.navigateForward('/producto/'+id+"/agregar"+"/"+this.id);
-     }
+     //}
 
 
       }

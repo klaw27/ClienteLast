@@ -62,7 +62,7 @@ var BuscarPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header >\r\n  <ion-toolbar color=\"danger\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button mode=\"md\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title>Búsqueda</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<!-- <img src=\"/assets/img/EstoCuadro.png\" alt=\"logo estor\" class='logoPrinipal'>-->\r\n<!-- Barra de busqueda -->\r\n<ion-searchbar (keyup.enter)=\"buscarEstore($event)\" placeholder=\"Búsqueda por producto o negocio\" ></ion-searchbar>\r\n\r\n<ion-content>\r\n\r\n\r\n<!--<ion-list >-->\r\n    <div *ngIf=\"itemsflag\" >\r\n    <p class = \"tit_res\">Productos</p>\r\n  </div>\r\n\t\t<ion-item *ngFor=\"let item of items\" (click)='agregarProducto(item.id_producto)'>\r\n    <ion-thumbnail slot=\"start\" class=\"thumbnail\">\r\n          <!-- <img  src= \"{{item.fotografia}}\"> -->\r\n           <!--<img  [src]=\"fotografiaProd\" >-->\r\n      <img src=\"test.jpg\" [src]=\"fotografiaProd\"  onError= \"this.src='/assets/img/default_productos.png'\">\r\n      </ion-thumbnail>\r\n      <div class=\"contenidoPlatillo\">\r\n      <ion-label>\r\n          <h6 class=tituloPlatillo>{{item.nombre}}</h6>\r\n          <p>{{item.descripcion}}</p>\r\n      </ion-label>\r\n      <div class=\"footerPlatillo\">\r\n        <p>${{item.precio}}.00 MXN</p>\r\n        <ion-button fill=\"clear\" slot=\"end\" (click)='agregarProducto(item.id_producto)'>Ver Detalle</ion-button>\r\n    </div>\r\n  </div>\r\n</ion-item>\r\n\r\n  <div *ngIf=\"itemsflagNeg\" >\r\n    <p class = \"tit_res\">Negocios</p>\r\n  </div>\r\n  <ion-item *ngFor=\"let item of itemsNeg\" (click)='menu(local.id_negocio)'>\r\n    <ion-thumbnail slot=\"start\" class=\"thumbnail\">\r\n      <img src=\"tests.png\" onError= \"this.src='/assets/img/default_negocio.png'\" (click)='menu(local.id_negocio)' >\r\n    </ion-thumbnail>\r\n    <div class=\"contenidoLocal\" (click)='menu(item.id_negocio)'>\r\n      <ion-label>\r\n        <h6 class=tituloLocal>{{item.nombre}}</h6>\r\n        <p>{{item.colonia}} {{item.callenumero}}</p>\r\n        <p>Horario: {{item.horaapertura}} - {{item.horacierre}}</p>\r\n      </ion-label>\r\n       <!--<ion-button fill=\"clear\" slot=\"end\" (click)='menu(local.id_negocio)' class = \"menuver\">Ver Menú</ion-button>-->\r\n      <div class=\"footerLocal\">\r\n         <!-- <ion-button fill=\"clear\" slot=\"end\" (click)='menu(local.id_negocio)'>Ver Menú</ion-button>-->\r\n \r\n          <div class=\"contenedorEstrellas\">\r\n            <ion-icon class=\"estrella\" name='star'></ion-icon>\r\n            <ion-icon class=\"estrella\" name='star'></ion-icon>\r\n            <ion-icon class=\"estrella\" name='star'></ion-icon>\r\n            <ion-icon class=\"estrella\" name='star'></ion-icon>\r\n            <ion-icon class=\"estrella\" name='star'></ion-icon>\r\n          </div>\r\n        </div>\r\n    </div>\r\n</ion-item>\r\n\r\n  <ion-item *ngIf=\"!items &&  !itemsNeg \">\r\n      <p class = \"tit_res\">No hay resultados de la busqueda</p>\r\n</ion-item>\r\n\r\n\r\n</ion-content>\r\n"
+module.exports = "<ion-header >\r\n  <ion-toolbar color=\"danger\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button mode=\"md\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title>Búsqueda</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<!-- <img src=\"/assets/img/EstoCuadro.png\" alt=\"logo estor\" class='logoPrinipal'>-->\r\n<!-- Barra de busqueda -->\r\n<ion-searchbar (keyup.enter)=\"buscarEstore($event)\" placeholder=\"Búsqueda por producto o negocio\" ></ion-searchbar>\r\n\r\n<ion-content>\r\n\r\n\r\n<!--<ion-list >-->\r\n    <div *ngIf=\"itemsflag\">\r\n    <p class = \"tit_res\">Productos</p>\r\n  </div>\r\n\t\t<ion-item *ngFor=\"let item of items\" (click)='agregarProducto(item.id_producto)'>\r\n    <ion-thumbnail slot=\"start\" class=\"thumbnail\">\r\n          <!-- <img  src= \"{{item.fotografia}}\"> -->\r\n           <!--<img  [src]=\"fotografiaProd\" >-->\r\n      <img src=\"test.jpg\" onError= \"this.src='/assets/img/default_productos.png'\"  (click)='agregarProducto(item.id_producto)'>\r\n      </ion-thumbnail>\r\n      <div class=\"contenidoPlatillo\">\r\n      <ion-label>\r\n          <h6 class=tituloPlatillo>{{item.nombre}}</h6>\r\n          <p>{{item.descripcion}}</p>\r\n      </ion-label>\r\n      <div class=\"footerPlatillo\">\r\n        <p>${{item.precio}}.00 MXN</p>\r\n        <ion-button fill=\"clear\" slot=\"end\" (click)='agregarProducto(item.id_producto)'>Ver Detalle</ion-button>\r\n    </div>\r\n  </div>\r\n</ion-item>\r\n\r\n  <div *ngIf=\"itemsflagNeg\">\r\n    <p class = \"tit_res\">Negocios</p>\r\n  </div>\r\n  <ion-item *ngFor=\"let item of itemsNeg\" (click)='menu(local.id_negocio)'>\r\n    <ion-thumbnail slot=\"start\" class=\"thumbnail\">\r\n      <img src=\"tests.png\" onError= \"this.src='/assets/img/default_negocio.png'\" (click)='menu(local.id_negocio)' >\r\n    </ion-thumbnail>\r\n    <div class=\"contenidoLocal\" (click)='menu(item.id_negocio)'>\r\n      <ion-label>\r\n        <h6 class=tituloLocal>{{item.nombre}}</h6>\r\n        <p>{{item.colonia}} {{item.callenumero}}</p>\r\n        <p>Horario: {{item.horaapertura}} - {{item.horacierre}}</p>\r\n      </ion-label>\r\n       <!--<ion-button fill=\"clear\" slot=\"end\" (click)='menu(local.id_negocio)' class = \"menuver\">Ver Menú</ion-button>-->\r\n      <div class=\"footerLocal\">\r\n         <!-- <ion-button fill=\"clear\" slot=\"end\" (click)='menu(local.id_negocio)'>Ver Menú</ion-button>-->\r\n \r\n          <div class=\"contenedorEstrellas\">\r\n            <ion-icon class=\"estrella\" name='star'></ion-icon>\r\n            <ion-icon class=\"estrella\" name='star'></ion-icon>\r\n            <ion-icon class=\"estrella\" name='star'></ion-icon>\r\n            <ion-icon class=\"estrella\" name='star'></ion-icon>\r\n            <ion-icon class=\"estrella\" name='star'></ion-icon>\r\n          </div>\r\n        </div>\r\n    </div>\r\n</ion-item>\r\n\r\n  <ion-item *ngIf=\"!items &&  !itemsNeg \">\r\n      <p class = \"tit_res\">No hay resultados de la busqueda</p>\r\n</ion-item>\r\n\r\n\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -117,7 +117,6 @@ var BuscarPage = /** @class */ (function () {
             descripcion: '',
             tiempopreparacion: '',
             precio: '',
-            fotografia: ""
         };
         this.itemsNeg = {
             id_negocio: '',
@@ -126,7 +125,6 @@ var BuscarPage = /** @class */ (function () {
             colonia: '',
             horaapertura: '',
             horacierre: '',
-            fotografia: ""
         };
         this.indexCount = 0;
         this.errorCount = null;
@@ -137,7 +135,6 @@ var BuscarPage = /** @class */ (function () {
                 descripcion: '',
                 tiempopreparacion: '',
                 precio: '',
-                fotografia: ''
             }];
         this.negocios = [{
                 id_negocio: '',
@@ -146,7 +143,6 @@ var BuscarPage = /** @class */ (function () {
                 colonia: '',
                 horaapertura: '',
                 horacierre: '',
-                fotografia: ''
             }];
         //this.ionViewDidLoad();
         // this.iniBusqueda();
@@ -174,7 +170,7 @@ var BuscarPage = /** @class */ (function () {
         };
         console.log(body);
         //obtener productos
-        this.http.post("http://localhost/api/dashbusqueda.php", body).subscribe(function (data) {
+        this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com/clienteApi/dashbusqueda.php", body).subscribe(function (data) {
             console.log(data);
             if (data['success']) {
                 _this.productos = data['productos'];
@@ -191,7 +187,7 @@ var BuscarPage = /** @class */ (function () {
             funcion: "all"
         };
         console.log(body);
-        this.http.post("http://localhost/api/dashbusqueda.php", body).subscribe(function (data) {
+        this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com/clienteApi/dashbusqueda.php", body).subscribe(function (data) {
             console.log(data);
             if (data['success']) {
                 _this.negocios = data['negocios'];

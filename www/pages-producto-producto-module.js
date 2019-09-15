@@ -190,7 +190,8 @@ var ProductoPage = /** @class */ (function () {
         //  this.navCtrl.pop();
         // this.navCtrl.navigateForward('/carrito');
         // this.navCtrl.push("CarritoPage");
-        this.router.navigate(['/carrito/' + idNegocio]);
+        this.navCtrl.navigateForward('/carrito/' + idNegocio);
+        //this.router.navigate(['/carrito/'+idNegocio]);
         // this.navCtrl.navigateRoot('/carrito');
     };
     ProductoPage.prototype.eliminar = function (idNegocio) {
