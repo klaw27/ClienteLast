@@ -84,9 +84,14 @@ export class CarritoPage  {
     this.carrito = this._carrito.items.filter(v=>v.FK_idNegocio==this.id);
     console.log ("productos del carrito: ");
     console.log (this.carrito);
-    this.ubicacionActual();
+    
     this.deviceSessionId = OpenPay.deviceData.setup();
    console.log(this.deviceSessionId);
+    if(this.noCarrito!=0){
+   this.ubicacionActual();
+  }else{
+    console.log("ya no hay productos");
+  }
     //this.mostrarTarjetas();
 
   }
@@ -96,6 +101,8 @@ export class CarritoPage  {
   callDistancia(){
     // let origin = new google.maps.LatLng(this.coordenadas['lat'], this.coordenadas['lng'] );
     // let destination = new google.maps.LatLng(this.carrito[0]['latitud'], this.carrito[0]['longitud']);
+
+    
     let destination= new google.maps.LatLng(this.coordenadas['lat'], this.coordenadas['lng'] );
     let origin  = new google.maps.LatLng(this.carrito[0]['latitud'], this.carrito[0]['longitud']);
     
@@ -140,6 +147,8 @@ export class CarritoPage  {
  
       console.log(response);
     });
+
+    
  
   }
 
@@ -527,7 +536,7 @@ export class CarritoPage  {
           cssClass: 'secondary',
           handler: () => {
             console.log('Confirm Cancel');
-          this.navCtrl.navigateForward("/carrito");
+           // this.navCtrl.navigateForward('/pre-cart');
           }
         },
       ]

@@ -134,6 +134,8 @@ export class ProductoPage implements OnInit {
     //this.navCtrl.pop();
     //filtrar y obtener id  
     this.navCtrl.navigateForward('/carrito/'+idNegocio);
+  
+  // this.navCtrl.navigateForward("/pre-cart");
     
     
   }

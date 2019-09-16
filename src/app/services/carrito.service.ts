@@ -83,6 +83,7 @@ export class CarritoService {
   }
 
   eliminarItem(id){
+    console.log("eliminar producto " + id);
     let item = this.items.map((data,indice)=>{
       if(data.id_producto == id){
         this.items.splice(indice,1);
