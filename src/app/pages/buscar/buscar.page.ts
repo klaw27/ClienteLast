@@ -16,15 +16,14 @@ export class BuscarPage implements OnInit {
  fotografiaProd:any;
  // prod: [];
 
-
-  items:any = {
-    id_producto:'',
-    nombre: '',
-    descripcion: '',
-    tiempopreparacion: '',
-    precio: '',
-    //fotografia:""
-  };
+ items:any;
+  // items:any = {
+  //   id_producto:'',
+  //   nombre: '',
+  //   descripcion: '',
+  //   tiempopreparacion: '',
+  //   precio: '',
+  // };
 
   itemsNeg:any = {
     id_negocio:'',
@@ -32,8 +31,7 @@ export class BuscarPage implements OnInit {
     callenumero: '',
     colonia: '',
     horaapertura: '',
-    horacierre: '',    
-    //fotografia:""
+    horacierre: '',
   };
 
   criterio :any;
@@ -41,23 +39,21 @@ export class BuscarPage implements OnInit {
   errorCount: any =null;
   idNegocio:any;
   id:any;
-  //productos: [];
-  productos:any = [{
-    id_producto:'',
-    nombre: '',
-    descripcion: '',
-    tiempopreparacion: '',
-    precio: '',    
-   // fotografia:''
-  }];
+  productos:any;
+  // productos:any = {
+  //   id_producto:'',
+  //   nombre: '',
+  //   descripcion: '',
+  //   tiempopreparacion: '',
+  //   precio: ''
+  // };
   negocios:any = [{
     id_negocio:'',
     nombre: '',
     callenumero: '',
     colonia: '',
     horaapertura: '',
-    horacierre: '',    
-    //fotografia:''
+    horacierre: '',
   }];
 
 
@@ -65,12 +61,12 @@ export class BuscarPage implements OnInit {
     private activatedRoute: ActivatedRoute,public navCtrl: NavController,
     public alertController: AlertController,
     public http: HttpClient,
-    private _sanitizer: DomSanitizer) { 
+    private _sanitizer: DomSanitizer) {
       //this.ionViewDidLoad();
-     // this.iniBusqueda();
+      
       }
 
-    
+
 
   iniBusqueda(){
     //this.items = this.lista;
@@ -78,19 +74,13 @@ export class BuscarPage implements OnInit {
     this.itemsNeg = this.negocios;
     this.itemsflag = this.productos;
     this.itemsflagNeg = this.negocios;
-    
     console.log (this.items.id_producto);
-    //console.log("Base64 Image: ",imageData);
-   //this.fotografiaProd = this._sanitizer.bypassSecurityTrustUrl("data:Image/*;base64,"+this.items.fotografia);
-   // this.fotografiaProd = this._sanitizer.bypassSecurityTrustResourceUrl(this.items.fotografia);
-   
-   // this.fotografiaProd = this._sanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64,"+this.items.fotografia);
 }
 
-  ngOnInit() {  
-
+  ngOnInit() {
        //productos
         console.log(this.productos);
+      //  this.items = this.productos;
         this.id = "0";
         let body = {
           id: this.id,
@@ -99,77 +89,73 @@ export class BuscarPage implements OnInit {
         console.log(body);
 
         //obtener productos
-        this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com/clienteApi/dashbusqueda.php",body).subscribe(data => {
-           console.log(data);
+        this.http.post("http://localhost/api/dashbusqueda.php",body).subscribe(data => {
+           //console.log(data);
            if(data['success']){
             this.productos = data['productos'];
             console.log(this.productos);
           }
           }, error => {
            console.log(error);
-         }); 
-     
+         });
+
          //Obtener negocios
-         console.log(this.negocios);
-         this.id = "0";
-          body = {
-           id: this.id,
-           funcion: "all"
-         };
-         console.log(body);
- 
-         this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com/clienteApi/dashbusqueda.php",body).subscribe(data => {
-            console.log(data);
-           if(data['success']){
-             this.negocios = data['negocios'];
-             console.log(this.negocios);
-           }
-           }, error => {
-            console.log(error);
-          });
+        //  console.log(this.negocios);
+        //  this.id = "0";
+        //   body = {
+        //    id: this.id,
+        //    funcion: "all"
+        //  };
+        //  console.log(body);
+
+        //  this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com/clienteApi/dashbusqueda.php",body).subscribe(data => {
+        //     console.log(data);
+        //    if(data['success']){
+        //      this.negocios = data['negocios'];
+        //      console.log(this.negocios);
+        //    }
+        //    }, error => {
+        //     console.log(error);
+        //   });
 
   }
 
  buscarEstore(event){
-
     this.criterio = event.target.value;
     console.log(this.criterio);
-
     if(this.criterio && this.criterio.trim() != ""){
       this.iniBusqueda();
-      console.log(this.items);     
-  
+      console.log(this.items);
+
       this.items = this.items.filter((item) =>{
-        return (item.nombre.toLowerCase().indexOf(this.criterio.toLowerCase()) >-1);  
+        return (item.nombre.toLowerCase().indexOf(this.criterio.toLowerCase()) >-1);
       })
 
       if(this.items.length === 0){
-        this.itemsflag = null; 
+        this.itemsflag = null;
       }
-      
+
       this.itemsNeg = this.itemsNeg.filter((item) =>{
-        return (item.nombre.toLowerCase().indexOf(this.criterio.toLowerCase()) >-1);  
+        return (item.nombre.toLowerCase().indexOf(this.criterio.toLowerCase()) >-1);
       })
 
       if(this.itemsNeg.length === 0){
-        this.itemsflagNeg = null; 
+        this.itemsflagNeg = null;
       }
-
-         
     }
-    else{     
+    else{
       this.indexCount = 1;
       console.log ("no capturo nada");
      this.items = null;
      this.itemsNeg = null;
-    this.itemsflag = null; 
+    this.itemsflag = null;
     this.itemsflagNeg = null;
     }
   }
-  
+
 
   agregarProducto(id){
-   
+
     //Funcion editar
     console.log("id del producto: " + id);
     if ( localStorage.getItem('productos') ){
@@ -177,7 +163,7 @@ export class BuscarPage implements OnInit {
       this.idNegocio = JSON.parse( localStorage.getItem('idNegocio') );
     }
 
-  
+
     let indicex;
     console.log("get item");
     console.log(this.items);
@@ -185,7 +171,7 @@ export class BuscarPage implements OnInit {
       let item = this.items.map((data,indice)=>{
       if(data.id_producto == id){
         //
-        console.log("se encontro producto"); 
+        console.log("se encontro producto");
         ///this.alertEditar();
         console.log(indice);
         indicex = indice;
@@ -194,7 +180,7 @@ export class BuscarPage implements OnInit {
     });
      // return this.items[item[0]];
      //return this.items[item[indicex]];
-    
+
      if(indicex >=0){
       console.log("el producto ya existe en carrito")
         this.alertEditar();
@@ -216,7 +202,7 @@ export class BuscarPage implements OnInit {
   }
 
 
-  
+
   async alertEditar() {
     const alert = await this.alertController.create({
       header: 'Informacion',

@@ -17,13 +17,12 @@
     <div *ngIf="itemsflag">
     <p class = "tit_res">Productos</p>
   </div>
+
 		<ion-item *ngFor="let item of items" (click)='agregarProducto(item.id_producto)'>
     <ion-thumbnail slot="start" class="thumbnail">
-          <!-- <img  src= "{{item.fotografia}}"> -->
-           <!--<img  [src]="fotografiaProd" >-->
       <img src="test.jpg" onError= "this.src='/assets/img/default_productos.png'"  (click)='agregarProducto(item.id_producto)'>
       </ion-thumbnail>
-      <div class="contenidoPlatillo">
+   <div class="contenidoPlatillo">
       <ion-label>
           <h6 class=tituloPlatillo>{{item.nombre}}</h6>
           <p>{{item.descripcion}}</p>
@@ -35,7 +34,7 @@
   </div>
 </ion-item>
 
-  <div *ngIf="itemsflagNeg">
+  <!-- <div *ngIf="itemsflagNeg">
     <p class = "tit_res">Negocios</p>
   </div>
   <ion-item *ngFor="let item of itemsNeg" (click)='menu(local.id_negocio)'>
@@ -47,12 +46,12 @@
         <h6 class=tituloLocal>{{item.nombre}}</h6>
         <p>{{item.colonia}} {{item.callenumero}}</p>
         <p>Horario: {{item.horaapertura}} - {{item.horacierre}}</p>
-      </ion-label>
+      </ion-label> -->
        <!--<ion-button fill="clear" slot="end" (click)='menu(local.id_negocio)' class = "menuver">Ver Menú</ion-button>-->
-      <div class="footerLocal">
+      <!-- <div class="footerLocal"> -->
          <!-- <ion-button fill="clear" slot="end" (click)='menu(local.id_negocio)'>Ver Menú</ion-button>-->
- 
-          <div class="contenedorEstrellas">
+
+          <!-- <div class="contenedorEstrellas">
             <ion-icon class="estrella" name='star'></ion-icon>
             <ion-icon class="estrella" name='star'></ion-icon>
             <ion-icon class="estrella" name='star'></ion-icon>
@@ -61,7 +60,7 @@
           </div>
         </div>
     </div>
-</ion-item>
+</ion-item> -->
 
   <ion-item *ngIf="!items &&  !itemsNeg ">
       <p class = "tit_res">No hay resultados de la busqueda</p>
