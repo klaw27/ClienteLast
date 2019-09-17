@@ -46,10 +46,10 @@
         <h6 class=tituloLocal>{{item.nombre}}</h6>
         <p>{{item.colonia}} {{item.callenumero}}</p>
         <p>Horario: {{item.horaapertura}} - {{item.horacierre}}</p>
-      </ion-label> -->
-       <!--<ion-button fill="clear" slot="end" (click)='menu(local.id_negocio)' class = "menuver">Ver Menú</ion-button>-->
-      <!-- <div class="footerLocal"> -->
-         <!-- <ion-button fill="clear" slot="end" (click)='menu(local.id_negocio)'>Ver Menú</ion-button>-->
+      </ion-label> 
+       <ion-button fill="clear" slot="end" (click)='menu(local.id_negocio)' class = "menuver">Ver Menú</ion-button>
+      <!-- <div class="footerLocal"> 
+         <ion-button fill="clear" slot="end" (click)='menu(local.id_negocio)'>Ver Menú</ion-button>
 
            <div class="contenedorEstrellas">
             <ion-icon class="estrella" name='star'></ion-icon>
@@ -58,11 +58,11 @@
             <ion-icon class="estrella" name='star'></ion-icon>
             <ion-icon class="estrella" name='star'></ion-icon>
           </div>
-        </div>
+        </div> -->
     </div>
 </ion-item> 
 
-  <ion-item *ngIf="!items &&  !itemsNeg ">
+  <ion-item *ngIf="!items && !itemsNeg ">
       <p class = "tit_res">No hay resultados de la busqueda</p>
 </ion-item>
 

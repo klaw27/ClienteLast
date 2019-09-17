@@ -16,7 +16,7 @@ export class BuscarPage implements OnInit {
  fotografiaProd:any;
  // prod: [];
 
- items:any;
+ items:any = [];
   // items:any = {
   //   id_producto:'',
   //   nombre: '',
@@ -24,15 +24,15 @@ export class BuscarPage implements OnInit {
   //   tiempopreparacion: '',
   //   precio: '',
   // };
-
-  itemsNeg:any = {
-    id_negocio:'',
-    nombre: '',
-    callenumero: '',
-    colonia: '',
-    horaapertura: '',
-    horacierre: '',
-  };
+  itemsNeg:any= [];
+  // itemsNeg:any = {
+  //   id_negocio:'',
+  //   nombre: '',
+  //   callenumero: '',
+  //   colonia: '',
+  //   horaapertura: '',
+  //   horacierre: '',
+  // };
 
   criterio :any;
   indexCount = 0;
@@ -47,14 +47,15 @@ export class BuscarPage implements OnInit {
   //   tiempopreparacion: '',
   //   precio: ''
   // };
-  negocios:any = [{
-    id_negocio:'',
-    nombre: '',
-    callenumero: '',
-    colonia: '',
-    horaapertura: '',
-    horacierre: '',
-  }];
+  negocios:any;
+  // negocios:any = [{
+  //   id_negocio:'',
+  //   nombre: '',
+  //   callenumero: '',
+  //   colonia: '',
+  //   horaapertura: '',
+  //   horacierre: '',
+  // }];
 
 
   constructor(public alertCtrl: AlertController,public estore : EstoreService,
@@ -74,49 +75,49 @@ export class BuscarPage implements OnInit {
     this.itemsNeg = this.negocios;
     this.itemsflag = this.productos;
     this.itemsflagNeg = this.negocios;
-    console.log (this.items.id_producto);
+   // console.log (this.items.id_producto);
 }
 
   ngOnInit() {
-       //productos
-        console.log(this.productos);
-      //  this.items = this.productos;
-        this.id = "0";
-        let body = {
-          id: this.id,
-          funcion: "p"
-        };
-        console.log(body);
+      //  //productos
+         console.log(this.productos);
+         this.items = this.productos;
+         this.id = "0";
+         let body = {
+           id: this.id,
+           funcion: "p"
+         };
+         console.log(body);
 
-        //obtener productos
-        this.http.post("http://localhost/api/dashbusqueda.php",body).subscribe(data => {
-           //console.log(data);
-           if(data['success']){
-            this.productos = data['productos'];
-            console.log(this.productos);
-          }
-          }, error => {
-           console.log(error);
-         });
+         //obtener productos
+         this.http.post("http://localhost/api/dashbusqueda.php",body).subscribe(data => {
+            //console.log(data);
+            if(data['success']){
+             this.productos = data['productos'];
+             console.log(this.productos);
+           }
+           }, error => {
+            console.log(error);
+          });
 
          //Obtener negocios
-        //  console.log(this.negocios);
-        //  this.id = "0";
-        //   body = {
-        //    id: this.id,
-        //    funcion: "all"
-        //  };
-        //  console.log(body);
 
-        //  this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com/clienteApi/dashbusqueda.php",body).subscribe(data => {
-        //     console.log(data);
-        //    if(data['success']){
-        //      this.negocios = data['negocios'];
-        //      console.log(this.negocios);
-        //    }
-        //    }, error => {
-        //     console.log(error);
-        //   });
+          this.id = "0";
+          body = {
+            id: this.id,
+            funcion: "p"
+          };
+          console.log(body);
+
+           this.http.post("http://localhost/api/busquedaNeg.php",body).subscribe(data => {
+              console.log(data);
+             if(data['success']){
+              this.negocios = data['productos'];
+               console.log(this.negocios);
+             }
+             }, error => {
+              console.log(error);
+          });
 
   }
 
@@ -133,6 +134,9 @@ export class BuscarPage implements OnInit {
 
       if(this.items.length === 0){
         this.itemsflag = null;
+        this.items = null;
+
+  
       }
 
       this.itemsNeg = this.itemsNeg.filter((item) =>{
@@ -141,6 +145,7 @@ export class BuscarPage implements OnInit {
 
       if(this.itemsNeg.length === 0){
         this.itemsflagNeg = null;
+        this.itemsNeg= null;
       }
     }
     else{
