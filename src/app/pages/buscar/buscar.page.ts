@@ -118,7 +118,6 @@ export class BuscarPage implements OnInit {
              }, error => {
               console.log(error);
           });
-
   }
 
  buscarEstore(event){
