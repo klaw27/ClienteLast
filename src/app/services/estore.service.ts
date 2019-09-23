@@ -45,9 +45,19 @@ export class EstoreService {
     return this.http.post(this.server+file,JSON.stringify(body));
   }
 
-  locales(body,file){
-    return this.http.post(this.server+file,JSON.stringify(body));
-  }
+   locales(body,file){
+     return this.http.post(this.server+file,JSON.stringify(body));
+   }
+
+  //  localesUbicacion(body,file){
+  //   return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
+  //  }
+
+
+  localesUbicacion(body,file){
+      return this.http.post(this.server+file,JSON.stringify(body));
+     }
+
 
   productos(body,file){
      return this.http.post(this.server+file,JSON.stringify(body));

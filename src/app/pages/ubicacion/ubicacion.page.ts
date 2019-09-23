@@ -24,19 +24,20 @@ export class UbicacionPage implements OnInit {
   ngOnInit() {
     this.hora = new Date();
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    console.log(this.id);
     let body = {
       funcion: 'id',
       clientid: this.id
     }
-    this.estore.locales(body,"negocio.php").subscribe(data=>{
+    this.estore.localesUbicacion(body,"localesUbicacion.php").subscribe(data=>{
       console.log(this.local);
-      this.local = data['local'];
-      this.local['latitud'] = parseFloat(this.local['latitud']);
-      this.local['longitud'] = parseFloat(this.local['longitud']);
-      this.abierto();
-      setTimeout(()=>{
-        this.loadmap();
-      },0);
+       this.local = data['local'];
+        this.local['latitud'] = parseFloat(this.local['latitud']);
+        this.local['longitud'] = parseFloat(this.local['longitud']);
+        this.abierto();
+       setTimeout(()=>{
+         this.loadmap();
+       },0);
     });
   }
 
@@ -61,12 +62,12 @@ export class UbicacionPage implements OnInit {
         this.horaCierre(horas,hoursCierre,minutos,minutosCierre);
       }
       else{
-        this.textoAbierto = "Abre pronto";
+        this.textoAbierto = "Abrirá pronto";
       }
 
     }
     else{
-     this.textoAbierto = "Esta Cerrado";
+     this.textoAbierto = "Cerrado";
 
     }
 

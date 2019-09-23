@@ -82,12 +82,11 @@ export class LocalMenuPage implements OnInit {
       console.log("No existe en carrito");
       this.navCtrl.navigateForward('/producto/'+id+"/agregar"+"/"+this.id);
      }
-
-
-    }else{
-      console.log("NO HAY productos ");
-      this.navCtrl.navigateForward('/producto/'+id+"/agregar"+"/"+this.id);
-      }
+    }
+    else{
+       console.log("NO HAY productos ");
+       this.navCtrl.navigateForward('/producto/'+id+"/agregar"+"/"+this.id);
+       }
 
       }
 
