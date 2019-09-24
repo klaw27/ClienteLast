@@ -75,19 +75,19 @@ export class UbicacionPage implements OnInit {
 
   horaCierre(horas,hoursCierre, minutos, minutosCierre){
     if(horas < hoursCierre){
-      this.textoAbierto = "Esta Abierto";
+      this.textoAbierto = "Abrirá Abierto";
     }
     else if( horas == hoursCierre){
       if(minutos <= minutosCierre){
-        this.textoAbierto = "Cierra Pronto";
+        this.textoAbierto = "Cerrará Pronto";
       }
       else{
-        this.textoAbierto = "Esta Cerrado";
+        this.textoAbierto = "Cerrado";
       }
 
     }
     else{
-      this.textoAbierto = "Esta Cerrado";
+      this.textoAbierto = "Cerrado";
 
     }
 
