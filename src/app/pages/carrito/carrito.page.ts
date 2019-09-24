@@ -237,7 +237,7 @@ export class CarritoPage  {
     this.customerOpenid = {...JSON.parse(localStorage.getItem('userOpen'))};
     let customer_id =  JSON.stringify(this.customerOpenid.id);
     console.log(this.customerOpenid.id);
-    return this.http.post("https://localhost:5010/api/card/get",customer_id,httpOptions).subscribe(
+    return this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com:5011/api/card/get",customer_id,httpOptions).subscribe(
       data => {
          console.log("Tarjetas guardadas del cliente");
          this.tarjetas = data;
@@ -386,7 +386,7 @@ export class CarritoPage  {
     }
     console.log(this.ChargeRequest);
 
-    return this.http.post("https://localhost:5010/api/charge/add",JSON.stringify(this.ChargeRequest),httpOptions).subscribe(
+    return this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com:5011/api/charge/add",JSON.stringify(this.ChargeRequest),httpOptions).subscribe(
       data => {
          console.log("Pago realizado con exito");
          console.log(data);

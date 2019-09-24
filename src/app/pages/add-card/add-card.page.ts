@@ -149,8 +149,8 @@ this.Customer= {
     }
 
 
-   //return this.http.post("http://localhost/api/Openpay/save_card.php",JSON.stringify(this.cardData),{headers:headers}).subscribe(
-    return this.http.post("https://localhost:5010/api/card/add",JSON.stringify(this.cardData),httpOptions).subscribe(
+  // return this.http.post("http://localhost/api/Openpay/save_card.php",JSON.stringify(this.cardData),{headers:headers}).subscribe(
+    return this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com:5011/api/card/add",JSON.stringify(this.cardData),httpOptions).subscribe(
        data => {
           console.log("Tarjeta agregada al cliente");
           console.log(data);
