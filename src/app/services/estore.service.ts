@@ -59,12 +59,12 @@ export class EstoreService {
      }
 
 
-   productos(body,file){
-      return this.http.post(this.server+file,JSON.stringify(body));
-   }
-  //  productos(body,file){
-  //    return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
-  //  }
+    productos(body,file){
+       return this.http.post(this.server+file,JSON.stringify(body));
+    }
+    // productos(body,file){
+    //   return this.http.post("http://localhost/api/"+file,JSON.stringify(body));
+    // }
 
  producto(body,file){
      return this.http.post(this.server+file,JSON.stringify(body));

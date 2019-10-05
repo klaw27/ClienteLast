@@ -67,17 +67,21 @@ p{
 .tituloSlide{
     font-size: 13px;
     margin: 5px;
-    color: black;
-    background-color: lightgrey;
-    border-radius: 15px;
+    color:black;
+    background-color: rgb(226, 226, 226);
+    border-radius: 17px;
     width: 100%;
-    font-weight: bold;
-    //height: 25px;
+    border: 1px solid rgb(175, 174, 174);
+    height:27px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
  .tituloSlide:hover {
     
-    background-color:grey;
+    background-color:rgb(65, 64, 64);
+    border: 1px solid rgb(65, 64, 64);
      color: white;
      //margin-right:10px;
      }
