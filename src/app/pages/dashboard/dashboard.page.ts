@@ -5,6 +5,7 @@ import { EstoreService } from 'src/app/services/estore.service';
 import { RepartoTipoComponent } from 'src/app/home-popover/reparto-tipo/reparto-tipo.component';
 import { CarritoService } from 'src/app/services/carrito.service';
 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',

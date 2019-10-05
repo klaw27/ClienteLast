@@ -59,10 +59,9 @@ export class BuscarPage implements OnInit {
 
 
   constructor(public alertCtrl: AlertController,public estore : EstoreService,
-    private activatedRoute: ActivatedRoute,public navCtrl: NavController,
+    public activatedRoute: ActivatedRoute,public navCtrl: NavController,
     public alertController: AlertController,
-    public http: HttpClient,
-    private _sanitizer: DomSanitizer) {
+    public http: HttpClient) {
       //this.ionViewDidLoad();
       
       }
@@ -90,7 +89,7 @@ export class BuscarPage implements OnInit {
          console.log(body);
 
          //obtener productos
-         this.http.post("http://ec2-54-193-34-153.us-west-1.compute.amazonaws.com/clienteApi/dashbusqueda.php",body).subscribe(data => {
+         this.estore.dashboardSub(body,"dashbusqueda.php").subscribe(data => {
             //console.log(data);
             if(data['success']){
              this.productos = data['productos'];
@@ -109,7 +108,7 @@ export class BuscarPage implements OnInit {
           };
           console.log(body);
 
-           this.http.post("http://ec2-54-193-34-153.us-west-1.compute.amazonaws.com/clienteApi/busquedaNeg.php",body).subscribe(data => {
+          this.estore.dashboardSub(body,"busquedaNeg.php").subscribe(data => {
               console.log(data);
              if(data['success']){
               this.negocios = data['productos'];

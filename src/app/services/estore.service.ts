@@ -9,8 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class EstoreService {
 
 
-  //server:string = 'http://ec2-13-57-42-231.us-west-1.compute.amazonaws.com/clienteApi/';
-  server:string = 'http://ec2-54-193-34-153.us-west-1.compute.amazonaws.com/clienteApi/';
+    server:string = 'http://ec2-54-193-34-153.us-west-1.compute.amazonaws.com/clienteApi/';
     //server:string = "http://localhost:8888/apiCliente/";
   serverData: string = "https://jsonplaceholder.typicode.com/users";
 
@@ -91,4 +90,9 @@ export class EstoreService {
 
 
       //url + archivo.php , body
+      BarraBuscar(body,file){
+        return this.http.post(this.server+file,JSON.stringify(body));
+        }
+  
+
 }
