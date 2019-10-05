@@ -90,7 +90,7 @@ export class BuscarPage implements OnInit {
          console.log(body);
 
          //obtener productos
-         this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com/clienteApi/dashbusqueda.php",body).subscribe(data => {
+         this.http.post("http://ec2-54-193-34-153.us-west-1.compute.amazonaws.com/clienteApi/dashbusqueda.php",body).subscribe(data => {
             //console.log(data);
             if(data['success']){
              this.productos = data['productos'];
@@ -109,7 +109,7 @@ export class BuscarPage implements OnInit {
           };
           console.log(body);
 
-           this.http.post("http://ec2-13-57-185-15.us-west-1.compute.amazonaws.com/clienteApi/busquedaNeg.php",body).subscribe(data => {
+           this.http.post("http://ec2-54-193-34-153.us-west-1.compute.amazonaws.com/clienteApi/busquedaNeg.php",body).subscribe(data => {
               console.log(data);
              if(data['success']){
               this.negocios = data['productos'];

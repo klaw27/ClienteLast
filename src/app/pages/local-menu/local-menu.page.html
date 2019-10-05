@@ -10,14 +10,24 @@
   </div>
 
   <div class="principal">
-    
-    <ion-buttons class="atras"> 
+
+    <ion-buttons class="atras">
       <ion-button size='small' (click)='ubicacion()' expand="full" fill="clear" class="boton">Ubicación y Horario</ion-button>
     </ion-buttons>
     <h6 class="titulo">Nuestro Menú</h6>
 
-      <div class="data" *ngIf="productos" >
-          <ion-item class="platillo" *ngFor="let producto of productos" (click)='agregarProducto(producto.id_producto)'>
+       <ion-slides [options]="slideOpts" class="slide">
+          <ion-slide  (click)="todo()">
+              <ion-label class='tituloSlide'>Todo</ion-label>
+            </ion-slide>
+            <ion-slide  *ngFor="let producto of productos"  class='lugar' (click)="actualizarCat(producto.nomcat)">
+              <ion-label class='tituloSlide'>{{producto.nomcat}}</ion-label>
+            </ion-slide>
+        </ion-slides> 
+
+
+      <div class="data" *ngIf="productosCat" >
+          <ion-item class="platillo" *ngFor="let producto of productosCat" (click)='agregarProducto(producto.id_producto)'>
             <ion-thumbnail slot="start" class="thumbnail">
               <img src="test.png" onError= "this.src='/assets/img/default_productos.png'">
             </ion-thumbnail>
@@ -52,10 +62,10 @@
           </div>
         </ion-item>
       </div>
-      
+
     </div>
 
-    <ion-buttons class="atras"> 
+    <ion-buttons class="atras">
         <ion-button size='small' expand="full" fill="clear" class="boton" (click)='salir()'>Atrás</ion-button>
     </ion-buttons>
 
@@ -64,6 +74,6 @@
             <ion-icon name='cart'></ion-icon>
         </ion-fab-button>
     </ion-fab>-->
-  
+
 
 </ion-content>

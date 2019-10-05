@@ -59,3 +59,25 @@ p{
     justify-content: space-between;
 }
 
+ .slide{
+     margin: 10px;
+//     //background-color:rgba(255, 0, 0, 0.685)
+ }
+
+.tituloSlide{
+    font-size: 13px;
+    margin: 5px;
+    color: black;
+    background-color: lightgrey;
+    border-radius: 15px;
+    width: 100%;
+    font-weight: bold;
+    //height: 25px;
+  }
+
+ .tituloSlide:hover {
+    
+    background-color:grey;
+     color: white;
+     //margin-right:10px;
+     }

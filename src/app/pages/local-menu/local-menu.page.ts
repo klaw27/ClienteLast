@@ -11,9 +11,14 @@ import { CarritoService } from '../../services/carrito.service';
   styleUrls: ['./local-menu.page.scss'],
 })
 export class LocalMenuPage implements OnInit {
-
+  slideOpts = {
+    effect: 'flip',
+    slidesPerView: 3.3,
+    freeMode: true
+  };
   id:any;
-  productos: [];
+  productos: any[];
+  productosCat: any[];
   carrito:boolean = false;
   
   items:any = {
@@ -46,11 +51,14 @@ export class LocalMenuPage implements OnInit {
       console.log(data);
       if(data['success']){
         this.productos = data['productos'];
+        this.productosCat =  this.productos;
         console.log(this.productos);
       }
     });
+  }
 
-
+  todo(){
+    this.productosCat =  this.productos;
   }
 
   salir(){
@@ -125,5 +133,14 @@ export class LocalMenuPage implements OnInit {
 
     await alert.present();
   }
+
+
+  actualizarCat(catnombre,i){
+    this.productosCat = this.productos.filter((item) =>{
+      return (item.nomcat.toLowerCase().indexOf(catnombre.toLowerCase()) >-1);
+    });  
+    console.log(this.productos);
+  }
+  
 
 }
