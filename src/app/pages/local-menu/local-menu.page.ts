@@ -3,6 +3,7 @@ import { NavController, AlertController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { EstoreService } from '../../services/estore.service';
 import { CarritoService } from '../../services/carrito.service';
+import { distinct } from 'rxjs/operators';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class LocalMenuPage implements OnInit {
     freeMode: true
   };
   id:any;
+  categorias: any[];
   productos: any[];
   productosCat: any[];
   carrito:boolean = false;
@@ -52,9 +54,24 @@ export class LocalMenuPage implements OnInit {
       if(data['success']){
         this.productos = data['productos'];
         this.productosCat =  this.productos;
-        console.log(this.productos);
+         console.log(this.productos);
+         const result = [];    
+         const map = new Map();
+         for (const item of this.productos) {
+             if(!map.has(item.id_catProducto)){
+                 map.set(item.id_catProducto, true);    // set any value to Map
+                 result.push({
+                   id: item.id_catProducto,
+                   name: item.nomcat
+               });
+             }
+         }
+       this.categorias = result;
+        console.log(this.categorias); 
       }
     });
+    
+
   }
 
   todo(){
@@ -139,8 +156,27 @@ export class LocalMenuPage implements OnInit {
     this.productosCat = this.productos.filter((item) =>{
       return (item.nomcat.toLowerCase().indexOf(catnombre.toLowerCase()) >-1);
     });  
-    console.log(this.productos);
+    console.log(this.productosCat);
+     
   }
-  
+
+  catego(){
+
+const result = [];    
+  const map = new Map();
+  for (const item of this.productos) {
+      if(!map.has(item.id_catProducto)){
+          map.set(item.id_catProducto, true);    // set any value to Map
+          result.push({
+            id: item.id_catProducto,
+            name: item.nomcat
+        });
+      }
+  }
+this.categorias = result;
+ console.log(this.categorias); 
+    }  
+
+
 
 }

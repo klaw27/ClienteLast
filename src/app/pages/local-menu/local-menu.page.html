@@ -20,8 +20,8 @@
           <ion-slide  (click)="todo()">
               <ion-label class='tituloSlide'>Todo</ion-label>
             </ion-slide>
-            <ion-slide  *ngFor="let producto of productos"  class='lugar' (click)="actualizarCat(producto.nomcat)">
-              <ion-label class='tituloSlide'>{{producto.nomcat}}</ion-label>
+            <ion-slide  *ngFor="let producto of categorias"  class='lugar' (click)="actualizarCat(producto.name)">
+              <ion-label class='tituloSlide'>{{producto.name}}</ion-label>
             </ion-slide>
         </ion-slides> 
 
